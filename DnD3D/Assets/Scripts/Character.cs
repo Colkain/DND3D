@@ -37,7 +37,7 @@ public class Character : MonoBehaviour {
         agility = Random.Range (1, 5);
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (1, 4);
-        range = 1;
+        range = 0;
         power = "Can attack again";
         level = 1;
         coor = coorc;
@@ -63,7 +63,7 @@ public class Character : MonoBehaviour {
         agility = Random.Range (5, 10);
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (1, 4);
-        range = 1;
+        range = 0;
         power = "If not in front of enemy, gain +5 dice roll on attack";
         level = 1;
         coor = coorc;
@@ -88,7 +88,7 @@ public class Character : MonoBehaviour {
         agility = Random.Range (1, 4);
         intelligence = Random.Range (5, 11);
         wisdom = Random.Range (2, 6);
-        range = 2;
+        range = 1;
         power = "+1 Range";
         level = 1;
         coor = coorc;
@@ -113,7 +113,7 @@ public class Character : MonoBehaviour {
         agility = Random.Range (1, 4);
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (5, 10);
-        range = 1;
+        range = 0;
         power = "Can Heal : 1;5";
         level = 1;
         coor = coorc;
