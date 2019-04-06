@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86d4c1f51cbc30488352e80ec5d838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 6671865540067338469, guid: 460567ec07577fa468cded5ab25b8f4f,
+  tilePrefab: {fileID: 5294003374783881657, guid: 460567ec07577fa468cded5ab25b8f4f,
     type: 3}
-  wallPrefab: {fileID: 5686410223251467276, guid: 24c129dcb62e77849b9bfdb950ef903a,
+  wallPrefab: {fileID: 806159467575743796, guid: 24c129dcb62e77849b9bfdb950ef903a,
     type: 3}
   characterPrefab: {fileID: 8904764741009441828, guid: 7f3cc659a78c1e24f8610a1f8349b76b,
     type: 3}
@@ -66,4 +66,5 @@ MonoBehaviour:
   maxColumns: 10
   maxRows: 10
   size: 0
-  tile: {fileID: 0}
+  currentTile: {fileID: 0}
+  previousTile: {fileID: 0}

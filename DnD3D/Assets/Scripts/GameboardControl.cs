@@ -44,6 +44,9 @@ public class GameboardControl : MonoBehaviour {
         }
         MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (tiles);
         ma.CreateMaze ();
+        foreach (Tile t in tiles) {
+            t.SetVisited (false);
+        }
     }
     // Update is called once per frame
     void Update () {
@@ -56,6 +59,7 @@ public class GameboardControl : MonoBehaviour {
             uiC.SetCharUI (player);
             ActivateDoors (false);
             currentTile = WhatTile (player);
+            currentTile.SetVisited (true);
             if (previousTile != currentTile) {
                 if (previousTile != null)
                     player.SetMouvementUI (player.GetMouvementUI () - 1);

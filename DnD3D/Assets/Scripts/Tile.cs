@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
-    private bool visited = false;
+    [SerializeField] private bool visited = false;
     public GameObject doorPrefab;
     private GameObject northWall, westWall, eastWall, southWall;
     [SerializeField] private Vector3 coor;
@@ -14,6 +14,14 @@ public class Tile : MonoBehaviour {
         doorObject.transform.SetParent (gameObject.transform, false);
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
         gb.AddInDoors (doorObject);
+    }
+
+    public void Update () {
+        Light l = gameObject.transform.Find ("Spot Light").GetComponent<Light> ();
+        if (visited) {
+            l.enabled = true;
+        } else
+            l.enabled = false;
     }
     public bool GetVisited () {
         return visited;
