@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
+    private bool _action = true;
     //Mouvement
     private bool _isTurn = false;
     GameboardControl gameboard;
@@ -18,12 +19,23 @@ public class CharacterMovement : MonoBehaviour {
     void Start () {
         _controller = GetComponent<CharacterController> ();
         gameboard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-
+        _action = true;
     }
     // Update is called once per frame
     void Update () {
         if (IsTurn ()) {
             //Mouvement
+            Move ();
+            //Attack
+            if (Input.GetKey (KeyCode.Space)) {
+                _action = false;
+                StartCoroutine (Attack ());
+            }
+
+        }
+    }
+    public void Move () {
+        if (_action) {
             _velocity.y += gravity * Time.deltaTime;
             _velocity.x /= 1 + Drag.x * Time.deltaTime;
             _velocity.y /= 1 + Drag.y * Time.deltaTime;
@@ -36,11 +48,6 @@ public class CharacterMovement : MonoBehaviour {
             _controller.Move (move * Time.deltaTime * Speed);
             if (move != Vector3.zero)
                 transform.forward = move;
-
-            //Attack
-            while (Input.GetKey ("space")) {
-                StartCoroutine (Attack ());
-            }
         }
     }
     public void SetTurn (bool t) {
@@ -58,15 +65,15 @@ public class CharacterMovement : MonoBehaviour {
     IEnumerator Attack () {
         Character c = gameObject.GetComponent<Character> ();
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        if (c.GetRange () == 0) {
-            Tile t = gb.WhatTile (c);
-            t.GetComponent<Renderer> ().material.color = endColor;
-            Debug.Log ("endcolor");
-            yield return new WaitForSeconds (0.4f);
-            t.GetComponent<Renderer> ().material.color = startColor;
-            Debug.Log ("startcolor");
-            yield return new WaitForSeconds (0.4f);
-
+        Tile t = gb.WhatTile (c);
+        t.GetComponent<Renderer> ().material.color = endColor;
+        int i = 0;
+        while (i < 50 || !Input.GetKey (KeyCode.Return)) {
+            Debug.Log (i);
+            yield return new WaitForSeconds (0.1f);
+            i++;
         }
+        t.GetComponent<Renderer> ().material.color = startColor;
+        _action = true;
     }
 }

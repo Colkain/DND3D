@@ -21,7 +21,7 @@ public class GameboardControl : MonoBehaviour {
     int mouvement;
 
     // Start is called before the first frame update
-    public void Start () {
+    public void Awake () {
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
     }
