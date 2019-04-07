@@ -45,7 +45,6 @@ public class CharacterAttack : MonoBehaviour {
             if (!cm.GetAction ()) {
                 ray = Camera.main.ScreenPointToRay (Input.mousePosition);
                 if (Physics.Raycast (ray, out hit, 100)) {
-                    Debug.Log (hit);
                     foreach (Tile t in cells) {
                         if (t != null) {
                             if (t.name == hit.transform.gameObject.name) {
