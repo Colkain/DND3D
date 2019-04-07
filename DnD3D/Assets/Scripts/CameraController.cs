@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour {
     Vector3 offset;
     [Range (0.01f, 1.0f)]
     public float smoothFactor = 0.5f;
-    private Vector3 rot;
 
     // Use this for initialization
     void Start () {

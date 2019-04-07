@@ -64,4 +64,7 @@ public class Tile : MonoBehaviour {
     public void SetActive (bool a) {
         SetActive (a);
     }
+    public Vector3 GetCoor () {
+        return coor;
+    }
 }

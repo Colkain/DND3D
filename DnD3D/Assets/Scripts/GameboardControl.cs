@@ -18,7 +18,6 @@ public class GameboardControl : MonoBehaviour {
     CameraController cam;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
-    int mouvement;
 
     // Start is called before the first frame update
     public void Awake () {
@@ -72,12 +71,6 @@ public class GameboardControl : MonoBehaviour {
     public void SetIdc (int i) {
         idc = i;
     }
-    public void SetMouvement (int m) {
-        mouvement = m;
-    }
-    public int GetMouvement () {
-        return mouvement;
-    }
     public void SetPreviousTile () {
         previousTile = null;
     }
@@ -109,5 +102,12 @@ public class GameboardControl : MonoBehaviour {
                 return t;
         }
         return null;
+    }
+
+    public Tile GetTile (int c, int r) {
+        if (c < 0 || r < 0 || c >= maxColumns || r >= maxRows)
+            return null;
+        else
+            return tiles[c, r];
     }
 }
