@@ -11,11 +11,6 @@ public class CharacterMovement : MonoBehaviour {
     public Vector3 Drag;
     private CharacterController _controller;
     private Vector3 _velocity;
-    //Attack
-    public static List<Tile> cells;
-
-    public Color startColor;
-    public Color endColor;
     // Start is called before the first frame update
     void Start () {
         _controller = GetComponent<CharacterController> ();
@@ -27,12 +22,6 @@ public class CharacterMovement : MonoBehaviour {
         if (IsTurn ()) {
             //Mouvement
             Move ();
-            //Attack
-            if (Input.GetKey (KeyCode.Space)) {
-                _action = false;
-                StartCoroutine (Attack ());
-            }
-
         }
     }
     public void Move () {
@@ -51,7 +40,7 @@ public class CharacterMovement : MonoBehaviour {
                 transform.forward = move;
         }
     }
-    bool IsTurn () {
+    public bool IsTurn () {
         Character c = gameObject.GetComponent<Character> ();
         int id = c.GetId ();
         int idc = gameboard.GetIdc ();
@@ -60,33 +49,7 @@ public class CharacterMovement : MonoBehaviour {
         else
             return false;
     }
-    IEnumerator Attack () {
-        cells = new List<Tile> ();
-        Character c = gameObject.GetComponent<Character> ();
-        int range = c.GetRange ();
-        GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        cells.Add (gb.WhatTile (c));
-        Vector3 coor = gb.WhatTile (c).GetCoor ();
-        if (range != 0) {
-            for (int i = 0; i <= range; i++) {
-                cells.Add (gb.GetTile ((int) coor.x + i, (int) coor.z));
-                cells.Add (gb.GetTile ((int) coor.x - i, (int) coor.z));
-            }
-            for (int j = 0; j <= range; j++) {
-                cells.Add (gb.GetTile ((int) coor.x, (int) coor.z + j));
-                cells.Add (gb.GetTile ((int) coor.x, (int) coor.z - j));
-            }
-        }
-        foreach (Tile t in cells) {
-            if (t != null)
-                t.GetComponent<Renderer> ().material.color = endColor;
-        }
-        while (!Input.GetKeyDown (KeyCode.Return))
-            yield return null;
-        foreach (Tile t in cells) {
-            if (t != null)
-                t.GetComponent<Renderer> ().material.color = startColor;
-        }
-        _action = true;
+    public void SetAction (bool a) {
+        _action = a;
     }
 }
