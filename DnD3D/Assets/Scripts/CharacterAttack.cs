@@ -9,9 +9,10 @@ public class CharacterAttack : MonoBehaviour {
     public Color startColor;
     public Color endColor;
     GameboardControl gb;
+    RaycastHit hit;
     Character c;
     int range;
-
+    Ray ray;
     void Start () {
         cm = gameObject.GetComponent<CharacterMovement> ();
         c = gameObject.GetComponent<Character> ();
@@ -39,26 +40,29 @@ public class CharacterAttack : MonoBehaviour {
                     if (t != null)
                         t.GetComponent<Renderer> ().material.color = endColor;
                 }
-                StartCoroutine (Hover ());
-
+                StartCoroutine (Attack ());
             }
-        }
-    }
-    IEnumerator Hover () {
-        Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-        RaycastHit hit;
-        while (!Input.GetMouseButtonUp (0)) {//Failed Hover
-            if (Physics.Raycast (ray, out hit, 100)) {
-                foreach (Tile t in cells) {
-                    if (t != null) {
-                        if (t.name == hit.transform.gameObject.name) {
-                            t.GetComponent<Renderer> ().material.color = Color.green;
-                        } else {
-                            t.GetComponent<Renderer> ().material.color = endColor;
+            if (!cm.GetAction ()) {
+                ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+                if (Physics.Raycast (ray, out hit, 100)) {
+                    Debug.Log (hit);
+                    foreach (Tile t in cells) {
+                        if (t != null) {
+                            if (t.name == hit.transform.gameObject.name) {
+                                t.GetComponent<Renderer> ().material.color = Color.green;
+                            } else {
+                                t.GetComponent<Renderer> ().material.color = endColor;
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+    IEnumerator Attack () {
+
+        while (!Input.GetMouseButtonUp (0)) { //Failed Hover
+
             yield return null;
         }
         foreach (Tile t in cells) {

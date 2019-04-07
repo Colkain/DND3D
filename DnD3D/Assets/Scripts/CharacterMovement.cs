@@ -44,10 +44,17 @@ public class CharacterMovement : MonoBehaviour {
         Character c = gameObject.GetComponent<Character> ();
         int id = c.GetId ();
         int idc = gameboard.GetIdc ();
-        if (id == idc)
+        if (id == idc) {
+            gameObject.GetComponent<Collider> ().enabled = true;
             return true;
-        else
+
+        } else {
+            gameObject.GetComponent<Collider> ().enabled = false;
             return false;
+        }
+    }
+    public bool GetAction () {
+        return _action;
     }
     public void SetAction (bool a) {
         _action = a;
