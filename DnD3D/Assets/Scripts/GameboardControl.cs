@@ -83,6 +83,9 @@ public class GameboardControl : MonoBehaviour {
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
     }
+    public Character[] GetCharacters(){
+        return characters;
+    }
     public void AddInDoors (GameObject d) {
         doors.Add (d);
     }
@@ -103,7 +106,6 @@ public class GameboardControl : MonoBehaviour {
         }
         return null;
     }
-
     public Tile GetTile (int c, int r) {
         if (c < 0 || r < 0 || c >= maxColumns || r >= maxRows)
             return null;

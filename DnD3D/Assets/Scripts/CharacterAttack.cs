@@ -12,6 +12,7 @@ public class CharacterAttack : MonoBehaviour {
     RaycastHit hit;
     Character c;
     int range;
+    Tile attackedTile;
     Ray ray;
     void Start () {
         cm = gameObject.GetComponent<CharacterMovement> ();
@@ -40,7 +41,7 @@ public class CharacterAttack : MonoBehaviour {
                     if (t != null)
                         t.GetComponent<Renderer> ().material.color = endColor;
                 }
-                StartCoroutine (Attack ());
+                StartCoroutine (Attack (c));
             }
             if (!cm.GetAction ()) {
                 ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -49,8 +50,23 @@ public class CharacterAttack : MonoBehaviour {
                         if (t != null) {
                             if (t.name == hit.transform.gameObject.name) {
                                 t.GetComponent<Renderer> ().material.color = Color.green;
+                                attackedTile = t;
                             } else {
                                 t.GetComponent<Renderer> ().material.color = endColor;
+                            }
+                        }
+                    }
+                }
+                if (Input.GetMouseButtonUp (0)) {
+                    cm.SetAction (true);
+                    foreach (Tile t in cells) {
+                        if (t != null)
+                            t.GetComponent<Renderer> ().material.color = startColor;
+                    } //attack function
+                    foreach (Character chara in gb.GetCharacters ()) {
+                        if (c != chara) {
+                            if (IsCharacterHit (chara, attackedTile)) {
+                                chara.SetHealth (chara.GetHealth () - c.GetAtttack());
                             }
                         }
                     }
@@ -58,18 +74,14 @@ public class CharacterAttack : MonoBehaviour {
             }
         }
     }
-    IEnumerator Attack () {
-
-        while (!Input.GetMouseButtonUp (0)) { //Failed Hover
-
+    IEnumerator Attack (Character c) {
+        while (!Input.GetMouseButtonUp (0))
             yield return null;
-        }
-        foreach (Tile t in cells) {
-            if (t != null) {
-                t.GetComponent<Renderer> ().material.color = startColor;
-                //attack
-            }
-        }
-        cm.SetAction (true);
+    }
+    public bool IsCharacterHit (Character c, Tile t) {
+        if (gb.WhatTile (c) == t)
+            return true;
+        else
+            return false;
     }
 }

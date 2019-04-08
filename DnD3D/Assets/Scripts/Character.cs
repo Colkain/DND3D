@@ -130,6 +130,9 @@ public class Character : MonoBehaviour {
     public string GetName () => nameC;
     public string GetClass () => classC;
     public int GetHealth () => health;
+    public void SetHealth (int h) {
+        health = h;
+    }
     public int GetMaxHealth () => maxHealth;
     public int GetMouvement () => mouvement;
     public void SetMouvement (int i) {
@@ -147,5 +150,8 @@ public class Character : MonoBehaviour {
     public int GetRange () => range;
     public int GetId () => id;
     public string GetPower () => power;
+    public int GetAtttack () {
+        return (int) (strength + intelligence + agility + wisdom) / 8; //returns damage
+    }
 
 }
