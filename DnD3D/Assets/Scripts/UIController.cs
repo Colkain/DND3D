@@ -41,7 +41,6 @@ public class UIController : MonoBehaviour {
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetMouvementUI (player.GetMouvement ());
             gbb.SetPreviousTile ();
-            player.SetIsTurn (true);
         } else
             idc++;
 
@@ -60,17 +59,14 @@ public class UIController : MonoBehaviour {
     }
     public void NextTurn () {
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        string name = "Player" + idc;
-        Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
-        player.SetIsTurn (false);
+
         if (idc < cMax)
             idc++;
         else
             idc = 1;
 
-        name = "Player" + idc;
-        player = GameObject.FindWithTag (name).GetComponent<Character> ();
-        player.SetIsTurn (true);
+         string name = "Player" + idc;
+        Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
         player.SetMouvementUI (player.GetMouvement ());
         gb.SetPreviousTile ();
         gb.SetIdc (idc);

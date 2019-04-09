@@ -12,14 +12,12 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] int maxRows = 10;
     [SerializeField] float size;
     private int idt;
-    [SerializeField] private int idc;
+    private int idc;
     private int cMax;
-    //Misc
     UIController uiC;
     CameraController cam;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
-    CharacterMovement cm;
 
     // Start is called before the first frame update
     public void Awake () {
@@ -85,7 +83,7 @@ public class GameboardControl : MonoBehaviour {
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
     }
-    public Character[] GetCharacters () {
+    public Character[] GetCharacters(){
         return characters;
     }
     public void AddInDoors (GameObject d) {
@@ -113,8 +111,5 @@ public class GameboardControl : MonoBehaviour {
             return null;
         else
             return tiles[c, r];
-    }
-    public void EndTurn () {
-        uiC.NextTurn ();
     }
 }

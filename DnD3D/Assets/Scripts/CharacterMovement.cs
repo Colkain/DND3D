@@ -30,17 +30,11 @@ public class CharacterMovement : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        if (c.GetIsTurn ()) {
-            if (!isAttacking) {
-                Move ();
-                if (Input.GetKeyUp (KeyCode.Return))
-                    gameboard.EndTurn ();
-            }
-            Attack ();
+        if (IsTurn ()) {
+            //Mouvement
+            Move ();
+            Attack();
         }
-    }
-    private bool IsTurn () {
-        return true;
     }
     public void Attack () {
         if (Input.GetKey (KeyCode.Space)) {
@@ -93,22 +87,37 @@ public class CharacterMovement : MonoBehaviour {
                 }
             }
         }
+
     }
     public void Move () {
-        _velocity.y += gravity * Time.deltaTime;
-        _velocity.x /= 1 + Drag.x * Time.deltaTime;
-        _velocity.y /= 1 + Drag.y * Time.deltaTime;
-        _velocity.z /= 1 + Drag.z * Time.deltaTime;
-        _controller.Move (_velocity * Time.deltaTime);
-        if (_controller.isGrounded)
-            _velocity.y = 0;
+        if (!isAttacking) {
+            _velocity.y += gravity * Time.deltaTime;
+            _velocity.x /= 1 + Drag.x * Time.deltaTime;
+            _velocity.y /= 1 + Drag.y * Time.deltaTime;
+            _velocity.z /= 1 + Drag.z * Time.deltaTime;
+            _controller.Move (_velocity * Time.deltaTime);
+            if (_controller.isGrounded)
+                _velocity.y = 0;
 
-        Vector3 move = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-        _controller.Move (move * Time.deltaTime * Speed);
-        if (move != Vector3.zero)
-            transform.forward = move;
+            Vector3 move = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+            _controller.Move (move * Time.deltaTime * Speed);
+            if (move != Vector3.zero)
+                transform.forward = move;
+        }
     }
+    public bool IsTurn () {
+        Character c = gameObject.GetComponent<Character> ();
+        int id = c.GetId ();
+        int idc = gameboard.GetIdc ();
+        if (id == idc) {
+            gameObject.GetComponent<Collider> ().enabled = true;
+            return true;
 
+        } else {
+            gameObject.GetComponent<Collider> ().enabled = false;
+            return false;
+        }
+    }
     IEnumerator Attacking (Character c) {
         while (!Input.GetMouseButtonUp (0))
             yield return null;
