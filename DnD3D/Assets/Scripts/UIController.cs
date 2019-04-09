@@ -41,6 +41,7 @@ public class UIController : MonoBehaviour {
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetMouvementUI (player.GetMouvement ());
             gbb.SetPreviousTile ();
+            player.SetIsTurn (true);
         } else
             idc++;
 
@@ -65,7 +66,7 @@ public class UIController : MonoBehaviour {
         else
             idc = 1;
 
-         string name = "Player" + idc;
+        string name = "Player" + idc;
         Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
         player.SetMouvementUI (player.GetMouvement ());
         gb.SetPreviousTile ();

@@ -10,6 +10,7 @@ public class Character : MonoBehaviour {
     public GameObject clericPrefab;
     private GameObject gameBoardPrefab;
 
+    [SerializeField] private bool isTurn;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private int id;
@@ -30,6 +31,7 @@ public class Character : MonoBehaviour {
         nameC = n;
         classC = "Warrior";
         id = i;
+        isTurn = false;
         maxHealth = Random.Range (5, 11);
         health = maxHealth;
         mouvement = Random.Range (1, 5);
@@ -56,6 +58,7 @@ public class Character : MonoBehaviour {
         nameC = n;
         classC = "Rogue";
         id = i;
+        isTurn = false;
         maxHealth = Random.Range (4, 9);
         health = maxHealth;
         mouvement = Random.Range (2, 7);
@@ -81,6 +84,7 @@ public class Character : MonoBehaviour {
         nameC = n;
         classC = "Mage";
         id = i;
+        isTurn = false;
         maxHealth = Random.Range (3, 9);
         health = maxHealth;
         mouvement = Random.Range (2, 6);
@@ -106,6 +110,7 @@ public class Character : MonoBehaviour {
         nameC = n;
         classC = "Cleric";
         id = i;
+        isTurn = false;
         maxHealth = Random.Range (5, 9);
         health = maxHealth;
         mouvement = Random.Range (1, 6);
@@ -126,7 +131,12 @@ public class Character : MonoBehaviour {
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
     }
-
+    public bool GetIsTurn () {
+        return isTurn;
+    }
+    public void SetIsTurn (bool t) {
+        isTurn = t;
+    }
     public string GetName () => nameC;
     public string GetClass () => classC;
     public int GetHealth () => health;
