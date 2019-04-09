@@ -12,7 +12,7 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] int maxRows = 10;
     [SerializeField] float size;
     private int idt;
-    private int idc;
+    [SerializeField] private int idc;
     private int cMax;
     //Misc
     UIController uiC;
@@ -114,22 +114,7 @@ public class GameboardControl : MonoBehaviour {
         else
             return tiles[c, r];
     }
-    public void EndTurn (int i) {
-        Debug.Log (i + " " + idc);
-        if (idc == i) {
-            foreach (Character chara in characters) {
-                chara.SetIsTurn (false);
-            }
-            if (idc < cMax)
-                idc++;
-            else
-                idc = 1;
-            characters[idc - 1].SetIsTurn (true);
-            string name = "Player" + idc;
-            characters[idc - 1].SetMouvementUI (characters[idc - 1].GetMouvement ());
-            SetPreviousTile ();
-            Debug.Log ("a");
-        }
-
+    public void EndTurn () {
+        uiC.NextTurn ();
     }
 }

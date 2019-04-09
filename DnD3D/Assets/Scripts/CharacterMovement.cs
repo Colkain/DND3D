@@ -34,10 +34,13 @@ public class CharacterMovement : MonoBehaviour {
             if (!isAttacking) {
                 Move ();
                 if (Input.GetKeyUp (KeyCode.Return))
-                    gameboard.EndTurn (c.GetId ());
+                    gameboard.EndTurn ();
             }
             Attack ();
         }
+    }
+    private bool IsTurn () {
+        return true;
     }
     public void Attack () {
         if (Input.GetKey (KeyCode.Space)) {
