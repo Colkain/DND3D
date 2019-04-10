@@ -12,7 +12,7 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] int maxRows = 10;
     [SerializeField] float size;
     private int idt;
-    private int idc;
+    [SerializeField] private int idc;
     private int cMax;
     UIController uiC;
     CameraController cam;
@@ -78,7 +78,7 @@ public class GameboardControl : MonoBehaviour {
         int c = Random.Range (0, maxColumns);
         int r = Random.Range (0, maxRows);
         Vector3 coor = new Vector3 (tiles[c, r].transform.localPosition.x, 3f, tiles[c, r].transform.localPosition.z);
-        uiC.SetCreationUI (idc, coor);
+        uiC.SetCreationUI (coor);
     }
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
@@ -112,7 +112,16 @@ public class GameboardControl : MonoBehaviour {
         else
             return tiles[c, r];
     }
-    public void NextTurn () {
-        uiC.NextTurn ();
+    public void NextTurn (Character c) {
+        if (c.GetId () < cMax)
+            idc = c.GetId ();
+        else
+            idc = 1;
+        characters[idc].SetMouvementUI (characters[idc].GetMouvement ());
+        characters[idc].SetisTurn (true);
+        SetPreviousTile ();
+        Debug.Log ("a");
+        // uiC.NextTurn ();
     }
+
 }

@@ -12,6 +12,7 @@ public class Character : MonoBehaviour {
 
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
+    [SerializeField] private bool isTurn;
     [SerializeField] private int id;
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
@@ -29,6 +30,7 @@ public class Character : MonoBehaviour {
     public void SetWarrior (int i, Vector3 coorc, string n) {
         nameC = n;
         classC = "Warrior";
+        isTurn = false;
         id = i;
         maxHealth = Random.Range (5, 11);
         health = maxHealth;
@@ -55,6 +57,7 @@ public class Character : MonoBehaviour {
     public void SetRogue (int i, Vector3 coorc, string n) {
         nameC = n;
         classC = "Rogue";
+        isTurn = false;
         id = i;
         maxHealth = Random.Range (4, 9);
         health = maxHealth;
@@ -80,6 +83,7 @@ public class Character : MonoBehaviour {
     public void SetMage (int i, Vector3 coorc, string n) {
         nameC = n;
         classC = "Mage";
+        isTurn = false;
         id = i;
         maxHealth = Random.Range (3, 9);
         health = maxHealth;
@@ -105,6 +109,7 @@ public class Character : MonoBehaviour {
     public void SetCleric (int i, Vector3 coorc, string n) {
         nameC = n;
         classC = "Cleric";
+        isTurn = false;
         id = i;
         maxHealth = Random.Range (5, 9);
         health = maxHealth;
@@ -150,8 +155,11 @@ public class Character : MonoBehaviour {
     public int GetRange () => range;
     public int GetId () => id;
     public string GetPower () => power;
-    public int GetAtttack () {
+    public int GetAttack () {
         return (int) (strength + intelligence + agility + wisdom) / 8; //returns damage
     }
-
+    public bool GetisTurn () => isTurn;
+    public void SetisTurn (bool t) {
+        isTurn = t;
+    }
 }

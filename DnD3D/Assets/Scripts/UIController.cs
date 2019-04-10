@@ -8,13 +8,12 @@ public class UIController : MonoBehaviour {
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
     [SerializeField] private static int cMax;
-    [SerializeField] private int idc;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     public GameObject creationUI;
     public GameObject inGameUI;
+    GameboardControl gameBoard;
     public void Start () {
-        idc = 1;
         creationUI = GameObject.Find ("CreationUI");
         inGameUI = GameObject.Find ("InGameUI");
         SetCreationUI ();
@@ -24,54 +23,51 @@ public class UIController : MonoBehaviour {
         m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
         cMax = m_Dropdown.value + 2;
         GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (60, 0, 0), Quaternion.identity);
-        GameboardControl gb = gameBoardObject.GetComponent<GameboardControl> ();
+        gameBoard = gameBoardObject.GetComponent<GameboardControl> ();
         GameObject.Find ("SettingupUI").SetActive (false);
-        gb.StartingGame (cMax);
+        gameBoard.StartingGame (cMax);
     }
     public void CreateCharacter (string c) {
         nameField = GameObject.FindGameObjectWithTag ("NameField").GetComponent<InputField> ();
         Spawner s = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<Spawner> ();
-        s.SetNewCharacter (idc, nameField.text, c, characterCoor);
+        s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
         SetCreationUI ();
-        if (idc == cMax) {
+        if (gameBoard.GetIdc () == cMax) {
             inGameUI.SetActive (true);
-            idc = 1;
-            GameboardControl gbb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-            string name = "Player" + idc;
+            gameBoard.SetIdc (1);
+            string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetMouvementUI (player.GetMouvement ());
-            gbb.SetPreviousTile ();
+            player.SetisTurn (true);
+            gameBoard.SetPreviousTile ();
         } else
-            idc++;
-
-        GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        gb.SetIdc (idc);
+            gameBoard.SetIdc (gameBoard.GetIdc () + 1);
     }
     public void SetCreationUI () {
         creationUI.SetActive (false);
     }
-    public void SetCreationUI (int i, Vector3 coor) {
+    public void SetCreationUI (Vector3 coor) {
         characterCoor = coor;
         creationUI.SetActive (true);
-        idc = i;
         Text text = GameObject.Find ("PlayerNumber").GetComponent<Text> ();
-        text.text = "Player number:" + idc;
+        text.text = "Player number:" + gameBoard.GetIdc ();
     }
     public void NextTurn () {
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        string name = "Player" + idc;
+        string name = "Player" + gameBoard.GetIdc ();
         Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
-        if (idc < cMax)
-            idc++;
+        player.SetisTurn (false);
+        if (gameBoard.GetIdc () < cMax)
+            gameBoard.SetIdc (gameBoard.GetIdc () + 1);
         else
-            idc = 1;
+            gameBoard.SetIdc (1);
 
-        name = "Player" + idc;
+        name = "Player" + gameBoard.GetIdc ();
         player = GameObject.FindWithTag (name).GetComponent<Character> ();
         player.SetMouvementUI (player.GetMouvement ());
+        player.SetisTurn (true);
         gb.SetPreviousTile ();
-        gb.SetIdc (idc);
-        Debug.Log ("a");
+        gb.SetIdc (gameBoard.GetIdc ());
     }
     public void SetCharUI (Character c) {
         Text name = GameObject.Find ("Name").GetComponent<Text> ();

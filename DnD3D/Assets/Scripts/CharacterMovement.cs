@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour {
     public Color startColor;
     public Color endColor;
     RaycastHit hit;
-    Character c;
+    Character player;
     int range;
     Tile attackedTile;
     Ray ray;
@@ -25,27 +25,32 @@ public class CharacterMovement : MonoBehaviour {
         _controller = GetComponent<CharacterController> ();
         gameboard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
         isAttacking = false;
-        c = gameObject.GetComponent<Character> ();
-        range = c.GetRange ();
+        player = gameObject.GetComponent<Character> ();
+        range = player.GetRange ();
     }
     // Update is called once per frame
     void Update () {
-        if (IsTurn ()) {
+        if (player.GetisTurn ()) {
+            gameObject.GetComponent<Collider> ().enabled = true;
             Move ();
             Attack ();
-            EndTurn();
+            EndTurn ();
+        } else {
+            gameObject.GetComponent<Collider> ().enabled = false;
         }
     }
     public void EndTurn () {
-        if (Input.GetKeyUp (KeyCode.Return))
-            gameboard.NextTurn ();
+        if (Input.GetKeyUp (KeyCode.Return)) {
+            player.SetisTurn (false);
+            gameboard.NextTurn (player);
+        }
     }
     public void Attack () {
         if (Input.GetKey (KeyCode.Space)) {
             isAttacking = true;
             cells = new List<Tile> ();
-            cells.Add (gameboard.WhatTile (c));
-            Vector3 coor = gameboard.WhatTile (c).GetCoor ();
+            cells.Add (gameboard.WhatTile (player));
+            Vector3 coor = gameboard.WhatTile (player).GetCoor ();
             if (range != 0) {
                 for (int i = 0; i <= range; i++) {
                     cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
@@ -60,7 +65,7 @@ public class CharacterMovement : MonoBehaviour {
                 if (t != null)
                     t.GetComponent<Renderer> ().material.color = endColor;
             }
-            StartCoroutine (Attacking (c));
+            StartCoroutine (Attacking (player));
         }
         if (isAttacking) {
             ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -83,9 +88,9 @@ public class CharacterMovement : MonoBehaviour {
                         t.GetComponent<Renderer> ().material.color = startColor;
                 } //attack function
                 foreach (Character chara in gameboard.GetCharacters ()) {
-                    if (c != chara) {
+                    if (player != chara) {
                         if (IsCharacterHit (chara, attackedTile)) {
-                            chara.SetHealth (chara.GetHealth () - c.GetAtttack ());
+                            chara.SetHealth (chara.GetHealth () - player.GetAttack ());
                         }
                     }
                 }
@@ -107,19 +112,6 @@ public class CharacterMovement : MonoBehaviour {
             _controller.Move (move * Time.deltaTime * Speed);
             if (move != Vector3.zero)
                 transform.forward = move;
-        }
-    }
-    public bool IsTurn () {
-        Character c = gameObject.GetComponent<Character> ();
-        int id = c.GetId ();
-        int idc = gameboard.GetIdc ();
-        if (id == idc) {
-            gameObject.GetComponent<Collider> ().enabled = true;
-            return true;
-
-        } else {
-            gameObject.GetComponent<Collider> ().enabled = false;
-            return false;
         }
     }
     IEnumerator Attacking (Character c) {
