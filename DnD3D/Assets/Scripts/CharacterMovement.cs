@@ -31,10 +31,14 @@ public class CharacterMovement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (IsTurn ()) {
-            //Mouvement
             Move ();
-            Attack();
+            Attack ();
+            EndTurn();
         }
+    }
+    public void EndTurn () {
+        if (Input.GetKeyUp (KeyCode.Return))
+            gameboard.NextTurn ();
     }
     public void Attack () {
         if (Input.GetKey (KeyCode.Space)) {

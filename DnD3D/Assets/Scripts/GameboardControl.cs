@@ -83,7 +83,7 @@ public class GameboardControl : MonoBehaviour {
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
     }
-    public Character[] GetCharacters(){
+    public Character[] GetCharacters () {
         return characters;
     }
     public void AddInDoors (GameObject d) {
@@ -111,5 +111,8 @@ public class GameboardControl : MonoBehaviour {
             return null;
         else
             return tiles[c, r];
+    }
+    public void NextTurn () {
+        uiC.NextTurn ();
     }
 }
