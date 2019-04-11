@@ -34,15 +34,8 @@ public class CharacterMovement : MonoBehaviour {
             gameObject.GetComponent<Collider> ().enabled = true;
             Move ();
             Attack ();
-            EndTurn ();
         } else {
             gameObject.GetComponent<Collider> ().enabled = false;
-        }
-    }
-    public void EndTurn () {
-        if (Input.GetKeyUp (KeyCode.Return)) {
-            player.SetisTurn (false);
-            gameboard.NextTurn (player);
         }
     }
     public void Attack () {
@@ -123,5 +116,8 @@ public class CharacterMovement : MonoBehaviour {
             return true;
         else
             return false;
+    }
+    public bool IsAttacking(){
+        return isAttacking;
     }
 }

@@ -52,23 +52,6 @@ public class UIController : MonoBehaviour {
         Text text = GameObject.Find ("PlayerNumber").GetComponent<Text> ();
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
-    public void NextTurn () {
-        GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        string name = "Player" + gameBoard.GetIdc ();
-        Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
-        player.SetisTurn (false);
-        if (gameBoard.GetIdc () < cMax)
-            gameBoard.SetIdc (gameBoard.GetIdc () + 1);
-        else
-            gameBoard.SetIdc (1);
-
-        name = "Player" + gameBoard.GetIdc ();
-        player = GameObject.FindWithTag (name).GetComponent<Character> ();
-        player.SetMouvementUI (player.GetMouvement ());
-        player.SetisTurn (true);
-        gb.SetPreviousTile ();
-        gb.SetIdc (gameBoard.GetIdc ());
-    }
     public void SetCharUI (Character c) {
         Text name = GameObject.Find ("Name").GetComponent<Text> ();
         Text classC = GameObject.Find ("Class").GetComponent<Text> ();

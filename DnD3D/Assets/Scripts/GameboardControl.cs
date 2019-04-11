@@ -18,7 +18,8 @@ public class GameboardControl : MonoBehaviour {
     CameraController cam;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
-
+    Character player;
+    CharacterMovement characterMouvement;
     // Start is called before the first frame update
     public void Awake () {
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
@@ -54,7 +55,8 @@ public class GameboardControl : MonoBehaviour {
         } else {
             cam.SetCamera (idc);
             string name = "Player" + idc;
-            Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
+            player = GameObject.FindWithTag (name).GetComponent<Character> ();
+            characterMouvement = player.GetComponent<CharacterMovement> ();
             uiC.SetCharUI (player);
             ActivateDoors (false);
             currentTile = WhatTile (player);
@@ -66,6 +68,10 @@ public class GameboardControl : MonoBehaviour {
             }
             if (player.GetMouvementUI () == 0)
                 ActivateDoors (true);
+            if (Input.GetKeyUp (KeyCode.Return)) {
+                if (player.GetisTurn () && !characterMouvement.IsAttacking ())
+                    NextTurn (player);
+            }
         }
     }
     public void SetIdc (int i) {
@@ -113,15 +119,14 @@ public class GameboardControl : MonoBehaviour {
             return tiles[c, r];
     }
     public void NextTurn (Character c) {
+        player.SetisTurn (false);
         if (c.GetId () < cMax)
-            idc = c.GetId ();
+            idc++;
         else
             idc = 1;
-        characters[idc].SetMouvementUI (characters[idc].GetMouvement ());
-        characters[idc].SetisTurn (true);
+        characters[idc - 1].SetMouvementUI (characters[idc - 1].GetMouvement ());
+        characters[idc - 1].SetisTurn (true);
         SetPreviousTile ();
-        Debug.Log ("a");
-        // uiC.NextTurn ();
     }
 
 }
