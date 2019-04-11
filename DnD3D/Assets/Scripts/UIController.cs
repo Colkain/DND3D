@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
-
+    CameraController cam;
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
     [SerializeField] private static int cMax;
@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
         inGameUI = GameObject.Find ("InGameUI");
         SetCreationUI ();
         inGameUI.SetActive (false);
+        cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
     }
     public void SettingUp () {
         m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
@@ -40,6 +41,7 @@ public class UIController : MonoBehaviour {
             player.SetMouvementUI (player.GetMouvement ());
             player.SetisTurn (true);
             gameBoard.SetPreviousTile ();
+            cam.SetCamera (gameBoard.GetIdc ());
         } else
             gameBoard.SetIdc (gameBoard.GetIdc () + 1);
     }

@@ -54,7 +54,6 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
-            cam.SetCamera (idc);
             string name = "Player" + idc;
             player = GameObject.FindWithTag (name).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
@@ -128,6 +127,7 @@ public class GameboardControl : MonoBehaviour {
         characters[idc - 1].SetMouvementUI (characters[idc - 1].GetMouvement ());
         characters[idc - 1].SetisTurn (true);
         SetPreviousTile ();
+        cam.SetCamera (idc);
     }
 
 }
