@@ -11,11 +11,12 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] int maxColumns = 10;
     [SerializeField] int maxRows = 10;
     [SerializeField] float size;
-    private int idt;
+    [SerializeField] private int idt;
     [SerializeField] private int idc;
-    private int cMax;
+    [SerializeField] private int cMax;
     UIController uiC;
     CameraController cam;
+    //Misc
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
     Character player;
