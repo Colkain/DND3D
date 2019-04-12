@@ -25,7 +25,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private string power;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
-
+    [SerializeField] private Item[] items;
     public void SetWarrior (int i, Vector3 coorc, string n) {
         nameC = n;
         classC = "Warrior";
@@ -43,6 +43,7 @@ public class Character : MonoBehaviour {
         power = "Can attack again";
         level = 1;
         coor = coorc;
+        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -71,6 +72,7 @@ public class Character : MonoBehaviour {
         power = "If not in front of enemy, gain +5 dice roll on attack";
         level = 1;
         coor = coorc;
+        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -98,6 +100,7 @@ public class Character : MonoBehaviour {
         power = "+1 Range";
         level = 1;
         coor = coorc;
+        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -125,6 +128,7 @@ public class Character : MonoBehaviour {
         power = "Can Heal : 1;5";
         level = 1;
         coor = coorc;
+        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
