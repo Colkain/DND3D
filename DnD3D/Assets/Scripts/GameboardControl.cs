@@ -21,6 +21,7 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] private Tile previousTile = null;
     [SerializeField] Character player;
     CharacterMovement characterMouvement;
+    bool newRound = true;
     // Start is called before the first frame update
     public void Awake () {
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
@@ -55,8 +56,11 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
-            if (round > 0)
-                LevelUp ();
+            if (round > 0 && newRound) {
+                newRound = false;
+                uiC.SetLevelUpButtons (true); //level up buttons     
+            }
+
             player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
             uiC.SetCharUI (player);
@@ -66,15 +70,19 @@ public class GameboardControl : MonoBehaviour {
             if (previousTile != currentTile) {
                 if (previousTile != null)
                     player.SetMouvementUI (player.GetMouvementUI () - 1);
+
                 previousTile = currentTile;
             }
             if (player.GetMouvementUI () == 0)
                 ActivateDoors (true);
+
             if (Input.GetKeyUp (KeyCode.Return)) {
                 if (player.GetisTurn () && !characterMouvement.IsAttacking ())
                     NextTurn ();
-                if (idc == 1)
+
+                if (idc == 1) {
                     round++;
+                }
             }
         }
     }
@@ -133,8 +141,6 @@ public class GameboardControl : MonoBehaviour {
         player.SetisTurn (true);
         SetPreviousTile ();
         cam.SetCamera (idc);
-    }
-    public void LevelUp () {
-        uiC.SetLevelUpButtons (true);
+        newRound = true;
     }
 }

@@ -25,10 +25,8 @@ public class Character : MonoBehaviour {
     [SerializeField] private string power;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
-    [SerializeField] private int[] stats;
 
     public void SetWarrior (int i, Vector3 coorc, string n) {
-        stats = new int[6];
         nameC = n;
         classC = "Warrior";
         isTurn = false;
@@ -46,13 +44,6 @@ public class Character : MonoBehaviour {
         level = 1;
         coor = coorc;
 
-        stats[0] = mouvement;
-        stats[1] = maxHealth;
-        stats[2] = strength;
-        stats[3] = agility;
-        stats[4] = intelligence;
-        stats[5] = wisdom;
-
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
@@ -64,7 +55,6 @@ public class Character : MonoBehaviour {
     }
 
     public void SetRogue (int i, Vector3 coorc, string n) {
-        stats = new int[6];
         nameC = n;
         classC = "Rogue";
         isTurn = false;
@@ -82,13 +72,6 @@ public class Character : MonoBehaviour {
         level = 1;
         coor = coorc;
 
-        stats[0] = mouvement;
-        stats[1] = maxHealth;
-        stats[2] = strength;
-        stats[3] = agility;
-        stats[4] = intelligence;
-        stats[5] = wisdom;
-
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
@@ -99,7 +82,6 @@ public class Character : MonoBehaviour {
     }
 
     public void SetMage (int i, Vector3 coorc, string n) {
-        stats = new int[6];
         nameC = n;
         classC = "Mage";
         isTurn = false;
@@ -117,13 +99,6 @@ public class Character : MonoBehaviour {
         level = 1;
         coor = coorc;
 
-        stats[0] = mouvement;
-        stats[1] = maxHealth;
-        stats[2] = strength;
-        stats[3] = agility;
-        stats[4] = intelligence;
-        stats[5] = wisdom;
-
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
@@ -134,7 +109,6 @@ public class Character : MonoBehaviour {
     }
 
     public void SetCleric (int i, Vector3 coorc, string n) {
-        stats = new int[6];
         nameC = n;
         classC = "Cleric";
         isTurn = false;
@@ -151,13 +125,6 @@ public class Character : MonoBehaviour {
         power = "Can Heal : 1;5";
         level = 1;
         coor = coorc;
-
-        stats[0] = mouvement;
-        stats[1] = maxHealth;
-        stats[2] = strength;
-        stats[3] = agility;
-        stats[4] = intelligence;
-        stats[5] = wisdom;
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -176,13 +143,11 @@ public class Character : MonoBehaviour {
     }
     public void SetMaxHealth (int h) {
         maxHealth = h;
-        stats[1] = maxHealth;
     }
     public int GetMaxHealth () => maxHealth;
     public int GetMouvement () => mouvement;
     public void SetMouvement (int i) {
         mouvement = i;
-        stats[0] = mouvement;
     }
     public void SetMouvementUI (int i) {
         mouvementUI = i;
@@ -194,8 +159,20 @@ public class Character : MonoBehaviour {
     public int GetWisdom () => wisdom;
     public int GetLevel () => level;
     public void LevelUp (int stat) {
+        if (stat == 0) {
+            mouvement++;
+            mouvementUI++;
+        } else if (stat == 1)
+            maxHealth++;
+        else if (stat == 2)
+            strength++;
+        else if (stat == 3)
+            agility++;
+        else if (stat == 4)
+            intelligence++;
+        else if (stat == 5)
+            wisdom++;
         level++;
-        stats[stat]++;
     }
     public int GetRange () => range;
     public int GetId () => id;

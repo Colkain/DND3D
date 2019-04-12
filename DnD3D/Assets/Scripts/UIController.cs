@@ -113,4 +113,8 @@ public class UIController : MonoBehaviour {
         wisdom.transform.GetChild (0).gameObject.SetActive (a);
     }
 
+    public void LevelUp (int stat) {
+        gameBoard.GetCharacters () [gameBoard.GetIdc () - 1].LevelUp (stat);
+        SetLevelUpButtons (false);
+    }
 }
