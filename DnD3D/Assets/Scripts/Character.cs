@@ -150,6 +150,9 @@ public class Character : MonoBehaviour {
     public int GetIntelligence () => intelligence;
     public int GetWisdom () => wisdom;
     public int GetLevel () => level;
+    public void LevelUp () {
+        level++;
+    }
     public int GetRange () => range;
     public int GetId () => id;
     public string GetPower () => power;

@@ -16,9 +16,10 @@ public class GameboardControl : MonoBehaviour {
     UIController uiC;
     CameraController cam;
     //Misc
+    [SerializeField] private int round;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
-    Character player;
+    [SerializeField] Character player;
     CharacterMovement characterMouvement;
     // Start is called before the first frame update
     public void Awake () {
@@ -26,6 +27,7 @@ public class GameboardControl : MonoBehaviour {
         uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
     }
     public void StartingGame (int c) {
+        round = 0;
         idt = 0; //tile id
         tiles = new Tile[maxColumns, maxRows];
         doors = new ArrayList ();
@@ -53,8 +55,7 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
-            string name = "Player" + idc;
-            player = GameObject.FindWithTag (name).GetComponent<Character> ();
+            player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
             uiC.SetCharUI (player);
             ActivateDoors (false);
@@ -69,7 +70,9 @@ public class GameboardControl : MonoBehaviour {
                 ActivateDoors (true);
             if (Input.GetKeyUp (KeyCode.Return)) {
                 if (player.GetisTurn () && !characterMouvement.IsAttacking ())
-                    NextTurn (player);
+                    NextTurn ();
+                if (idc == 1)
+                    round++;
             }
         }
     }
@@ -117,16 +120,19 @@ public class GameboardControl : MonoBehaviour {
         else
             return tiles[c, r];
     }
-    public void NextTurn (Character c) {
+    public void NextTurn () {
         player.SetisTurn (false);
-        if (c.GetId () < cMax)
+        if (player.GetId () < cMax)
             idc++;
         else
             idc = 1;
-        characters[idc - 1].SetMouvementUI (characters[idc - 1].GetMouvement ());
-        characters[idc - 1].SetisTurn (true);
+        player = characters[idc - 1];
+        player.SetMouvementUI (player.GetMouvement ());
+        player.SetisTurn (true);
         SetPreviousTile ();
         cam.SetCamera (idc);
     }
-
+    public void LevelUp () {
+        player.LevelUp ();
+    }
 }
