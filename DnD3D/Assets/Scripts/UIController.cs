@@ -11,12 +11,33 @@ public class UIController : MonoBehaviour {
     public GameObject creationUI;
     public GameObject inGameUI;
     GameboardControl gameBoard;
+    //inGame Texts
+    GameObject nameC;
+    GameObject classC;
+    GameObject level;
+    GameObject health;
+    GameObject mouvement;
+    GameObject strength;
+    GameObject agility;
+    GameObject intelligence;
+    GameObject wisdom;
+    GameObject range;
+    GameObject power;
+    //inGame Buttons
+    Button mouvementB;
+    Button healthB;
+    Button strengthB;
+    Button agilityB;
+    Button intelligenceB;
+    Button wisdomB;
+    bool startOfTheGame;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
         inGameUI = GameObject.Find ("InGameUI");
         SetCreationUI ();
         inGameUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
+        startOfTheGame = true;
     }
     public void SettingUp () {
         m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
@@ -53,28 +74,43 @@ public class UIController : MonoBehaviour {
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
     public void SetCharUI (Character c) {
-        Text name = GameObject.Find ("Name").GetComponent<Text> ();
-        Text classC = GameObject.Find ("Class").GetComponent<Text> ();
-        Text level = GameObject.Find ("Level").GetComponent<Text> ();
-        Text health = GameObject.Find ("Health").GetComponent<Text> ();
-        Text mouvement = GameObject.Find ("Mouvement").GetComponent<Text> ();
-        Text strength = GameObject.Find ("Strength").GetComponent<Text> ();
-        Text agility = GameObject.Find ("Agility").GetComponent<Text> ();
-        Text intelligence = GameObject.Find ("Intelligence").GetComponent<Text> ();
-        Text wisdom = GameObject.Find ("Wisdom").GetComponent<Text> ();
-        Text range = GameObject.Find ("Range").GetComponent<Text> ();
-        Text power = GameObject.Find ("Power").GetComponent<Text> ();
+        nameC = GameObject.Find ("Name");
+        classC = GameObject.Find ("Class");
+        level = GameObject.Find ("Level");
+        health = GameObject.Find ("Health");
+        mouvement = GameObject.Find ("Mouvement");
+        strength = GameObject.Find ("Strength");
+        agility = GameObject.Find ("Agility");
+        intelligence = GameObject.Find ("Intelligence");
+        wisdom = GameObject.Find ("Wisdom");
+        range = GameObject.Find ("Range");
+        power = GameObject.Find ("Power");
 
-        name.text = c.GetName ();
-        classC.text = c.GetClass ();
-        level.text = "Lvl:" + c.GetLevel ().ToString ();
-        health.text = "HP:" + c.GetHealth ().ToString () + "/" + c.GetMaxHealth ().ToString ();
-        mouvement.text = "Mv:" + c.GetMouvementUI ().ToString ();
-        strength.text = "Str:" + c.GetStrength ().ToString ();
-        agility.text = "Agi:" + c.GetAgility ().ToString ();
-        intelligence.text = "Int:" + c.GetIntelligence ().ToString ();
-        wisdom.text = "Wis:" + c.GetWisdom ().ToString ();
-        range.text = "Ran:" + c.GetRange ().ToString ();
-        power.text = "Powers:\n* " + c.GetPower ();
+        if (startOfTheGame) {
+            SetLevelUpButtons (false);
+            startOfTheGame = false;
+        }
+
+        nameC.GetComponent<Text> ().text = c.GetName ();
+        classC.GetComponent<Text> ().text = c.GetClass ();
+        level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
+        health.GetComponent<Text> ().text = "HP:" + c.GetHealth ().ToString () + "/" + c.GetMaxHealth ().ToString ();
+        mouvement.GetComponent<Text> ().text = "Mv:" + c.GetMouvementUI ().ToString ();
+        strength.GetComponent<Text> ().text = "Str:" + c.GetStrength ().ToString ();
+        agility.GetComponent<Text> ().text = "Agi:" + c.GetAgility ().ToString ();
+        intelligence.GetComponent<Text> ().text = "Int:" + c.GetIntelligence ().ToString ();
+        wisdom.GetComponent<Text> ().text = "Wis:" + c.GetWisdom ().ToString ();
+        range.GetComponent<Text> ().text = "Ran:" + c.GetRange ().ToString ();
+        power.GetComponent<Text> ().text = "Powers:\n* " + c.GetPower ();
     }
+
+    public void SetLevelUpButtons (bool a) {
+        mouvement.transform.GetChild (0).gameObject.SetActive (a);
+        health.transform.GetChild (0).gameObject.SetActive (a);
+        strength.transform.GetChild (0).gameObject.SetActive (a);
+        agility.transform.GetChild (0).gameObject.SetActive (a);
+        intelligence.transform.GetChild (0).gameObject.SetActive (a);
+        wisdom.transform.GetChild (0).gameObject.SetActive (a);
+    }
+
 }

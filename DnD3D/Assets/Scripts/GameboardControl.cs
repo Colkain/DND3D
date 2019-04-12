@@ -55,6 +55,8 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
+            if (round > 0)
+                LevelUp ();
             player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
             uiC.SetCharUI (player);
@@ -133,6 +135,6 @@ public class GameboardControl : MonoBehaviour {
         cam.SetCamera (idc);
     }
     public void LevelUp () {
-        player.LevelUp ();
+        uiC.SetLevelUpButtons (true);
     }
 }

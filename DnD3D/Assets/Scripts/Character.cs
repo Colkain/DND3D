@@ -14,6 +14,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private int id;
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
+    [SerializeField] private int action;
     [SerializeField] private int mouvement;
     [SerializeField] private int mouvementUI;
     [SerializeField] private int strength;
@@ -24,15 +25,18 @@ public class Character : MonoBehaviour {
     [SerializeField] private string power;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
+    [SerializeField] private int[] stats;
 
     public void SetWarrior (int i, Vector3 coorc, string n) {
+        stats = new int[6];
         nameC = n;
         classC = "Warrior";
         isTurn = false;
         id = i;
+        action = 2;
+        mouvement = Random.Range (1, 5);
         maxHealth = Random.Range (5, 11);
         health = maxHealth;
-        mouvement = Random.Range (1, 5);
         strength = Random.Range (5, 11);
         agility = Random.Range (1, 5);
         intelligence = Random.Range (1, 4);
@@ -41,6 +45,13 @@ public class Character : MonoBehaviour {
         power = "Can attack again";
         level = 1;
         coor = coorc;
+
+        stats[0] = mouvement;
+        stats[1] = maxHealth;
+        stats[2] = strength;
+        stats[3] = agility;
+        stats[4] = intelligence;
+        stats[5] = wisdom;
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -53,13 +64,15 @@ public class Character : MonoBehaviour {
     }
 
     public void SetRogue (int i, Vector3 coorc, string n) {
+        stats = new int[6];
         nameC = n;
         classC = "Rogue";
         isTurn = false;
         id = i;
+        action = 1;
+        mouvement = Random.Range (2, 7);
         maxHealth = Random.Range (4, 9);
         health = maxHealth;
-        mouvement = Random.Range (2, 7);
         strength = Random.Range (1, 5);
         agility = Random.Range (5, 10);
         intelligence = Random.Range (1, 4);
@@ -68,6 +81,13 @@ public class Character : MonoBehaviour {
         power = "If not in front of enemy, gain +5 dice roll on attack";
         level = 1;
         coor = coorc;
+
+        stats[0] = mouvement;
+        stats[1] = maxHealth;
+        stats[2] = strength;
+        stats[3] = agility;
+        stats[4] = intelligence;
+        stats[5] = wisdom;
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -79,13 +99,15 @@ public class Character : MonoBehaviour {
     }
 
     public void SetMage (int i, Vector3 coorc, string n) {
+        stats = new int[6];
         nameC = n;
         classC = "Mage";
         isTurn = false;
         id = i;
+        action = 1;
+        mouvement = Random.Range (2, 6);
         maxHealth = Random.Range (3, 9);
         health = maxHealth;
-        mouvement = Random.Range (2, 6);
         strength = Random.Range (1, 4);
         agility = Random.Range (1, 4);
         intelligence = Random.Range (5, 11);
@@ -94,6 +116,13 @@ public class Character : MonoBehaviour {
         power = "+1 Range";
         level = 1;
         coor = coorc;
+
+        stats[0] = mouvement;
+        stats[1] = maxHealth;
+        stats[2] = strength;
+        stats[3] = agility;
+        stats[4] = intelligence;
+        stats[5] = wisdom;
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -105,13 +134,15 @@ public class Character : MonoBehaviour {
     }
 
     public void SetCleric (int i, Vector3 coorc, string n) {
+        stats = new int[6];
         nameC = n;
         classC = "Cleric";
         isTurn = false;
         id = i;
+        action = 1;
+        mouvement = Random.Range (1, 6);
         maxHealth = Random.Range (5, 9);
         health = maxHealth;
-        mouvement = Random.Range (1, 6);
         strength = Random.Range (1, 6);
         agility = Random.Range (1, 4);
         intelligence = Random.Range (1, 4);
@@ -120,6 +151,13 @@ public class Character : MonoBehaviour {
         power = "Can Heal : 1;5";
         level = 1;
         coor = coorc;
+
+        stats[0] = mouvement;
+        stats[1] = maxHealth;
+        stats[2] = strength;
+        stats[3] = agility;
+        stats[4] = intelligence;
+        stats[5] = wisdom;
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -136,10 +174,15 @@ public class Character : MonoBehaviour {
     public void SetHealth (int h) {
         health = h;
     }
+    public void SetMaxHealth (int h) {
+        maxHealth = h;
+        stats[1] = maxHealth;
+    }
     public int GetMaxHealth () => maxHealth;
     public int GetMouvement () => mouvement;
     public void SetMouvement (int i) {
         mouvement = i;
+        stats[0] = mouvement;
     }
     public void SetMouvementUI (int i) {
         mouvementUI = i;
@@ -150,8 +193,9 @@ public class Character : MonoBehaviour {
     public int GetIntelligence () => intelligence;
     public int GetWisdom () => wisdom;
     public int GetLevel () => level;
-    public void LevelUp () {
+    public void LevelUp (int stat) {
         level++;
+        stats[stat]++;
     }
     public int GetRange () => range;
     public int GetId () => id;
