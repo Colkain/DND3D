@@ -75,6 +75,6 @@ public class UIController : MonoBehaviour {
         intelligence.text = "Int:" + c.GetIntelligence ().ToString ();
         wisdom.text = "Wis:" + c.GetWisdom ().ToString ();
         range.text = "Ran:" + c.GetRange ().ToString ();
-        power.text = "Power:" + c.GetPower ();
+        power.text = "Powers:\n* " + c.GetPower ();
     }
 }
