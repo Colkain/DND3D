@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,6 +75,6 @@ public class UIController : MonoBehaviour {
         intelligence.text = "Int:" + c.GetIntelligence ().ToString ();
         wisdom.text = "Wis:" + c.GetWisdom ().ToString ();
         range.text = "Ran:" + c.GetRange ().ToString ();
-        power.text = "Powers:\n -" + c.GetPower ();
+        power.text = "Power:" + c.GetPower ();
     }
 }

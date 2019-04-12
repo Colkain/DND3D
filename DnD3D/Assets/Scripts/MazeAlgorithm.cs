@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public abstract class MazeAlgorithm {
+﻿public abstract class MazeAlgorithm {
 	protected Tile[, ] tiles;
 	protected int mazeRows, mazeColumns;
 
