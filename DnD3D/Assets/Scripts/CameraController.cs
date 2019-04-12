@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
     GameObject player;
-    Vector3 newPos;
+    public Vector3 newPos;
     Vector3[] offsets;
     Quaternion[] angles;
-    float smoothFactor = 0.5f;
+    float smoothFactor = 10;
     bool isSet = false;
     [SerializeField] bool isLocked = true;
     int whatOffset;
-
+    float panBorderThickness = 15f;
+    Vector2 panMaxLimit;
+    Vector2 panMinLimit;
     void Start () {
+        panMaxLimit = new Vector2 (36, 36);
+        panMinLimit = new Vector2 (-5, -5);
         offsets = new Vector3[3];
         angles = new Quaternion[3];
         offsets[0] = new Vector3 (0, 8, -3);
@@ -26,18 +28,20 @@ public class CameraController : MonoBehaviour {
         if (isSet) {
             if (isLocked) {
                 newPos = player.transform.position + offsets[whatOffset];
-                transform.position = Vector3.Slerp (transform.position, newPos, smoothFactor);
-                transform.rotation = Quaternion.Slerp (transform.rotation, angles[whatOffset], smoothFactor);
+                ChangeView ();
             } else {
                 MoveCamera ();
             }
             SetisLock ();
-            ChangeView ();
+            transform.position = Vector3.Slerp (transform.position, newPos, smoothFactor * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp (transform.rotation, angles[whatOffset], smoothFactor * Time.deltaTime);
         }
     }
     public void SetCamera (int idc) {
         if (!isSet)
             isSet = true;
+        if (!isLocked)
+            isLocked = true;
         player = GameObject.FindWithTag ("Player" + idc);
         whatOffset = 1;
     }
@@ -57,7 +61,6 @@ public class CameraController : MonoBehaviour {
     }
     public void SetisLock () {
         if (Input.GetKeyUp (KeyCode.LeftControl)) {
-            Debug.Log ("a");
             if (isLocked)
                 isLocked = false;
             else
@@ -66,5 +69,16 @@ public class CameraController : MonoBehaviour {
     }
     public void MoveCamera () {
         //Move Camera when mouse at the edge of the screen.
+        if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+            newPos.z += smoothFactor * Time.deltaTime;
+        if (Input.mousePosition.y <= panBorderThickness)
+            newPos.z -= smoothFactor * Time.deltaTime;
+        if (Input.mousePosition.x >= Screen.width - panBorderThickness)
+            newPos.x += smoothFactor * Time.deltaTime;
+        if (Input.mousePosition.x <= panBorderThickness)
+            newPos.x -= smoothFactor * Time.deltaTime;
+
+        newPos.x = Mathf.Clamp (newPos.x, panMinLimit.x, panMaxLimit.x);
+        newPos.z = Mathf.Clamp (newPos.z, panMinLimit.y, panMaxLimit.y);
     }
 }

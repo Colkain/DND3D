@@ -868,6 +868,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 741934176, guid: b1cfda3965dace34ba3bf8083e482d72, type: 3}
+      propertyPath: panLimit.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 741934176, guid: b1cfda3965dace34ba3bf8083e482d72, type: 3}
+      propertyPath: panLimit.y
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 741934178, guid: b1cfda3965dace34ba3bf8083e482d72, type: 3}
       propertyPath: m_OcclusionCulling
       value: 1

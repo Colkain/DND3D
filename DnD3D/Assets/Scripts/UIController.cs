@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour {
     public void SettingUp () {
         m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
         cMax = m_Dropdown.value + 2;
-        GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (60, 0, 0), Quaternion.identity);
+        GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
         gameBoard = gameBoardObject.GetComponent<GameboardControl> ();
         GameObject.Find ("SettingupUI").SetActive (false);
         gameBoard.StartingGame (cMax);
