@@ -22,7 +22,6 @@ public class UIController : MonoBehaviour {
     GameObject intelligence;
     GameObject wisdom;
     GameObject range;
-    GameObject power;
     //inGame Buttons
     Button mouvementB;
     Button healthB;
@@ -84,7 +83,6 @@ public class UIController : MonoBehaviour {
         intelligence = GameObject.Find ("Intelligence");
         wisdom = GameObject.Find ("Wisdom");
         range = GameObject.Find ("Range");
-        power = GameObject.Find ("Power");
 
         if (startOfTheGame) {
             SetLevelUpButtons (false);
@@ -101,7 +99,6 @@ public class UIController : MonoBehaviour {
         intelligence.GetComponent<Text> ().text = "Int:" + c.GetIntelligence ().ToString ();
         wisdom.GetComponent<Text> ().text = "Wis:" + c.GetWisdom ().ToString ();
         range.GetComponent<Text> ().text = "Ran:" + c.GetRange ().ToString ();
-        power.GetComponent<Text> ().text = "Powers:\n* " + c.GetPower ();
     }
 
     public void SetLevelUpButtons (bool a) {
