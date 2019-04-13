@@ -133,7 +133,6 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
-        powers[0] = new Power (3);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -199,4 +198,26 @@ public class Character : MonoBehaviour {
         action += i;
     }
     public int GetAction () => action;
+    public void ActivatePowerEffect (Power p) {
+        if (p.GetId () == 0) {
+            SetAction (1);
+        } else if (p.GetId () == 1) {
+            SetMouvement (2);
+        } else if (p.GetId () == 2) {
+            SetRange (1);
+        } else if (p.GetId () == 3) {
+            SetHealth (Random.Range (1, 5));
+            if (GetHealth () > GetMaxHealth ())
+                SetHealth (GetMaxHealth () - GetHealth ());
+        } else if (p.GetId () == 4) {
+            // description = "+2 for all dice rolls this turn";
+        } else if (p.GetId () == 5) {
+            // description = "Can reroll once this turn";
+        } else if (p.GetId () == 6) {
+            // description = "+3 damage this turn";
+        } else if (p.GetId () == 7) {
+            // description = "Prevent damage until next turn";
+        } else
+            Debug.Log ("Power Activate Error");
+    }
 }

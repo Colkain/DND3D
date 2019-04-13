@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item{
     private int id;
     private string typeI;
     private string nameI;

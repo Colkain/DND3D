@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour {
     bool startOfTheGame;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
-        inGameUI = GameObject.Find ("InGameUI");
+        inGameUI = GameObject.Find ("InGameStatUI");
         SetCreationUI ();
         inGameUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
