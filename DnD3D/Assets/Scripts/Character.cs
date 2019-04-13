@@ -34,7 +34,7 @@ public class Character : MonoBehaviour {
         classC = "Warrior";
         isTurn = false;
         id = i;
-        action = 2;
+        action = 1;
         mouvement = Random.Range (1, 5);
         maxHealth = Random.Range (5, 11);
         health = maxHealth;
@@ -75,6 +75,7 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
+        powers[0] = new Power (1);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -100,9 +101,10 @@ public class Character : MonoBehaviour {
         agility = Random.Range (1, 4);
         intelligence = Random.Range (5, 11);
         wisdom = Random.Range (2, 6);
-        range = 1;
+        range = 0;
         level = 1;
         coor = coorc;
+        powers[0] = new Power (2);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -131,6 +133,7 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
+        powers[0] = new Power (3);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -195,4 +198,5 @@ public class Character : MonoBehaviour {
     public void SetAction (int i) {
         action += i;
     }
+    public int GetAction () => action;
 }

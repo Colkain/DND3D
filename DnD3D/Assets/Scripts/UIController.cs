@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour {
     GameObject nameC;
     GameObject classC;
     GameObject level;
+    GameObject action;
     GameObject health;
     GameObject mouvement;
     GameObject strength;
@@ -76,6 +77,7 @@ public class UIController : MonoBehaviour {
         nameC = GameObject.Find ("Name");
         classC = GameObject.Find ("Class");
         level = GameObject.Find ("Level");
+        action = GameObject.Find ("Action");
         health = GameObject.Find ("Health");
         mouvement = GameObject.Find ("Mouvement");
         strength = GameObject.Find ("Strength");
@@ -92,6 +94,7 @@ public class UIController : MonoBehaviour {
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
         level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
+        action.GetComponent<Text> ().text = "Action:" + c.GetAction ();
         health.GetComponent<Text> ().text = "HP:" + c.GetHealth ().ToString () + "/" + c.GetMaxHealth ().ToString ();
         mouvement.GetComponent<Text> ().text = "Mv:" + c.GetMouvementUI ().ToString ();
         strength.GetComponent<Text> ().text = "Str:" + c.GetStrength ().ToString ();
