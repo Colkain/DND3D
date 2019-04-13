@@ -43,7 +43,29 @@ public class Power : MonoBehaviour {
         } else
             Debug.Log ("Power Error");
     }
-    public string Name => nameP;
+    public void ActivateEffect (Character c) {
+        if (id == 0) {
+            c.SetAction (1);
+        } else if (id == 1) {
+            c.SetMouvement (2);
+        } else if (id == 2) {
+            c.SetRange (1);
+        } else if (id == 3) {
+            c.SetHealth (Random.Range (1, 5));
+            if (c.GetHealth () > c.GetMaxHealth ())
+                c.SetHealth (c.GetMaxHealth () - c.GetHealth ());
+        } else if (id == 4) {
+            // description = "+2 for all dice rolls this turn";
+        } else if (id == 5) {
+            // description = "Can reroll once this turn";
+        } else if (id == 6) {
+            // description = "+3 damage this turn";
+        } else if (id == 7) {
+            // description = "Prevent damage until next turn";
+        } else
+            Debug.Log ("Power Activate Error");
+    }
+    public string GetName () => nameP;
     public string GetDescription () => description;
     public int GetId () => id;
     public int GetCooldown () => cooldown;

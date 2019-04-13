@@ -83,7 +83,7 @@ public class CharacterMovement : MonoBehaviour {
                 foreach (Character chara in gameboard.GetCharacters ()) {
                     if (player != chara) {
                         if (IsCharacterHit (chara, attackedTile)) {
-                            chara.SetHealth (chara.GetHealth () - player.GetAttack ());
+                            chara.SetHealth (-player.GetAttack ());
                         }
                     }
                 }
@@ -117,7 +117,7 @@ public class CharacterMovement : MonoBehaviour {
         else
             return false;
     }
-    public bool IsAttacking(){
+    public bool IsAttacking () {
         return isAttacking;
     }
 }

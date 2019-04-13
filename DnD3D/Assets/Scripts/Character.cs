@@ -22,11 +22,14 @@ public class Character : MonoBehaviour {
     [SerializeField] private int intelligence;
     [SerializeField] private int wisdom;
     [SerializeField] private int range;
-    [SerializeField] private string power;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Item[] items;
+    [SerializeField] private Power[] powers;
+
     public void SetWarrior (int i, Vector3 coorc, string n) {
+        items = new Item[6];
+        powers = new Power[3];
         nameC = n;
         classC = "Warrior";
         isTurn = false;
@@ -42,7 +45,7 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
-        items = new Item[3];
+        powers[0] = new Power (0);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -55,6 +58,8 @@ public class Character : MonoBehaviour {
     }
 
     public void SetRogue (int i, Vector3 coorc, string n) {
+        items = new Item[6];
+        powers = new Power[3];
         nameC = n;
         classC = "Rogue";
         isTurn = false;
@@ -70,7 +75,6 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
-        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -82,6 +86,8 @@ public class Character : MonoBehaviour {
     }
 
     public void SetMage (int i, Vector3 coorc, string n) {
+        items = new Item[6];
+        powers = new Power[3];
         nameC = n;
         classC = "Mage";
         isTurn = false;
@@ -97,7 +103,6 @@ public class Character : MonoBehaviour {
         range = 1;
         level = 1;
         coor = coorc;
-        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -109,6 +114,8 @@ public class Character : MonoBehaviour {
     }
 
     public void SetCleric (int i, Vector3 coorc, string n) {
+        items = new Item[6];
+        powers = new Power[3];
         nameC = n;
         classC = "Cleric";
         isTurn = false;
@@ -124,7 +131,6 @@ public class Character : MonoBehaviour {
         range = 0;
         level = 1;
         coor = coorc;
-        items = new Item[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -139,18 +145,21 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        health = h;
+        health += h;
     }
     public void SetMaxHealth (int h) {
-        maxHealth = h;
+        maxHealth += h;
     }
     public int GetMaxHealth () => maxHealth;
     public int GetMouvement () => mouvement;
     public void SetMouvement (int i) {
-        mouvement = i;
+        mouvement += i;
     }
     public void SetMouvementUI (int i) {
-        mouvementUI = i;
+        mouvementUI += i;
+    }
+    public void SetRange (int i) {
+        range += i;
     }
     public int GetMouvementUI () => mouvementUI;
     public int GetStrength () => strength;
@@ -176,12 +185,14 @@ public class Character : MonoBehaviour {
     }
     public int GetRange () => range;
     public int GetId () => id;
-    public string GetPower () => power;
     public int GetAttack () {
         return (int) (strength + intelligence + agility + wisdom) / 8; //returns damage
     }
     public bool GetisTurn () => isTurn;
     public void SetisTurn (bool t) {
         isTurn = t;
+    }
+    public void SetAction (int i) {
+        action += i;
     }
 }

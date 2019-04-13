@@ -69,7 +69,7 @@ public class GameboardControl : MonoBehaviour {
             currentTile.SetVisited (true);
             if (previousTile != currentTile) {
                 if (previousTile != null)
-                    player.SetMouvementUI (player.GetMouvementUI () - 1);
+                    player.SetMouvementUI (-1);
 
                 previousTile = currentTile;
             }
@@ -137,7 +137,7 @@ public class GameboardControl : MonoBehaviour {
         else
             idc = 1;
         player = characters[idc - 1];
-        player.SetMouvementUI (player.GetMouvement ());
+        player.SetMouvementUI (player.GetMouvement ()-player.GetMouvementUI ());
         player.SetisTurn (true);
         SetPreviousTile ();
         cam.SetCamera (idc);
