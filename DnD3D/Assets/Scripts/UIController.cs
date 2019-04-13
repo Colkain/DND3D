@@ -8,8 +8,10 @@ public class UIController : MonoBehaviour {
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
-    public GameObject creationUI;
-    public GameObject statUI;
+    private GameObject creationUI;
+    private GameObject statUI;
+    private GameObject controlsUI;
+    private GameObject itemsUI;
     GameboardControl gameBoard;
     //inGame Texts
     GameObject nameC;
@@ -34,8 +36,12 @@ public class UIController : MonoBehaviour {
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
+        controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
+        itemsUI = GameObject.Find ("InGameUI").transform.GetChild (2).gameObject;
         SetCreationUI ();
         statUI.SetActive (false);
+        controlsUI.SetActive (false);
+        itemsUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         startOfTheGame = true;
     }
@@ -54,6 +60,8 @@ public class UIController : MonoBehaviour {
         SetCreationUI ();
         if (gameBoard.GetIdc () == cMax) {
             statUI.SetActive (true);
+            controlsUI.SetActive (true);
+            itemsUI.SetActive (true);
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();

@@ -154,7 +154,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 6
   m_Range: 7
-  m_SpotAngle: 48
+  m_SpotAngle: 47
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
