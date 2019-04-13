@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     public GameObject creationUI;
-    public GameObject inGameUI;
+    public GameObject statUI;
     GameboardControl gameBoard;
     //inGame Texts
     GameObject nameC;
@@ -33,9 +33,9 @@ public class UIController : MonoBehaviour {
     bool startOfTheGame;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
-        inGameUI = GameObject.Find ("InGameStatUI");
+        statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         SetCreationUI ();
-        inGameUI.SetActive (false);
+        statUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         startOfTheGame = true;
     }
@@ -53,7 +53,7 @@ public class UIController : MonoBehaviour {
         s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
         SetCreationUI ();
         if (gameBoard.GetIdc () == cMax) {
-            inGameUI.SetActive (true);
+            statUI.SetActive (true);
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
@@ -61,8 +61,10 @@ public class UIController : MonoBehaviour {
             player.SetisTurn (true);
             gameBoard.SetPreviousTile ();
             cam.SetCamera (gameBoard.GetIdc ());
-        } else
+        } else {
             gameBoard.SetIdc (gameBoard.GetIdc () + 1);
+            nameField.text = null;
+        }
     }
     public void SetCreationUI () {
         creationUI.SetActive (false);

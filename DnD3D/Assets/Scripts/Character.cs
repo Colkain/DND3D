@@ -173,9 +173,10 @@ public class Character : MonoBehaviour {
         if (stat == 0) {
             mouvement++;
             mouvementUI++;
-        } else if (stat == 1)
+        } else if (stat == 1) {
+            health++;
             maxHealth++;
-        else if (stat == 2)
+        } else if (stat == 2)
             strength++;
         else if (stat == 3)
             agility++;
@@ -200,15 +201,16 @@ public class Character : MonoBehaviour {
     public int GetAction () => action;
     public void ActivatePowerEffect (Power p) {
         if (p.GetId () == 0) {
-            SetAction (1);
+            action++;
         } else if (p.GetId () == 1) {
-            SetMouvement (2);
+            mouvement += 2;
+            mouvementUI += 2;
         } else if (p.GetId () == 2) {
-            SetRange (1);
+            range++;
         } else if (p.GetId () == 3) {
-            SetHealth (Random.Range (1, 5));
-            if (GetHealth () > GetMaxHealth ())
-                SetHealth (GetMaxHealth () - GetHealth ());
+            health += Random.Range (1, 5);
+            if (health > maxHealth)
+                health = maxHealth;
         } else if (p.GetId () == 4) {
             // description = "+2 for all dice rolls this turn";
         } else if (p.GetId () == 5) {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Item{
+public class Item {
     private int id;
     private string typeI;
     private string nameI;
@@ -115,7 +115,7 @@ public class Item{
             effects[5] = 1;
             effects[6] = 1;
         } else
-            Debug.Log ("Item Error");
+            Debug.Log ("Item Error " + id);
     }
     public string GetTypeI () => typeI;
     public string GetNameI () => nameI;

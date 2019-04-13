@@ -41,7 +41,7 @@ public class Power {
             description = "Prevent damage until next turn";
             cooldown = 3;
         } else
-            Debug.Log ("Power Error");
+            Debug.Log ("Power Error " + id);
     }
     public string GetName () => nameP;
     public string GetDescription () => description;
