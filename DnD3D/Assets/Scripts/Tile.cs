@@ -6,6 +6,9 @@ public class Tile : MonoBehaviour {
     private GameObject northWall, westWall, eastWall, southWall;
     [SerializeField] private Vector3 coor;
     public GameObject[] walls;
+    Material[] mat;
+    public Color wallColor;
+    public Color tileColor;
     public void AddDoor (GameObject w) {
         GameObject doorObject = Instantiate (doorPrefab, w.transform.localPosition, Quaternion.identity);
         doorObject.transform.Rotate (w.transform.rotation.eulerAngles);
@@ -15,11 +18,21 @@ public class Tile : MonoBehaviour {
     }
 
     public void Update () {
-        Light l = gameObject.transform.Find ("Spot Light").GetComponent<Light> ();
-        if (visited) {
-            l.enabled = true;
-        } else
-            l.enabled = false;
+        // Renderer renderer = GetComponent<Renderer> ();
+        // Material mat = renderer.material;
+        if (visited) { } else {
+            foreach (Material m in mat) {
+                // m.SetColor = m.GetColor () * Mathf.LinearToGammaSpace (emission);
+            } 
+        }
+    }
+    public void SetMaterials () {
+        for (int i = 0; i < 3; i++) {
+            if (walls[i] != null) {
+                mat[i] = walls[i].GetComponent<Renderer> ().material;
+            }
+        }
+        mat[4] = GetComponent<Renderer> ().material;
     }
     public bool GetVisited () {
         return visited;
