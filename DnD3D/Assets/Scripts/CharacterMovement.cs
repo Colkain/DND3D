@@ -42,19 +42,19 @@ public class CharacterMovement : MonoBehaviour {
         }
     }
     public void PreUsePower () {
-        if (Input.GetKeyUp (KeyCode.A))
+        if (Input.GetKeyUp (KeyCode.E))
             UsePower (0);
-        else if (Input.GetKeyUp (KeyCode.Z))
+        else if (Input.GetKeyUp (KeyCode.R))
             UsePower (1);
-        else if (Input.GetKeyUp (KeyCode.E))
+        else if (Input.GetKeyUp (KeyCode.T))
             UsePower (2);
     }
     public void UsePower (int i) {
-        player.ActivatePowerEffect (player.GetPower (i));
+        // player.ActivatePowerEffect (player.GetPower (i));
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
-            if (Input.GetKeyUp (KeyCode.Q) || buttonClicked == true) {
+            if (Input.GetKeyUp (KeyCode.A) || buttonClicked == true) {
                 isAttacking = true;
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));

@@ -27,7 +27,8 @@ public class Character : MonoBehaviour {
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Item[] items;
-    private Power[] powers;
+    [SerializeField] private Power[] powers;
+    private GameObject power;
     public void SetWarrior (int i, Vector3 coorc, string n) {
         powers = new Power[3];
         items = new Item[6];
@@ -257,8 +258,10 @@ public class Character : MonoBehaviour {
         int a = 0;
         while ((a < 3) && powers[a] != null)
             a++;
-        if (a < 3)
-            powers[a] = new Power (i);
+        if (a < 3) {
+            powers[a] = new Power(0);
+        } else
+            Debug.Log ("Nope");
     }
     public Power GetPower (int i) {
         if (powers != null && powers[i] == null)

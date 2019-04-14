@@ -72,9 +72,12 @@ MonoBehaviour:
     type: 3}
   nameC: 
   classC: Mage
+  isTurn: 0
   id: 2
   maxHealth: 8
   health: 8
+  action: 0
+  actionUI: 0
   mouvement: 2
   mouvementUI: 0
   strength: 3
@@ -82,9 +85,11 @@ MonoBehaviour:
   intelligence: 6
   wisdom: 4
   range: 2
-  power: +1 Range
+  rangeUI: 0
   level: 1
   coor: {x: 5, y: 2, z: 25}
+  items: []
+  powers: []
 --- !u!143 &7143463284218721533
 CharacterController:
   m_ObjectHideFlags: 0

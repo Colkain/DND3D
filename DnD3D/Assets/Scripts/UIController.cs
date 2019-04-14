@@ -147,7 +147,7 @@ public class UIController : MonoBehaviour {
 
     public void SetPowersButtons () {
         for (int i = 0; i < 3; i++) {
-            power = player.GetPower (i);
+            // power = player.GetPower (i);
             if (power == null) {
                 powersB[i].transform.GetChild (1).gameObject.SetActive (true);
                 powersB[i].transform.GetChild (2).gameObject.SetActive (false);

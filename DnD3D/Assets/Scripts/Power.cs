@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class Power {
     private string nameP;
     private string description;
     private int id;
     private int cooldown;
     private int whatRound;
-
     public Power (int i) {
         id = i;
         if (id == 0) {
