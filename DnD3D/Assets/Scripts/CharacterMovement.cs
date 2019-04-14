@@ -20,6 +20,7 @@ public class CharacterMovement : MonoBehaviour {
     int range;
     Tile attackedTile;
     Ray ray;
+    bool buttonClicked;
     // Start is called before the first frame update
     void Start () {
         _controller = GetComponent<CharacterController> ();
@@ -27,6 +28,7 @@ public class CharacterMovement : MonoBehaviour {
         isAttacking = false;
         player = gameObject.GetComponent<Character> ();
         range = player.GetRange ();
+        buttonClicked = false;
     }
     // Update is called once per frame
     void Update () {
@@ -34,31 +36,45 @@ public class CharacterMovement : MonoBehaviour {
             gameObject.GetComponent<Collider> ().enabled = true;
             Move ();
             Attack ();
+            PreUsePower ();
         } else {
             gameObject.GetComponent<Collider> ().enabled = false;
         }
     }
+    public void PreUsePower () {
+        if (Input.GetKeyUp (KeyCode.A))
+            UsePower (0);
+        else if (Input.GetKeyUp (KeyCode.Z))
+            UsePower (1);
+        else if (Input.GetKeyUp (KeyCode.E))
+            UsePower (2);
+    }
+    public void UsePower (int i) {
+        player.ActivatePowerEffect (player.GetPower (i));
+    }
     public void Attack () {
-        if (Input.GetKey (KeyCode.Space)) {
-            isAttacking = true;
-            cells = new List<Tile> ();
-            cells.Add (gameboard.WhatTile (player));
-            Vector3 coor = gameboard.WhatTile (player).GetCoor ();
-            if (range != 0) {
-                for (int i = 0; i <= range; i++) {
-                    cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
-                    cells.Add (gameboard.GetTile ((int) coor.x - i, (int) coor.z));
+        if (player.GetActionUI () > 0) {
+            if (Input.GetKeyUp (KeyCode.Q) || buttonClicked == true) {
+                isAttacking = true;
+                cells = new List<Tile> ();
+                cells.Add (gameboard.WhatTile (player));
+                Vector3 coor = gameboard.WhatTile (player).GetCoor ();
+                if (range != 0) {
+                    for (int i = 0; i <= range; i++) {
+                        cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
+                        cells.Add (gameboard.GetTile ((int) coor.x - i, (int) coor.z));
+                    }
+                    for (int j = 0; j <= range; j++) {
+                        cells.Add (gameboard.GetTile ((int) coor.x, (int) coor.z + j));
+                        cells.Add (gameboard.GetTile ((int) coor.x, (int) coor.z - j));
+                    }
                 }
-                for (int j = 0; j <= range; j++) {
-                    cells.Add (gameboard.GetTile ((int) coor.x, (int) coor.z + j));
-                    cells.Add (gameboard.GetTile ((int) coor.x, (int) coor.z - j));
+                foreach (Tile t in cells) {
+                    if (t != null)
+                        t.GetComponent<Renderer> ().material.color = endColor;
                 }
+                StartCoroutine (Attacking (player));
             }
-            foreach (Tile t in cells) {
-                if (t != null)
-                    t.GetComponent<Renderer> ().material.color = endColor;
-            }
-            StartCoroutine (Attacking (player));
         }
         if (isAttacking) {
             ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -74,8 +90,9 @@ public class CharacterMovement : MonoBehaviour {
                     }
                 }
             }
-            if (Input.GetMouseButtonUp (0)) {
+            if (Input.GetMouseButtonDown (0)) {
                 isAttacking = false;
+                buttonClicked = false;
                 foreach (Tile t in cells) {
                     if (t != null)
                         t.GetComponent<Renderer> ().material.color = startColor;
@@ -84,6 +101,7 @@ public class CharacterMovement : MonoBehaviour {
                     if (player != chara) {
                         if (IsCharacterHit (chara, attackedTile)) {
                             chara.SetHealth (-player.GetAttack ());
+                            player.SetActionUI (-1);
                         }
                     }
                 }
@@ -106,6 +124,9 @@ public class CharacterMovement : MonoBehaviour {
             if (move != Vector3.zero)
                 transform.forward = move;
         }
+    }
+    public void SetButtonClicked (bool a) {
+        buttonClicked = a;
     }
     IEnumerator Attacking (Character c) {
         while (!Input.GetMouseButtonUp (0))

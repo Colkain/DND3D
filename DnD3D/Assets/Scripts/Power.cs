@@ -5,6 +5,7 @@ public class Power {
     private string description;
     private int id;
     private int cooldown;
+    private int whatRound;
 
     public Power (int i) {
         id = i;
@@ -47,4 +48,8 @@ public class Power {
     public string GetDescription () => description;
     public int GetId () => id;
     public int GetCooldown () => cooldown;
+    public void SetWhatRound (int i) {
+        whatRound = i + cooldown;
+    }
+    public int GetWhatRound () => whatRound;
 }

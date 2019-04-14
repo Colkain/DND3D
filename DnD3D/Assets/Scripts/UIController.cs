@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
+    CharacterMovement cm;
+    [SerializeField] private Character player;
     CameraController cam;
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
@@ -25,19 +27,27 @@ public class UIController : MonoBehaviour {
     GameObject intelligence;
     GameObject wisdom;
     GameObject range;
-    //inGame Buttons
-    Button mouvementB;
-    Button healthB;
-    Button strengthB;
-    Button agilityB;
-    Button intelligenceB;
-    Button wisdomB;
+    //inGame ControlsUI Buttons
+    Button attackB;
+    Button checkB;
+    Button[] powersB;
+    Button endTurn;
+    Power power;
+    //
     bool startOfTheGame;
     public void Start () {
+        powersB = new Button[3];
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
         itemsUI = GameObject.Find ("InGameUI").transform.GetChild (2).gameObject;
+        attackB = controlsUI.transform.GetChild (2).GetComponent<Button> ();
+        checkB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
+        powersB[0] = controlsUI.transform.GetChild (4).GetComponent<Button> ();
+        powersB[1] = controlsUI.transform.GetChild (5).GetComponent<Button> ();
+        powersB[2] = controlsUI.transform.GetChild (6).GetComponent<Button> ();
+        endTurn = controlsUI.transform.GetChild (7).GetComponent<Button> ();
+
         SetCreationUI ();
         statUI.SetActive (false);
         controlsUI.SetActive (false);
@@ -65,7 +75,6 @@ public class UIController : MonoBehaviour {
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
-            player.SetMouvementUI (player.GetMouvement ());
             player.SetisTurn (true);
             gameBoard.SetPreviousTile ();
             cam.SetCamera (gameBoard.GetIdc ());
@@ -84,6 +93,8 @@ public class UIController : MonoBehaviour {
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
     public void SetCharUI (Character c) {
+        player = c;
+        cm = player.GetComponent<CharacterMovement> ();
         nameC = GameObject.Find ("Name");
         classC = GameObject.Find ("Class");
         level = GameObject.Find ("Level");
@@ -100,18 +111,25 @@ public class UIController : MonoBehaviour {
             SetLevelUpButtons (false);
             startOfTheGame = false;
         }
-
+        if (player.GetActionUI () == 0) {
+            attackB.transform.GetChild (1).gameObject.SetActive (true);
+            checkB.transform.GetChild (1).gameObject.SetActive (true);
+        } else {
+            attackB.transform.GetChild (1).gameObject.SetActive (false);
+            checkB.transform.GetChild (1).gameObject.SetActive (false);
+        }
+        SetPowersButtons ();
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
         level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
-        action.GetComponent<Text> ().text = "Action:" + c.GetAction ();
+        action.GetComponent<Text> ().text = "Action:" + c.GetActionUI ();
         health.GetComponent<Text> ().text = "HP:" + c.GetHealth ().ToString () + "/" + c.GetMaxHealth ().ToString ();
         mouvement.GetComponent<Text> ().text = "Mv:" + c.GetMouvementUI ().ToString ();
         strength.GetComponent<Text> ().text = "Str:" + c.GetStrength ().ToString ();
         agility.GetComponent<Text> ().text = "Agi:" + c.GetAgility ().ToString ();
         intelligence.GetComponent<Text> ().text = "Int:" + c.GetIntelligence ().ToString ();
         wisdom.GetComponent<Text> ().text = "Wis:" + c.GetWisdom ().ToString ();
-        range.GetComponent<Text> ().text = "Ran:" + c.GetRange ().ToString ();
+        range.GetComponent<Text> ().text = "Ran:" + c.GetRangeUI ().ToString ();
     }
 
     public void SetLevelUpButtons (bool a) {
@@ -122,9 +140,32 @@ public class UIController : MonoBehaviour {
         intelligence.transform.GetChild (0).gameObject.SetActive (a);
         wisdom.transform.GetChild (0).gameObject.SetActive (a);
     }
-
     public void LevelUp (int stat) {
         gameBoard.GetCharacters () [gameBoard.GetIdc () - 1].LevelUp (stat);
         SetLevelUpButtons (false);
+    }
+
+    public void SetPowersButtons () {
+        for (int i = 0; i < 3; i++) {
+            power = player.GetPower (i);
+            if (power == null) {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (false);
+            } else if (power.GetWhatRound () > gameBoard.GetRound ()) {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetWhatRound () - gameBoard.GetRound ()).ToString ();
+            } else {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (false);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (false);
+            }
+        }
+    }
+    public void Attack () {
+        cm.SetButtonClicked (true);
+        cm.Attack ();
+    }
+    public void UsePower (int i) {
+        cm.UsePower (i);
     }
 }

@@ -15,6 +15,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
     [SerializeField] private int action;
+    [SerializeField] private int actionUI;
     [SerializeField] private int mouvement;
     [SerializeField] private int mouvementUI;
     [SerializeField] private int strength;
@@ -22,20 +23,22 @@ public class Character : MonoBehaviour {
     [SerializeField] private int intelligence;
     [SerializeField] private int wisdom;
     [SerializeField] private int range;
+    [SerializeField] private int rangeUI;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Item[] items;
-    [SerializeField] private Power[] powers;
-
+    private Power[] powers;
     public void SetWarrior (int i, Vector3 coorc, string n) {
-        items = new Item[6];
         powers = new Power[3];
+        items = new Item[6];
         nameC = n;
         classC = "Warrior";
         isTurn = false;
         id = i;
         action = 1;
+        actionUI = action;
         mouvement = Random.Range (1, 5);
+        mouvementUI = mouvement;
         maxHealth = Random.Range (5, 11);
         health = maxHealth;
         strength = Random.Range (5, 11);
@@ -43,9 +46,10 @@ public class Character : MonoBehaviour {
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (1, 4);
         range = 0;
+        rangeUI = range;
         level = 1;
         coor = coorc;
-        powers[0] = new Power (0);
+        AddPower (0);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -65,7 +69,9 @@ public class Character : MonoBehaviour {
         isTurn = false;
         id = i;
         action = 1;
+        actionUI = action;
         mouvement = Random.Range (2, 7);
+        mouvementUI = mouvement;
         maxHealth = Random.Range (4, 9);
         health = maxHealth;
         strength = Random.Range (1, 5);
@@ -73,9 +79,10 @@ public class Character : MonoBehaviour {
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (1, 4);
         range = 0;
+        rangeUI = range;
         level = 1;
         coor = coorc;
-        powers[0] = new Power (1);
+        AddPower (1);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -94,7 +101,9 @@ public class Character : MonoBehaviour {
         isTurn = false;
         id = i;
         action = 1;
+        actionUI = action;
         mouvement = Random.Range (2, 6);
+        mouvementUI = mouvement;
         maxHealth = Random.Range (3, 9);
         health = maxHealth;
         strength = Random.Range (1, 4);
@@ -102,9 +111,10 @@ public class Character : MonoBehaviour {
         intelligence = Random.Range (5, 11);
         wisdom = Random.Range (2, 6);
         range = 0;
+        rangeUI = range;
         level = 1;
         coor = coorc;
-        powers[0] = new Power (2);
+        AddPower (2);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -123,7 +133,9 @@ public class Character : MonoBehaviour {
         isTurn = false;
         id = i;
         action = 1;
+        actionUI = action;
         mouvement = Random.Range (1, 6);
+        mouvementUI = mouvement;
         maxHealth = Random.Range (5, 9);
         health = maxHealth;
         strength = Random.Range (1, 6);
@@ -131,8 +143,10 @@ public class Character : MonoBehaviour {
         intelligence = Random.Range (1, 4);
         wisdom = Random.Range (5, 10);
         range = 0;
+        rangeUI = range;
         level = 1;
         coor = coorc;
+        AddPower (3);
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -163,6 +177,9 @@ public class Character : MonoBehaviour {
     public void SetRange (int i) {
         range += i;
     }
+    public void SetRangeUI (int i) {
+        rangeUI += i;
+    }
     public int GetMouvementUI () => mouvementUI;
     public int GetStrength () => strength;
     public int GetAgility () => agility;
@@ -187,6 +204,7 @@ public class Character : MonoBehaviour {
         level++;
     }
     public int GetRange () => range;
+    public int GetRangeUI () => rangeUI;
     public int GetId () => id;
     public int GetAttack () {
         return (int) (strength + intelligence + agility + wisdom) / 8; //returns damage
@@ -198,28 +216,54 @@ public class Character : MonoBehaviour {
     public void SetAction (int i) {
         action += i;
     }
+    public void SetActionUI (int i) {
+        actionUI += i;
+    }
     public int GetAction () => action;
+    public int GetActionUI () => actionUI;
     public void ActivatePowerEffect (Power p) {
-        if (p.GetId () == 0) {
-            action++;
-        } else if (p.GetId () == 1) {
-            mouvement += 2;
-            mouvementUI += 2;
-        } else if (p.GetId () == 2) {
-            range++;
-        } else if (p.GetId () == 3) {
-            health += Random.Range (1, 5);
-            if (health > maxHealth)
-                health = maxHealth;
-        } else if (p.GetId () == 4) {
-            // description = "+2 for all dice rolls this turn";
-        } else if (p.GetId () == 5) {
-            // description = "Can reroll once this turn";
-        } else if (p.GetId () == 6) {
-            // description = "+3 damage this turn";
-        } else if (p.GetId () == 7) {
-            // description = "Prevent damage until next turn";
-        } else
-            Debug.Log ("Power Activate Error");
+        foreach (Power pa in powers) {
+            if (pa != null)
+                Debug.Log (pa.GetName ());
+        }
+        if (p.GetWhatRound () <= GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ()) {
+            p.SetWhatRound (GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ());
+            if (p.GetId () == 0) {
+                action++;
+                actionUI++;
+            } else if (p.GetId () == 1) {
+                mouvement += 2;
+                mouvementUI += 2;
+            } else if (p.GetId () == 2) {
+                range++;
+                rangeUI++;
+            } else if (p.GetId () == 3) {
+                health += Random.Range (1, 5);
+                if (health > maxHealth)
+                    health = maxHealth;
+            } else if (p.GetId () == 4) {
+                // description = "+2 for all dice rolls this turn";
+            } else if (p.GetId () == 5) {
+                // description = "Can reroll once this turn";
+            } else if (p.GetId () == 6) {
+                // description = "+3 damage this turn";
+            } else if (p.GetId () == 7) {
+                // description = "Prevent damage until next turn";
+            } else
+                Debug.Log ("Power Activate Error");
+        }
+    }
+    public void AddPower (int i) {
+        int a = 0;
+        while ((a < 3) && powers[a] != null)
+            a++;
+        if (a < 3)
+            powers[a] = new Power (i);
+    }
+    public Power GetPower (int i) {
+        if (powers != null && powers[i] == null)
+            return powers[i];
+        else
+            return null;
     }
 }
