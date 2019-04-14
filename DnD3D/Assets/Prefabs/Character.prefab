@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8904764741009441828
+--- !u!1 &6077675585819108852
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,120 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8904764741009441829}
-  - component: {fileID: 8904764741009441827}
-  - component: {fileID: 3618501683894274154}
-  - component: {fileID: 7143463284218721533}
-  m_Layer: 2
+  - component: {fileID: 6077675585819108853}
+  - component: {fileID: 4755525174303503077}
+  - component: {fileID: 6508016112847950554}
+  - component: {fileID: 238269458944083552}
+  - component: {fileID: 8921797088643113355}
+  - component: {fileID: 9114716149192632633}
+  m_Layer: 0
   m_Name: Character
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8904764741009441829
+--- !u!4 &6077675585819108853
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904764741009441828}
+  m_GameObject: {fileID: 6077675585819108852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6077675586515999261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8904764741009441827
+--- !u!33 &4755525174303503077
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675585819108852}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6508016112847950554
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675585819108852}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 01ad50b1732abee4ca165b1ed2e41d26, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &238269458944083552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904764741009441828}
+  m_GameObject: {fileID: 6077675585819108852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bc69ee085ea84449e147edb415e86d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warriorMat: {fileID: 2100000, guid: 01ad50b1732abee4ca165b1ed2e41d26, type: 2}
+  rogueMat: {fileID: 2100000, guid: 72f6ad51643c9c24eaeae18681ddad45, type: 2}
+  mageMat: {fileID: 2100000, guid: 09183acb07f1cf24ba19c85a224d3347, type: 2}
+  clericMat: {fileID: 2100000, guid: 25561d9a88052c44598df8d757b69cdb, type: 2}
+  nameC: 
+  classC: 
+  isTurn: 0
+  id: 0
+  maxHealth: 0
+  health: 0
+  action: 0
+  actionUI: 0
+  mouvement: 0
+  mouvementUI: 0
+  strength: 0
+  agility: 0
+  intelligence: 0
+  wisdom: 0
+  range: 0
+  rangeUI: 0
+  level: 0
+  coor: {x: 0, y: 0, z: 0}
+--- !u!114 &8921797088643113355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675585819108852}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e11d6be9f8c5ab41a0c0b45aa4fce1b, type: 3}
@@ -49,54 +131,14 @@ MonoBehaviour:
   gravity: -9.81
   Drag: {x: 0, y: 0, z: 0}
   startColor: {r: 0.8018868, g: 0.580538, b: 0.11725702, a: 1}
-  endColor: {r: 0.8773585, g: 0.0041384934, b: 0.0041384934, a: 0}
---- !u!114 &3618501683894274154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904764741009441828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bc69ee085ea84449e147edb415e86d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warriorPrefab: {fileID: 6077675585819108852, guid: 4ac1ae41a44241f4d980aa7dbb21e843,
-    type: 3}
-  roguePrefab: {fileID: 8792526510924516229, guid: 631063e989b69d6448f1f25fc1d4235a,
-    type: 3}
-  magePrefab: {fileID: 1465266023457331818, guid: 6dbb0a7aee0802849a6047b7598d450e,
-    type: 3}
-  clericPrefab: {fileID: 8290956404834388435, guid: f79288a05a359764ba09a31ed911b03b,
-    type: 3}
-  nameC: 
-  classC: Mage
-  isTurn: 0
-  id: 2
-  maxHealth: 8
-  health: 8
-  action: 0
-  actionUI: 0
-  mouvement: 2
-  mouvementUI: 0
-  strength: 3
-  agility: 2
-  intelligence: 6
-  wisdom: 4
-  range: 2
-  rangeUI: 0
-  level: 1
-  coor: {x: 5, y: 2, z: 25}
-  items: []
-  powers: []
---- !u!143 &7143463284218721533
+  endColor: {r: 0.3962264, g: 0.061676756, b: 0.061676756, a: 1}
+--- !u!143 &9114716149192632633
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904764741009441828}
+  m_GameObject: {fileID: 6077675585819108852}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -108,3 +150,80 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6077675586515999260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6077675586515999261}
+  - component: {fileID: 6077675586515999256}
+  - component: {fileID: 6077675586515999259}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6077675586515999261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675586515999260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0.2}
+  m_LocalScale: {x: 1, y: 0.1, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 6077675585819108853}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6077675586515999256
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675586515999260}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6077675586515999259
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077675586515999260}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b963172cf88345648bed06d9ba465070, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-    public GameObject warriorPrefab;
-    public GameObject roguePrefab;
-    public GameObject magePrefab;
-    public GameObject clericPrefab;
+    public Material warriorMat;
+    public Material rogueMat;
+    public Material mageMat;
+    public Material clericMat;
+    private Material currentMat;
     private GameObject gameBoardPrefab;
-
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private bool isTurn;
@@ -26,138 +26,77 @@ public class Character : MonoBehaviour {
     [SerializeField] private int rangeUI;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
-    [SerializeField] private Item[] items;
+    [SerializeField] private Power power;
     [SerializeField] private Power[] powers;
-    private GameObject power;
-    public void SetWarrior (int i, Vector3 coorc, string n) {
-        powers = new Power[3];
-        items = new Item[6];
+    public void Show () {
+        Debug.Log (power.GetName ());
+    }
+    public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
+        if (classId == "Warrior") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
+            currentMat = warriorMat;
+        } else if (classC == "Rogue") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
+            currentMat = rogueMat;
+        } else if (classC == "Mage") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
+            currentMat = mageMat;
+        } else if (classC == "Cleric") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
+            currentMat = clericMat;
+        }
         nameC = n;
-        classC = "Warrior";
+        classC = classId;
         isTurn = false;
         id = i;
         action = 1;
         actionUI = action;
-        mouvement = Random.Range (1, 5);
-        mouvementUI = mouvement;
-        maxHealth = Random.Range (5, 11);
-        health = maxHealth;
-        strength = Random.Range (5, 11);
-        agility = Random.Range (1, 5);
-        intelligence = Random.Range (1, 4);
-        wisdom = Random.Range (1, 4);
         range = 0;
         rangeUI = range;
         level = 1;
         coor = coorc;
-        AddPower (0);
-
-        Character charObject = Instantiate (this, coorc, Quaternion.identity);
-        gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
-        charObject.transform.SetParent (gameBoardPrefab.transform, false);
-        GameObject warriorObject = Instantiate (warriorPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
-        warriorObject.transform.SetParent (charObject.transform, false);
-
-        charObject.name = ("Player" + id);
-        charObject.tag = ("Player" + id);
-    }
-
-    public void SetRogue (int i, Vector3 coorc, string n) {
-        items = new Item[6];
-        powers = new Power[3];
-        nameC = n;
-        classC = "Rogue";
-        isTurn = false;
-        id = i;
-        action = 1;
-        actionUI = action;
-        mouvement = Random.Range (2, 7);
         mouvementUI = mouvement;
-        maxHealth = Random.Range (4, 9);
         health = maxHealth;
-        strength = Random.Range (1, 5);
-        agility = Random.Range (5, 10);
-        intelligence = Random.Range (1, 4);
-        wisdom = Random.Range (1, 4);
-        range = 0;
-        rangeUI = range;
-        level = 1;
-        coor = coorc;
-        AddPower (1);
-
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
-        GameObject warriorObject = Instantiate (roguePrefab, new Vector3 (0, 0, 0), Quaternion.identity);
-        warriorObject.transform.SetParent (charObject.transform, false);
+        if (classId == "Warrior") {
+            charObject.GetComponent<Renderer> ().material = warriorMat;
+            power = new Power (0);
+        } else if (classC == "Rogue") {
+            charObject.GetComponent<Renderer> ().material = rogueMat;
+            power = new Power (1);
+        } else if (classC == "Mage") {
+            charObject.GetComponent<Renderer> ().material = mageMat;
+            power = new Power (2);
+        } else if (classC == "Cleric") {
+            charObject.GetComponent<Renderer> ().material = clericMat;
+            power = new Power (3);
+        }
+        Debug.Log (power.GetName ());
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
     }
-
-    public void SetMage (int i, Vector3 coorc, string n) {
-        items = new Item[6];
-        powers = new Power[3];
-        nameC = n;
-        classC = "Mage";
-        isTurn = false;
-        id = i;
-        action = 1;
-        actionUI = action;
-        mouvement = Random.Range (2, 6);
-        mouvementUI = mouvement;
-        maxHealth = Random.Range (3, 9);
-        health = maxHealth;
-        strength = Random.Range (1, 4);
-        agility = Random.Range (1, 4);
-        intelligence = Random.Range (5, 11);
-        wisdom = Random.Range (2, 6);
-        range = 0;
-        rangeUI = range;
-        level = 1;
-        coor = coorc;
-        AddPower (2);
-
-        Character charObject = Instantiate (this, coorc, Quaternion.identity);
-        gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
-        charObject.transform.SetParent (gameBoardPrefab.transform, false);
-        GameObject warriorObject = Instantiate (magePrefab, new Vector3 (0, 0, 0), Quaternion.identity);
-        warriorObject.transform.SetParent (charObject.transform, false);
-        charObject.name = ("Player" + id);
-        charObject.tag = ("Player" + id);
-    }
-
-    public void SetCleric (int i, Vector3 coorc, string n) {
-        items = new Item[6];
-        powers = new Power[3];
-        nameC = n;
-        classC = "Cleric";
-        isTurn = false;
-        id = i;
-        action = 1;
-        actionUI = action;
-        mouvement = Random.Range (1, 6);
-        mouvementUI = mouvement;
-        maxHealth = Random.Range (5, 9);
-        health = maxHealth;
-        strength = Random.Range (1, 6);
-        agility = Random.Range (1, 4);
-        intelligence = Random.Range (1, 4);
-        wisdom = Random.Range (5, 10);
-        range = 0;
-        rangeUI = range;
-        level = 1;
-        coor = coorc;
-        AddPower (3);
-
-        Character charObject = Instantiate (this, coorc, Quaternion.identity);
-        gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
-        charObject.transform.SetParent (gameBoardPrefab.transform, false);
-        GameObject warriorObject = Instantiate (clericPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
-        warriorObject.transform.SetParent (charObject.transform, false);
-        charObject.name = ("Player" + id);
-        charObject.tag = ("Player" + id);
-    }
-
     public string GetName () => nameC;
     public string GetClass () => classC;
     public int GetHealth () => health;
@@ -222,51 +161,51 @@ public class Character : MonoBehaviour {
     }
     public int GetAction () => action;
     public int GetActionUI () => actionUI;
-    public void ActivatePowerEffect (Power p) {
-        foreach (Power pa in powers) {
-            if (pa != null)
-                Debug.Log (pa.GetName ());
-        }
-        if (p.GetWhatRound () <= GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ()) {
-            p.SetWhatRound (GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ());
-            if (p.GetId () == 0) {
-                action++;
-                actionUI++;
-            } else if (p.GetId () == 1) {
-                mouvement += 2;
-                mouvementUI += 2;
-            } else if (p.GetId () == 2) {
-                range++;
-                rangeUI++;
-            } else if (p.GetId () == 3) {
-                health += Random.Range (1, 5);
-                if (health > maxHealth)
-                    health = maxHealth;
-            } else if (p.GetId () == 4) {
-                // description = "+2 for all dice rolls this turn";
-            } else if (p.GetId () == 5) {
-                // description = "Can reroll once this turn";
-            } else if (p.GetId () == 6) {
-                // description = "+3 damage this turn";
-            } else if (p.GetId () == 7) {
-                // description = "Prevent damage until next turn";
-            } else
-                Debug.Log ("Power Activate Error");
-        }
-    }
-    public void AddPower (int i) {
-        int a = 0;
-        while ((a < 3) && powers[a] != null)
-            a++;
-        if (a < 3) {
-            powers[a] = new Power(0);
-        } else
-            Debug.Log ("Nope");
-    }
-    public Power GetPower (int i) {
-        if (powers != null && powers[i] == null)
-            return powers[i];
-        else
-            return null;
-    }
+    // public void ActivatePowerEffect (Power p) {
+    //     foreach (Power pa in powers) {
+    //         if (pa != null)
+    //             Debug.Log (pa.GetName ());
+    //     }
+    //     if (p.GetWhatRound () <= GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ()) {
+    //         p.SetWhatRound (GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ());
+    //         if (p.GetId () == 0) {
+    //             action++;
+    //             actionUI++;
+    //         } else if (p.GetId () == 1) {
+    //             mouvement += 2;
+    //             mouvementUI += 2;
+    //         } else if (p.GetId () == 2) {
+    //             range++;
+    //             rangeUI++;
+    //         } else if (p.GetId () == 3) {
+    //             health += Random.Range (1, 5);
+    //             if (health > maxHealth)
+    //                 health = maxHealth;
+    //         } else if (p.GetId () == 4) {
+    //             // description = "+2 for all dice rolls this turn";
+    //         } else if (p.GetId () == 5) {
+    //             // description = "Can reroll once this turn";
+    //         } else if (p.GetId () == 6) {
+    //             // description = "+3 damage this turn";
+    //         } else if (p.GetId () == 7) {
+    //             // description = "Prevent damage until next turn";
+    //         } else
+    //             Debug.Log ("Power Activate Error");
+    //     }
+    // }
+    // public void AddPower (int i) {
+    //     int a = 0;
+    //     while ((a < 3) && powers[a] != null)
+    //         a++;
+    //     if (a < 3) {
+    //         // powers[a] = new Power(0);
+    //     } else
+    //         Debug.Log ("Nope");
+    // }
+    // public Power GetPower (int i) {
+    //     if (powers != null && powers[i] == null)
+    //         return powers[i];
+    //     else
+    //         return null;
+    // }
 }

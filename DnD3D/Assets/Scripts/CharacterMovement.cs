@@ -33,6 +33,7 @@ public class CharacterMovement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (player.GetisTurn ()) {
+            player.Show ();
             gameObject.GetComponent<Collider> ().enabled = true;
             Move ();
             Attack ();

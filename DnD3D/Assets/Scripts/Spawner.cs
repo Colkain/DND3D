@@ -44,15 +44,7 @@ public class Spawner : MonoBehaviour {
     public void SetNewCharacter (int idc, string name, string c, Vector3 charCoor) {
         Character chara = characterPrefab.GetComponent<Character> ();
         GameboardControl gb = gameObject.GetComponent<GameboardControl> ();
-        if (c == "Warrior") {
-            chara.SetWarrior (idc, charCoor, name);
-        } else if (c == "Rogue")
-            chara.SetRogue (idc, charCoor, name);
-        else if (c == "Mage")
-            chara.SetMage (idc, charCoor, name);
-        else
-            chara.SetCleric (idc, charCoor, name);
-
+        chara.SetCharacter (c, idc, charCoor, name);
         gb.AddInCharacters (idc);
         UIController uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
         uiC.SetCreationUI ();
