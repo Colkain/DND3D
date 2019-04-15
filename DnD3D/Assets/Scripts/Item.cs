@@ -2,17 +2,19 @@
 
 [System.Serializable]
 public class Item {
-    private int id;
-    private string typeI;
-    private string nameI;
-    private int[] requirements;
-    private int[] effects;
-    private bool equipped;
+    [SerializeField] private int id;
+    [SerializeField] private string typeI;
+    [SerializeField] private string nameI;
+    [SerializeField] private int[] requirements;
+    [SerializeField] private int[] effects;
+    [SerializeField] private bool equipped;
+    [SerializeField] private bool set = false;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom
         effects = new int[10]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:all 8:damage 9:range
         equipped = false;
         id = i;
+        set = true;
         if (id == 0) {
             typeI = "Weapon";
             nameI = "Sword";
@@ -126,4 +128,5 @@ public class Item {
     public void SetEquiped (bool a) {
         equipped = a;
     }
+    public bool GetSet () => set;
 }

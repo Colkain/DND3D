@@ -26,6 +26,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Power[] powers;
+    [SerializeField] private Item[] items;
     public void Show () {
         // Debug.Log (power.GetName ());
     }
@@ -40,6 +41,7 @@ public class Character : MonoBehaviour {
         level = 1;
         coor = coorc;
         powers = new Power[3];
+        items = new Item[6];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -191,5 +193,13 @@ public class Character : MonoBehaviour {
             return powers[i];
         else
             return null;
+    }
+    public void AddItem (Item i) {
+        for (int a = 0; a < items.Length; a++) {
+            if (items[a].GetSet () == false) {
+                items[a] = i;
+                return;
+            }
+        }
     }
 }
