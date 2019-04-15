@@ -145,6 +145,10 @@ public class GameboardControl : MonoBehaviour {
         player.SetRangeUI (player.GetRange () - player.GetRangeUI ());
         player.SetMouvementUI (player.GetMouvement () - player.GetMouvementUI ());
         player.SetisTurn (true);
+        for (int p = 0; p < 3; p++) {
+            if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
+                player.GetPower (p).SetCooldownUI (-1);
+        }
         SetPreviousTile ();
         cam.SetCamera (idc);
         newRound = true;

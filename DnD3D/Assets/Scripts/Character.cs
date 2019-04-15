@@ -149,39 +149,35 @@ public class Character : MonoBehaviour {
     }
     public int GetAction () => action;
     public int GetActionUI () => actionUI;
-    
-    // public void ActivatePowerEffect (Power p) {
-    //     foreach (Power pa in powers) {
-    //         if (pa != null)
-    //             Debug.Log (pa.GetName ());
-    //     }
-    //     if (p.GetWhatRound () <= GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ()) {
-    //         p.SetWhatRound (GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ().GetRound ());
-    //         if (p.GetId () == 0) {
-    //             action++;
-    //             actionUI++;
-    //         } else if (p.GetId () == 1) {
-    //             mouvement += 2;
-    //             mouvementUI += 2;
-    //         } else if (p.GetId () == 2) {
-    //             range++;
-    //             rangeUI++;
-    //         } else if (p.GetId () == 3) {
-    //             health += Random.Range (1, 5);
-    //             if (health > maxHealth)
-    //                 health = maxHealth;
-    //         } else if (p.GetId () == 4) {
-    //             // description = "+2 for all dice rolls this turn";
-    //         } else if (p.GetId () == 5) {
-    //             // description = "Can reroll once this turn";
-    //         } else if (p.GetId () == 6) {
-    //             // description = "+3 damage this turn";
-    //         } else if (p.GetId () == 7) {
-    //             // description = "Prevent damage until next turn";
-    //         } else
-    //             Debug.Log ("Power Activate Error");
-    //     }
-    // }
+
+    public void ActivatePowerEffect (Power p) {
+        if (p.GetCooldownUI () == 0) {
+            p.SetCooldownUI (p.GetCooldown ());
+            if (p.GetId () == 0) {
+                action++;
+                actionUI++;
+            } else if (p.GetId () == 1) {
+                mouvement += 2;
+                mouvementUI += 2;
+            } else if (p.GetId () == 2) {
+                range++;
+                rangeUI++;
+            } else if (p.GetId () == 3) {
+                health += Random.Range (1, 5);
+                if (health > maxHealth)
+                    health = maxHealth;
+            } else if (p.GetId () == 4) {
+                // description = "+2 for all dice rolls this turn";
+            } else if (p.GetId () == 5) {
+                // description = "Can reroll once this turn";
+            } else if (p.GetId () == 6) {
+                // description = "+3 damage this turn";
+            } else if (p.GetId () == 7) {
+                // description = "Prevent damage until next turn";
+            } else
+                Debug.Log ("Power Activate Error");
+        }
+    }
     public void AddPower (int i) {
         for (int a = 0; a < powers.Length; a++) {
             if (powers[a].GetSet () == false) {

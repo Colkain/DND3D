@@ -7,28 +7,28 @@ public class Power {
     [SerializeField] private string name;
     [SerializeField] private string description;
     [SerializeField] private int cooldown;
-    [SerializeField] private int whatRound;
+    [SerializeField] private int cooldownUI;
 
     public Power (int i) {
         set = true;
         id = i;
-        whatRound = 0;
+        cooldownUI = 0;
         if (id == 0) {
             name = "Berserk";
             description = "+1 Action";
-            cooldown = 1;
+            cooldown = 3;
         } else if (id == 1) {
             name = "Backstab";
             description = "+2 Mouvement";
-            cooldown = 1;
+            cooldown = 3;
         } else if (id == 2) {
             name = "Sniper";
             description = "Range +1";
-            cooldown = 1;
+            cooldown = 3;
         } else if (id == 3) {
             name = "Heal";
             description = "Can Heal : 1;5";
-            cooldown = 1;
+            cooldown = 3;
         } else if (id == 4) {
             name = "Dice";
             description = "+2 for all dice rolls this turn";
@@ -53,9 +53,9 @@ public class Power {
     public string GetDescription () => description;
     public int GetId () => id;
     public int GetCooldown () => cooldown;
-    public void SetWhatRound (int i) {
-        whatRound = i + cooldown;
+    public void SetCooldownUI (int i) {
+        cooldownUI += i;
     }
-    public int GetWhatRound () => whatRound;
+    public int GetCooldownUI () => cooldownUI;
 
 }

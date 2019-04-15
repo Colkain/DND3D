@@ -151,15 +151,18 @@ public class UIController : MonoBehaviour {
             if (power == null) {
                 powersB[i].transform.GetChild (1).gameObject.SetActive (true);
                 powersB[i].transform.GetChild (2).gameObject.SetActive (false);
-            } else if (power.GetWhatRound () > gameBoard.GetRound ()) {
+            } else if (power.GetCooldownUI () > 0) {
                 powersB[i].transform.GetChild (1).gameObject.SetActive (true);
                 powersB[i].transform.GetChild (2).gameObject.SetActive (true);
-                powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetWhatRound () - gameBoard.GetRound ()).ToString ();
+                powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetCooldownUI ().ToString ());
             } else {
                 powersB[i].transform.GetChild (1).gameObject.SetActive (false);
                 powersB[i].transform.GetChild (2).gameObject.SetActive (false);
             }
         }
+    }
+    public void EndTurn () {
+        gameBoard.NextTurn ();
     }
     public void Attack () {
         cm.SetButtonClicked (true);

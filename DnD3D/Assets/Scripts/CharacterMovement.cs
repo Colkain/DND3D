@@ -47,11 +47,11 @@ public class CharacterMovement : MonoBehaviour {
             UsePower (0);
         else if (Input.GetKeyUp (KeyCode.R))
             UsePower (1);
-        else if (Input.GetKeyUp (KeyCode.T))
+        else if (Input.GetKeyUp (KeyCode.D))
             UsePower (2);
     }
     public void UsePower (int i) {
-        // player.ActivatePowerEffect (player.GetPower (i));
+         player.ActivatePowerEffect (player.GetPower (i));
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
