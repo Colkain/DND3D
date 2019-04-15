@@ -104,6 +104,7 @@ public class GameboardControl : MonoBehaviour {
     }
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
+        SetStartingPower ();
     }
     public Character[] GetCharacters () {
         return characters;
@@ -174,7 +175,10 @@ public class GameboardControl : MonoBehaviour {
         else if (characters[idc - 1].GetClass () == "Cleric")
             characters[idc - 1].AddPower (3);
     }
-    public void AddNewPower (int i) {
+    public void AddNewPower (Power i) {
         player.AddPower (i);
+    }
+    public void AddNewItem (Item i) {
+        player.AddItem (i);
     }
 }

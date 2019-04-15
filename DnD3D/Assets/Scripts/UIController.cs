@@ -36,6 +36,7 @@ public class UIController : MonoBehaviour {
     Power power;
     //Popup Buttons
     Button popupB;
+    TileEvent tileEvent;
     bool startOfTheGame;
     public void Start () {
         powersB = new Button[3];
@@ -179,14 +180,26 @@ public class UIController : MonoBehaviour {
     public void Check () {
         gameBoard.Check ();
     }
+    public void AcceptPopup () {
+        if (tileEvent.GetId () == 0)
+            gameBoard.AddNewPower (tileEvent.GetPower ());
+        else if (tileEvent.GetId () == 1)
+            gameBoard.AddNewItem (tileEvent.GetItem ());
+        else {
+            tileEvent.GetHap ().ActivateHap (player);
+            popupUI.transform.GetChild (2).GetComponent<Text> ().text = tileEvent.GetHap ().GetDescription ();
+        }
+        popupUI.transform.GetChild (3).gameObject.SetActive (false);
+    }
     public void ClosePopupUI () {
         popupUI.SetActive (false);
     }
     public void CheckUI (TileEvent te) {
+        tileEvent = te;
         popupUI.SetActive (true);
         popupUI.transform.GetChild (1).GetComponent<Text> ().text = te.GetNameE ();
         popupUI.transform.GetChild (2).GetComponent<Text> ().text = te.GetDescription ();
-        if (te.GetId () > 2)
+        if (tileEvent.GetId () > 2)
             popupUI.transform.GetChild (3).gameObject.SetActive (false);
         else
             popupUI.transform.GetChild (3).gameObject.SetActive (true);

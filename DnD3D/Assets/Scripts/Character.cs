@@ -27,9 +27,6 @@ public class Character : MonoBehaviour {
     [SerializeField] private Vector3 coor;
     [SerializeField] private Power[] powers;
     [SerializeField] private Item[] items;
-    public void Show () {
-        // Debug.Log (power.GetName ());
-    }
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
         nameC = n;
         classC = classId;
@@ -110,6 +107,18 @@ public class Character : MonoBehaviour {
     public void SetRangeUI (int i) {
         rangeUI += i;
     }
+    public void SetStrength (int i) {
+        strength += i;
+    }
+    public void SetAgility (int i) {
+        agility += i;
+    }
+    public void SetIntelligence (int i) {
+        intelligence += i;
+    }
+    public void SetWisdom (int i) {
+        wisdom += i;
+    }
     public int GetMouvementUI () => mouvementUI;
     public int GetStrength () => strength;
     public int GetAgility () => agility;
@@ -168,15 +177,17 @@ public class Character : MonoBehaviour {
                 health += Random.Range (1, 5);
                 if (health > maxHealth)
                     health = maxHealth;
-            } else if (p.GetId () == 4) {
-                // description = "+2 for all dice rolls this turn";
-            } else if (p.GetId () == 5) {
-                // description = "Can reroll once this turn";
-            } else if (p.GetId () == 6) {
-                // description = "+3 damage this turn";
-            } else if (p.GetId () == 7) {
-                // description = "Prevent damage until next turn";
-            } else
+            }
+            /* else if (p.GetId () == 4) {
+                                      // description = "+2 for all dice rolls this turn";
+                                  } else if (p.GetId () == 5) {
+                                      // description = "Can reroll once this turn";
+                                  } else if (p.GetId () == 6) {
+                                      // description = "+3 damage this turn";
+                                  } else if (p.GetId () == 7) {
+                                      // description = "Prevent damage until next turn";
+                                  } */
+            else
                 Debug.Log ("Power Activate Error");
         }
     }
@@ -184,6 +195,14 @@ public class Character : MonoBehaviour {
         for (int a = 0; a < powers.Length; a++) {
             if (powers[a].GetSet () == false) {
                 powers[a] = new Power (i);
+                return;
+            }
+        }
+    }
+    public void AddPower (Power i) {
+        for (int a = 0; a < powers.Length; a++) {
+            if (powers[a].GetSet () == false) {
+                powers[a] = i;
                 return;
             }
         }
