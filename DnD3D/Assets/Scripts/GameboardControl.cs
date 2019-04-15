@@ -19,6 +19,7 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] private int round;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
+    [SerializeField] private TileEvent tileEvent;
     [SerializeField] Character player;
     CharacterMovement characterMouvement;
     bool newRound = true;
@@ -42,7 +43,7 @@ public class GameboardControl : MonoBehaviour {
         for (int x = 0; x < maxColumns; x++) {
             for (int z = 0; z < maxRows; z++) {
                 tiles[x, z] = s.AddTile (idt, x, z, size, maxRows);
-                tiles[x, z].GetComponent<TileEvent> ().SetTileEvent (Random.Range (0, 10));
+                tiles[x, z].GetComponent<TileEvent> ().SetTileEvent (Random.Range (0, 9));
                 idt++;
             }
         }
@@ -76,15 +77,17 @@ public class GameboardControl : MonoBehaviour {
             }
             if (player.GetMouvementUI () == 0)
                 ActivateDoors (true);
-
-            if (Input.GetKeyUp (KeyCode.F)) {
-                if (player.GetisTurn () && !characterMouvement.IsAttacking ())
+            if (player.GetisTurn () && !characterMouvement.IsAttacking ()) {
+                if (Input.GetKeyUp (KeyCode.F)) {
                     NextTurn ();
-
-                if (idc == 1) {
-                    round++;
+                    if (idc == 1) {
+                        round++;
+                    }
                 }
+                if (Input.GetKeyUp (KeyCode.Z))
+                    Check ();
             }
+
         }
     }
     public void SetIdc (int i) {
@@ -153,6 +156,13 @@ public class GameboardControl : MonoBehaviour {
         SetPreviousTile ();
         cam.SetCamera (idc);
         newRound = true;
+    }
+    public void Check () {
+        if (player.GetActionUI () > 0) {
+            tileEvent = currentTile.GetComponent<TileEvent> ();
+            player.SetActionUI (-1);
+            uiC.CheckUI (tileEvent);
+        }
     }
     public void SetStartingPower () {
         if (characters[idc - 1].GetClass () == "Warrior")

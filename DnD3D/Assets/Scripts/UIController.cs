@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour {
     private GameObject statUI;
     private GameObject controlsUI;
     private GameObject itemsUI;
+    private GameObject popupUI;
     GameboardControl gameBoard;
     //inGame Texts
     GameObject nameC;
@@ -33,7 +34,8 @@ public class UIController : MonoBehaviour {
     Button[] powersB;
     Button endTurn;
     Power power;
-    //
+    //Popup Buttons
+    Button popupB;
     bool startOfTheGame;
     public void Start () {
         powersB = new Button[3];
@@ -41,17 +43,20 @@ public class UIController : MonoBehaviour {
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
         itemsUI = GameObject.Find ("InGameUI").transform.GetChild (2).gameObject;
+        popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
         attackB = controlsUI.transform.GetChild (2).GetComponent<Button> ();
         checkB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
         powersB[0] = controlsUI.transform.GetChild (4).GetComponent<Button> ();
         powersB[1] = controlsUI.transform.GetChild (5).GetComponent<Button> ();
         powersB[2] = controlsUI.transform.GetChild (6).GetComponent<Button> ();
+        popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
         endTurn = controlsUI.transform.GetChild (7).GetComponent<Button> ();
 
         SetCreationUI ();
         statUI.SetActive (false);
         controlsUI.SetActive (false);
         itemsUI.SetActive (false);
+        popupUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         startOfTheGame = true;
     }
@@ -170,5 +175,20 @@ public class UIController : MonoBehaviour {
     }
     public void UsePower (int i) {
         cm.UsePower (i);
+    }
+    public void Check () {
+        gameBoard.Check ();
+    }
+    public void ClosePopupUI () {
+        popupUI.SetActive (false);
+    }
+    public void CheckUI (TileEvent te) {
+        popupUI.SetActive (true);
+        popupUI.transform.GetChild (1).GetComponent<Text> ().text = te.GetNameE ();
+        popupUI.transform.GetChild (2).GetComponent<Text> ().text = te.GetDescription ();
+        if (te.GetId () > 2)
+            popupUI.transform.GetChild (3).gameObject.SetActive (false);
+        else
+            popupUI.transform.GetChild (3).gameObject.SetActive (true);
     }
 }
