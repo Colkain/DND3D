@@ -6,7 +6,6 @@ public class Character : MonoBehaviour {
     public Material rogueMat;
     public Material mageMat;
     public Material clericMat;
-    private Material currentMat;
     private GameObject gameBoardPrefab;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
@@ -26,7 +25,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private int rangeUI;
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
-    [SerializeField] private Power power;
+    [SerializeField] private Power[] powers;
     public void Show () {
         // Debug.Log (power.GetName ());
     }
@@ -40,11 +39,11 @@ public class Character : MonoBehaviour {
         rangeUI = range;
         level = 1;
         coor = coorc;
+        powers = new Power[3];
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
-        charObject.GetComponent<Renderer> ().material = currentMat;
 
         if (classId == "Warrior") {
             mouvement = Random.Range (1, 5);
@@ -54,7 +53,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = warriorMat;
-            power = new Power (0);
         } else if (classC == "Rogue") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -63,7 +61,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = rogueMat;
-            power = new Power (1);
         } else if (classC == "Mage") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -72,7 +69,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = mageMat;
-            power = new Power (2);
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -81,9 +77,7 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = clericMat;
-            power = new Power (3);
         }
-
         actionUI = action;
         mouvementUI = mouvement;
         health = maxHealth;
@@ -187,15 +181,14 @@ public class Character : MonoBehaviour {
     //             Debug.Log ("Power Activate Error");
     //     }
     // }
-    // public void AddPower (int i) {
-    //     int a = 0;
-    //     while ((a < 3) && powers[a] != null)
-    //         a++;
-    //     if (a < 3) {
-    //         // powers[a] = new Power(0);
-    //     } else
-    //         Debug.Log ("Nope");
-    // }
+    public void AddPower (int i) {
+        for (int a = 0; a < powers.Length; a++) {
+            if (powers[a].GetSet () == false) {
+                powers[a] = new Power (i);
+                return;
+            }
+        }
+    }
     // public Power GetPower (int i) {
     //     if (powers != null && powers[i] == null)
     //         return powers[i];

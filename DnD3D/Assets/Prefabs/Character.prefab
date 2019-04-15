@@ -134,7 +134,6 @@ MonoBehaviour:
   level: 0
   coor: {x: 0, y: 0, z: 0}
   power: {fileID: 0}
-  powers: []
 --- !u!114 &8921797088643113355
 MonoBehaviour:
   m_ObjectHideFlags: 0

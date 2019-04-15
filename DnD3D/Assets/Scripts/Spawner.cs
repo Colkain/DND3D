@@ -46,6 +46,7 @@ public class Spawner : MonoBehaviour {
         GameboardControl gb = gameObject.GetComponent<GameboardControl> ();
         chara.SetCharacter (c, idc, charCoor, name);
         gb.AddInCharacters (idc);
+        gb.SetStartingPower ();
         UIController uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
         uiC.SetCreationUI ();
     }

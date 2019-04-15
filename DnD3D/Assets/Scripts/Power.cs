@@ -2,6 +2,7 @@
 
 [System.Serializable]
 public class Power {
+    [SerializeField] private bool set = false;
     [SerializeField] private int id;
     [SerializeField] private string name;
     [SerializeField] private string description;
@@ -9,6 +10,7 @@ public class Power {
     [SerializeField] private int whatRound;
 
     public Power (int i) {
+        set = true;
         id = i;
         whatRound = 0;
         if (id == 0) {
@@ -46,6 +48,7 @@ public class Power {
         } else
             Debug.Log ("Power Error " + id);
     }
+    public bool GetSet () => set;
     public string GetName () => name;
     public string GetDescription () => description;
     public int GetId () => id;

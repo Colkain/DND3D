@@ -149,4 +149,17 @@ public class GameboardControl : MonoBehaviour {
         cam.SetCamera (idc);
         newRound = true;
     }
+    public void SetStartingPower () {
+        if (characters[idc - 1].GetClass () == "Warrior")
+            characters[idc - 1].AddPower (0);
+        else if (characters[idc - 1].GetClass () == "Rogue")
+            characters[idc - 1].AddPower (1);
+        else if (characters[idc - 1].GetClass () == "Mage")
+            characters[idc - 1].AddPower (2);
+        else if (characters[idc - 1].GetClass () == "Cleric")
+            characters[idc - 1].AddPower (3);
+    }
+    public void AddNewPower (int i) {
+        characters[idc - 1].AddPower (i);
+    }
 }
