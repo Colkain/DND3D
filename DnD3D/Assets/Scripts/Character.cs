@@ -93,7 +93,6 @@ public class Character : MonoBehaviour {
             charObject.GetComponent<Renderer> ().material = clericMat;
             power = new Power (3);
         }
-        Debug.Log (power.GetName ());
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
     }
