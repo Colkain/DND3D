@@ -2,13 +2,15 @@
 
 [System.Serializable]
 public class Power {
+    [SerializeField] private int id;
     [SerializeField] private string name;
     [SerializeField] private string description;
-    [SerializeField] private int id;
     [SerializeField] private int cooldown;
     [SerializeField] private int whatRound;
+
     public Power (int i) {
         id = i;
+        whatRound = 0;
         if (id == 0) {
             name = "Berserk";
             description = "+1 Action";

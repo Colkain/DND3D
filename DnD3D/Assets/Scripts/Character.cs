@@ -27,72 +27,67 @@ public class Character : MonoBehaviour {
     [SerializeField] private int level;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Power power;
-    [SerializeField] private Power[] powers;
     public void Show () {
-        Debug.Log (power.GetName ());
+        // Debug.Log (power.GetName ());
     }
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
-        if (classId == "Warrior") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
-            intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
-            currentMat = warriorMat;
-        } else if (classC == "Rogue") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
-            intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
-            currentMat = rogueMat;
-        } else if (classC == "Mage") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
-            intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
-            currentMat = mageMat;
-        } else if (classC == "Cleric") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
-            intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
-            currentMat = clericMat;
-        }
         nameC = n;
         classC = classId;
         isTurn = false;
         id = i;
         action = 1;
-        actionUI = action;
         range = 0;
         rangeUI = range;
         level = 1;
         coor = coorc;
-        mouvementUI = mouvement;
-        health = maxHealth;
+
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
+        charObject.GetComponent<Renderer> ().material = currentMat;
+
         if (classId == "Warrior") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = warriorMat;
             power = new Power (0);
         } else if (classC == "Rogue") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = rogueMat;
             power = new Power (1);
         } else if (classC == "Mage") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = mageMat;
             power = new Power (2);
         } else if (classC == "Cleric") {
+            mouvement = Random.Range (1, 5);
+            maxHealth = Random.Range (5, 11);
+            strength = Random.Range (5, 11);
+            agility = Random.Range (1, 5);
+            intelligence = Random.Range (1, 4);
+            wisdom = Random.Range (1, 4);
             charObject.GetComponent<Renderer> ().material = clericMat;
             power = new Power (3);
         }
+
+        actionUI = action;
+        mouvementUI = mouvement;
+        health = maxHealth;
+
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
     }
