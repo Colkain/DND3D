@@ -76,7 +76,7 @@ public class GameboardControl : MonoBehaviour {
             if (player.GetMouvementUI () == 0)
                 ActivateDoors (true);
 
-            if (Input.GetKeyUp (KeyCode.Return)) {
+            if (Input.GetKeyUp (KeyCode.F)) {
                 if (player.GetisTurn () && !characterMouvement.IsAttacking ())
                     NextTurn ();
 
@@ -160,6 +160,6 @@ public class GameboardControl : MonoBehaviour {
             characters[idc - 1].AddPower (3);
     }
     public void AddNewPower (int i) {
-        characters[idc - 1].AddPower (i);
+        player.AddPower (i);
     }
 }

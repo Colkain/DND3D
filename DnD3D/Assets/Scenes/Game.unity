@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2ac3723449a0b4dafa9aa8c863d996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   gameBoardPrefab: {fileID: 2797465346826325638, guid: 05c022d5886db1a438c26a135d9a38b7,
     type: 3}
   characterCoor: {x: 0, y: 0, z: 0}

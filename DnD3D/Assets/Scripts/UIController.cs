@@ -32,7 +32,7 @@ public class UIController : MonoBehaviour {
     Button checkB;
     Button[] powersB;
     Button endTurn;
-    // Power power;
+    Power power;
     //
     bool startOfTheGame;
     public void Start () {
@@ -118,7 +118,7 @@ public class UIController : MonoBehaviour {
             attackB.transform.GetChild (1).gameObject.SetActive (false);
             checkB.transform.GetChild (1).gameObject.SetActive (false);
         }
-        // SetPowersButtons ();
+        SetPowersButtons ();
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
         level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
@@ -145,22 +145,22 @@ public class UIController : MonoBehaviour {
         SetLevelUpButtons (false);
     }
 
-    // public void SetPowersButtons () {
-    //     for (int i = 0; i < 3; i++) {
-    //         // power = player.GetPower (i);
-    //         if (power == null) {
-    //             powersB[i].transform.GetChild (1).gameObject.SetActive (true);
-    //             powersB[i].transform.GetChild (2).gameObject.SetActive (false);
-    //         } else if (power.GetWhatRound () > gameBoard.GetRound ()) {
-    //             powersB[i].transform.GetChild (1).gameObject.SetActive (true);
-    //             powersB[i].transform.GetChild (2).gameObject.SetActive (true);
-    //             powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetWhatRound () - gameBoard.GetRound ()).ToString ();
-    //         } else {
-    //             powersB[i].transform.GetChild (1).gameObject.SetActive (false);
-    //             powersB[i].transform.GetChild (2).gameObject.SetActive (false);
-    //         }
-    //     }
-    // }
+    public void SetPowersButtons () {
+        for (int i = 0; i < 3; i++) {
+            power = player.GetPower (i);
+            if (power == null) {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (false);
+            } else if (power.GetWhatRound () > gameBoard.GetRound ()) {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (true);
+                powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetWhatRound () - gameBoard.GetRound ()).ToString ();
+            } else {
+                powersB[i].transform.GetChild (1).gameObject.SetActive (false);
+                powersB[i].transform.GetChild (2).gameObject.SetActive (false);
+            }
+        }
+    }
     public void Attack () {
         cm.SetButtonClicked (true);
         cm.Attack ();

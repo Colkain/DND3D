@@ -149,6 +149,7 @@ public class Character : MonoBehaviour {
     }
     public int GetAction () => action;
     public int GetActionUI () => actionUI;
+    
     // public void ActivatePowerEffect (Power p) {
     //     foreach (Power pa in powers) {
     //         if (pa != null)
@@ -189,10 +190,10 @@ public class Character : MonoBehaviour {
             }
         }
     }
-    // public Power GetPower (int i) {
-    //     if (powers != null && powers[i] == null)
-    //         return powers[i];
-    //     else
-    //         return null;
-    // }
+    public Power GetPower (int i) {
+        if (powers[i].GetSet () == true)
+            return powers[i];
+        else
+            return null;
+    }
 }
