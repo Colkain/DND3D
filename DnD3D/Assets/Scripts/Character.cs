@@ -24,6 +24,8 @@ public class Character : MonoBehaviour {
     [SerializeField] private int range;
     [SerializeField] private int rangeUI;
     [SerializeField] private int level;
+    [SerializeField] private int bonusAttack;
+    [SerializeField] private bool preventDamage;
     [SerializeField] private Vector3 coor;
     [SerializeField] private Power[] powers;
     [SerializeField] private Item[] items;
@@ -36,6 +38,8 @@ public class Character : MonoBehaviour {
         range = 0;
         rangeUI = range;
         level = 1;
+        bonusAttack = 0;
+        preventDamage = false;
         coor = coorc;
         powers = new Power[3];
         items = new Item[6];
@@ -88,7 +92,10 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        health += h;
+        if (preventDamage)
+            preventDamage = false;
+        else
+            health += h;
     }
     public void SetMaxHealth (int h) {
         maxHealth += h;
@@ -146,7 +153,7 @@ public class Character : MonoBehaviour {
     public int GetRangeUI () => rangeUI;
     public int GetId () => id;
     public int GetAttack () {
-        return (int) (strength + intelligence + agility + wisdom) / 8; //returns damage
+        return (int) (strength + intelligence + agility + wisdom) / 8 + bonusAttack; //returns damage
     }
     public bool GetisTurn () => isTurn;
     public void SetisTurn (bool t) {
@@ -177,17 +184,11 @@ public class Character : MonoBehaviour {
                 health += Random.Range (1, 5);
                 if (health > maxHealth)
                     health = maxHealth;
-            }
-            /* else if (p.GetId () == 4) {
-                                      // description = "+2 for all dice rolls this turn";
-                                  } else if (p.GetId () == 5) {
-                                      // description = "Can reroll once this turn";
-                                  } else if (p.GetId () == 6) {
-                                      // description = "+3 damage this turn";
-                                  } else if (p.GetId () == 7) {
-                                      // description = "Prevent damage until next turn";
-                                  } */
-            else
+            } else if (p.GetId () == 4) {
+                bonusAttack += 1;
+            } else if (p.GetId () == 5) {
+                preventDamage = true;
+            } else
                 Debug.Log ("Power Activate Error");
         }
     }
@@ -220,5 +221,21 @@ public class Character : MonoBehaviour {
                 return;
             }
         }
+    }
+    public Item GetItem (int i) {
+        if (items[i].GetSet () == true)
+            return items[i];
+        else
+            return null;
+    }
+    public int GetReqI (int i) {
+        if (i == 0)
+            return strength;
+        else if (i == 1)
+            return agility;
+        else if (i == 2)
+            return intelligence;
+        else
+            return wisdom;
     }
 }

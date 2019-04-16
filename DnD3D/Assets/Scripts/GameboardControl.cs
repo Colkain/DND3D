@@ -60,6 +60,7 @@ public class GameboardControl : MonoBehaviour {
         } else {
             if (round > 0 && newRound) {
                 newRound = false;
+                uiC.SetRoundUI (round);
                 uiC.SetLevelUpButtons (true); //level up buttons     
             }
 

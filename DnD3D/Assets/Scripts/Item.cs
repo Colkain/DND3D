@@ -9,6 +9,7 @@ public class Item {
     [SerializeField] private int[] requirements;
     [SerializeField] private int[] effects;
     [SerializeField] private bool equipped;
+    [SerializeField] private bool checkReq = false;
     [SerializeField] private bool set = false;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom
@@ -17,60 +18,60 @@ public class Item {
         id = i;
         set = true;
         if (id == 0) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Sword";
             requirements[0] = 3;
             requirements[1] = 3;
             effects[8] = 2;
             description = "Requirements:\n\tStrength:3\n\tAgility:3\nEffect:\n\t+2 Damage";
         } else if (id == 1) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Dagger";
             requirements[1] = 5;
             effects[8] = 4;
             description = "Requirements:\n\tAgility:5\nEffect:\n\t+4 Damage";
         } else if (id == 2) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Greatsword";
             requirements[0] = 5;
             effects[8] = 4;
             description = "Requirements:\n\tStrength:5\nEffect:\n\t+4 Damage";
         } else if (id == 3) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Staff";
             requirements[2] = 5;
             effects[8] = 4;
             description = "Requirements:\n\tIntelligence:5\nEffect:\n\t+4 Damage";
         } else if (id == 4) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Wand";
             requirements[2] = 3;
             requirements[3] = 3;
             effects[8] = 2;
             description = "Requirements:\n\tIntelligence:3\n\tWisdom:3\nEffect:\n\t+2 Damage";
         } else if (id == 5) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Mace";
             requirements[3] = 5;
             effects[8] = 4;
             description = "Requirements:\n\tWisdom:5\nEffect:\n\t+4 Damage";
         } else if (id == 6) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Bow";
             requirements[0] = 3;
             requirements[3] = 3;
             effects[9] = 1;
             description = "Requirements:\n\tStrength:3\n\tWisdom:3\nEffect:\n\t+2 Damage";
         } else if (id == 7) {
-            typeI = "Weapon";
+            typeI = "Equipment";
             name = "Crossbow";
             requirements[2] = 3;
             requirements[1] = 3;
             effects[9] = 1;
             description = "Requirements:\n\tIntelligence:3\n\tAgility:3\nEffect:\n\t+2 Damage";
         } else if (id == 8) {
-            typeI = "Armor";
-            name = "Light Armor";
+            typeI = "Equipment";
+            name = "Light Equipment";
             requirements[0] = 2;
             requirements[1] = 2;
             requirements[2] = 2;
@@ -78,8 +79,8 @@ public class Item {
             effects[1] = 2;
             description = "Requirements:\n\tStrength:2\n\tAgility:2\n\tIntelligence:2\n\tWisdom:2\nEffect:\n\t+2 MaxHealth";
         } else if (id == 9) {
-            typeI = "Armor";
-            name = "Medium Armor";
+            typeI = "Equipment";
+            name = "Medium Equipment";
             requirements[0] = 4;
             requirements[1] = 4;
             requirements[2] = 4;
@@ -87,8 +88,8 @@ public class Item {
             effects[1] = 4;
             description = "Requirements:\n\tStrength:4\n\tAgility:4\n\tIntelligence:4\n\tWisdom:4\nEffect:\n\t+4 MaxHealth";
         } else if (id == 10) {
-            typeI = "Armor";
-            name = "Heavy Armor";
+            typeI = "Equipment";
+            name = "Heavy Equipment";
             requirements[0] = 6;
             requirements[1] = 6;
             requirements[2] = 6;
@@ -149,4 +150,13 @@ public class Item {
         equipped = a;
     }
     public bool GetSet () => set;
+    public bool CheckReq (Character p) {
+        for (int i = 0; i < 4; i++) {
+            if (p.GetReqI (i) >= requirements[i])
+                checkReq = true;
+            else
+                checkReq = false;
+        }
+        return checkReq;
+    }
 }

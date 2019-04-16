@@ -10,7 +10,7 @@ public class TileEvent : MonoBehaviour {
     public void SetTileEvent (int i) {
         id = i;
         if (id == 0) {
-            power = new Power (Random.Range (0, 8));
+            power = new Power (Random.Range (0, 6));
             nameE = "New power:" + power.GetName ();
             description = power.GetDescription ();
         } else if (id == 1) {
