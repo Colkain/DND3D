@@ -8,7 +8,7 @@ public class TileEvent : MonoBehaviour {
     [SerializeField] private Item item;
     [SerializeField] private Hap hap;
     public void SetTileEvent (int i) {
-        id = i;
+        id = 1;
         if (id == 0) {
             power = new Power (Random.Range (0, 6));
             nameE = "New power:" + power.GetName ();
@@ -27,6 +27,14 @@ public class TileEvent : MonoBehaviour {
         }
     }
 
+    public void ClearEvent () {
+        id = 3;
+        power = null;
+        item = null;
+        hap = null;
+        nameE = "Tile Already checked";
+        description = "Too late, someone already looted the place.";
+    }
     public Power GetPower () => power;
     public Item GetItem () => item;
     public Hap GetHap () => hap;

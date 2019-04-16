@@ -74,7 +74,7 @@ public class Hap {
                 }
                 description = "You won the bet, everyone else loses 1 Hp.";
             }
-        } else if (id == 3) {
+        } else {
             UIController uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
             uiC.SetLevelUpButtons (true);
             description = "You gain a level.";

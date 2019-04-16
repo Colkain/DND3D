@@ -37,7 +37,10 @@ public class UIController : MonoBehaviour {
     Power power;
     //Items UI
     Button[] itemsB;
+    Button[] itemsBC;
     Item item;
+    int selectedItem;
+    bool itemInt;
     //Popup UI
     Button popupB;
     TileEvent tileEvent;
@@ -45,6 +48,7 @@ public class UIController : MonoBehaviour {
     public void Start () {
         powersB = new Button[3];
         itemsB = new Button[6];
+        itemsBC = new Button[2];
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
@@ -64,6 +68,9 @@ public class UIController : MonoBehaviour {
         itemsB[3] = itemsUI.transform.GetChild (5).GetComponent<Button> ();
         itemsB[4] = itemsUI.transform.GetChild (6).GetComponent<Button> ();
         itemsB[5] = itemsUI.transform.GetChild (7).GetComponent<Button> ();
+        itemsBC[0] = itemsUI.transform.GetChild (8).GetComponent<Button> ();
+        itemsBC[1] = itemsUI.transform.GetChild (9).GetComponent<Button> ();
+        itemInt = false;
 
         popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
         endTurn = controlsUI.transform.GetChild (7).GetComponent<Button> ();
@@ -141,6 +148,10 @@ public class UIController : MonoBehaviour {
         }
         SetPowersButtons ();
         SetItemsButtons ();
+        if (!itemInt) {
+            itemsBC[0].transform.gameObject.SetActive (false);
+            itemsBC[1].transform.gameObject.SetActive (false);
+        }
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
         level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
@@ -187,22 +198,86 @@ public class UIController : MonoBehaviour {
         }
     }
     public void SetItemsButtons () {
-        for (int i = 0; i < 6; i++) {
-            item = player.GetItem (i);
-            if (item == null) {
-                itemsB[i].transform.GetChild (0).gameObject.SetActive (true);
-            } else {
-                itemsB[i].transform.GetChild (1).gameObject.GetComponent<Text> ().text = (item.GetName ());
-                if (item.GetTypeI () == "Equipment") {
-                    if (!item.CheckReq (player)) {
-                        itemsB[i].transform.GetChild (0).gameObject.SetActive (true);
-                    } else {
+        if (!itemInt) {
+            for (int i = 0; i < 6; i++) {
+                item = player.GetItem (i);
+                if (item == null) {
+                    itemsB[i].transform.gameObject.SetActive (false);
+                } else {
+                    itemsB[i].transform.gameObject.SetActive (true);
+                    itemsB[i].transform.GetChild (1).gameObject.GetComponent<Text> ().text = (item.GetName ());
+                    if (item.GetTypeI () == "Equipment") {
+                        if (!item.CheckReq (player)) {
+                            itemsB[i].transform.GetChild (0).gameObject.SetActive (true);
+                        } else {
+                            itemsB[i].transform.GetChild (0).gameObject.SetActive (false);
+                        }
+                    } else
                         itemsB[i].transform.GetChild (0).gameObject.SetActive (false);
-                    }
-                } else
-                    itemsB[i].transform.GetChild (0).gameObject.SetActive (false);
+                }
             }
         }
+    }
+    public void ItemInteraction (int i) {
+        if (!itemInt) {
+            itemInt = true;
+            for (int a = 0; a < itemsB.Length; a++) {
+                if (a != i)
+                    itemsB[a].transform.gameObject.SetActive (false);
+            }
+            itemsBC[0].transform.gameObject.SetActive (true);
+            itemsBC[1].transform.gameObject.SetActive (true);
+            selectedItem = i;
+        }
+    }
+    public void ItemAction (int a) {
+        if (a == 6) {
+            item = player.GetItem (selectedItem);
+            if (item.GetTypeI () == "Equipment" && !item.CheckReq (player)) {
+                Debug.Log ("error item action");
+            } else {
+                if (!item.GetEquipped ()) {
+                    player.SetMouvement (item.GetEffect (0));
+                    player.SetMouvementUI (item.GetEffect (0));
+                    player.SetMaxHealth (item.GetEffect (1));
+                    player.SetHealth (item.GetEffect (2));
+                    player.SetStrength (item.GetEffect (3));
+                    player.SetAgility (item.GetEffect (4));
+                    player.SetIntelligence (item.GetEffect (5));
+                    player.SetWisdom (item.GetEffect (6));
+                    player.SetBonusDamage (item.GetEffect (7));
+                    player.SetRange (item.GetEffect (8));
+                    player.SetRangeUI (item.GetEffect (8));
+                    if (item.GetTypeI () == "Equipment") {
+                        itemsB[selectedItem].GetComponent<Image> ().color = Color.green;
+                        item.SetEquiped (true);
+                    } else {
+                        player.RemoveItem (selectedItem);
+                    }
+                }
+            }
+        } else if (a == 7) {
+            if (item.GetTypeI () == "Equipment" && item.GetEquipped ()) {
+                player.SetMouvement (-item.GetEffect (0));
+                player.SetMouvementUI (-item.GetEffect (0));
+                player.SetMaxHealth (-item.GetEffect (1));
+                player.SetHealth (-item.GetEffect (2));
+                player.SetStrength (-item.GetEffect (3));
+                player.SetAgility (item.GetEffect (4));
+                player.SetIntelligence (-item.GetEffect (5));
+                player.SetWisdom (-item.GetEffect (6));
+                player.SetBonusDamage (-item.GetEffect (7));
+                player.SetRange (-item.GetEffect (8));
+                player.SetRangeUI (-item.GetEffect (8));
+            }
+            player.RemoveItem (selectedItem);
+        }
+        itemInt = false;
+        for (int b = 0; b < itemsB.Length; b++) {
+            itemsB[b].transform.gameObject.SetActive (true);
+        }
+        itemsBC[0].transform.gameObject.SetActive (false);
+        itemsBC[1].transform.gameObject.SetActive (false);
     }
     public void EndTurn () {
         gameBoard.NextTurn ();
@@ -226,7 +301,9 @@ public class UIController : MonoBehaviour {
             tileEvent.GetHap ().ActivateHap (player);
             popupUI.transform.GetChild (2).GetComponent<Text> ().text = tileEvent.GetHap ().GetDescription ();
         }
-        popupUI.transform.GetChild (3).gameObject.SetActive (false);
+        tileEvent.ClearEvent ();
+        // popupUI.transform.GetChild (3).gameObject.SetActive (false);
+        popupUI.SetActive (false);
     }
     public void ClosePopupUI () {
         popupUI.SetActive (false);

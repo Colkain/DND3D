@@ -13,7 +13,7 @@ public class Item {
     [SerializeField] private bool set = false;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom
-        effects = new int[10]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:all 8:damage 9:range
+        effects = new int[10]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range
         equipped = false;
         id = i;
         set = true;
@@ -22,52 +22,52 @@ public class Item {
             name = "Sword";
             requirements[0] = 3;
             requirements[1] = 3;
-            effects[8] = 2;
+            effects[7] = 2;
             description = "Requirements:\n\tStrength:3\n\tAgility:3\nEffect:\n\t+2 Damage";
         } else if (id == 1) {
             typeI = "Equipment";
             name = "Dagger";
             requirements[1] = 5;
-            effects[8] = 4;
+            effects[7] = 4;
             description = "Requirements:\n\tAgility:5\nEffect:\n\t+4 Damage";
         } else if (id == 2) {
             typeI = "Equipment";
             name = "Greatsword";
             requirements[0] = 5;
-            effects[8] = 4;
+            effects[7] = 4;
             description = "Requirements:\n\tStrength:5\nEffect:\n\t+4 Damage";
         } else if (id == 3) {
             typeI = "Equipment";
             name = "Staff";
             requirements[2] = 5;
-            effects[8] = 4;
+            effects[7] = 4;
             description = "Requirements:\n\tIntelligence:5\nEffect:\n\t+4 Damage";
         } else if (id == 4) {
             typeI = "Equipment";
             name = "Wand";
             requirements[2] = 3;
             requirements[3] = 3;
-            effects[8] = 2;
+            effects[7] = 2;
             description = "Requirements:\n\tIntelligence:3\n\tWisdom:3\nEffect:\n\t+2 Damage";
         } else if (id == 5) {
             typeI = "Equipment";
             name = "Mace";
             requirements[3] = 5;
-            effects[8] = 4;
+            effects[7] = 4;
             description = "Requirements:\n\tWisdom:5\nEffect:\n\t+4 Damage";
         } else if (id == 6) {
             typeI = "Equipment";
             name = "Bow";
             requirements[0] = 3;
             requirements[3] = 3;
-            effects[9] = 1;
+            effects[8] = 1;
             description = "Requirements:\n\tStrength:3\n\tWisdom:3\nEffect:\n\t+2 Damage";
         } else if (id == 7) {
             typeI = "Equipment";
             name = "Crossbow";
             requirements[2] = 3;
             requirements[1] = 3;
-            effects[9] = 1;
+            effects[8] = 1;
             description = "Requirements:\n\tIntelligence:3\n\tAgility:3\nEffect:\n\t+2 Damage";
         } else if (id == 8) {
             typeI = "Equipment";
@@ -144,7 +144,7 @@ public class Item {
     public string GetName () => name;
     public string GetDescription () => description;
     public int[] GetRequirements () => requirements;
-    public int[] GetEffects () => effects;
+    public int GetEffect (int i) => effects[i];
     public bool GetEquipped () => equipped;
     public void SetEquiped (bool a) {
         equipped = a;

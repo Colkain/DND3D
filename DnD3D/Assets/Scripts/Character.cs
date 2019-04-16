@@ -210,6 +210,10 @@ public class Character : MonoBehaviour {
             }
         }
     }
+    public void RemovePower (int i) {
+        powers[i] = null;
+    }
+
     public Power GetPower (int i) {
         if (powers[i].GetSet () == true)
             return powers[i];
@@ -224,8 +228,11 @@ public class Character : MonoBehaviour {
             }
         }
     }
+    public void RemoveItem (int i) {
+        items[i] = null;
+    }
     public Item GetItem (int i) {
-        if (items[i].GetSet () == true)
+        if (items[i]!= null && items[i].GetSet () == true)
             return items[i];
         else
             return null;
@@ -239,5 +246,8 @@ public class Character : MonoBehaviour {
             return intelligence;
         else
             return wisdom;
+    }
+    public void SetBonusDamage (int i) {
+        bonusAttack += i;
     }
 }
