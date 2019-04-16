@@ -48,14 +48,19 @@ public class Character : MonoBehaviour {
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
         charObject.transform.SetParent (gameBoardPrefab.transform, false);
 
-        if (classId == "Warrior") {
+        charObject.name = ("Player" + id);
+        charObject.tag = ("Player" + id);
+    }
+    public void SetClass () {
+
+        if (classC == "Warrior") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
             strength = Random.Range (5, 11);
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            charObject.GetComponent<Renderer> ().material = warriorMat;
+            GetComponent<Renderer> ().material = warriorMat;
         } else if (classC == "Rogue") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -63,7 +68,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            charObject.GetComponent<Renderer> ().material = rogueMat;
+            GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -71,7 +76,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            charObject.GetComponent<Renderer> ().material = mageMat;
+            GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 5);
             maxHealth = Random.Range (5, 11);
@@ -79,14 +84,11 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            charObject.GetComponent<Renderer> ().material = clericMat;
+            GetComponent<Renderer> ().material = clericMat;
         }
         actionUI = action;
         mouvementUI = mouvement;
         health = maxHealth;
-
-        charObject.name = ("Player" + id);
-        charObject.tag = ("Player" + id);
     }
     public string GetName () => nameC;
     public string GetClass () => classC;

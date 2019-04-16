@@ -88,7 +88,6 @@ public class GameboardControl : MonoBehaviour {
                 if (Input.GetKeyUp (KeyCode.Z))
                     Check ();
             }
-
         }
     }
     public void SetIdc (int i) {
@@ -105,6 +104,7 @@ public class GameboardControl : MonoBehaviour {
     }
     public void AddInCharacters (int i) {
         characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
+        characters[i - 1].SetClass ();
         SetStartingPower ();
     }
     public Character[] GetCharacters () {
