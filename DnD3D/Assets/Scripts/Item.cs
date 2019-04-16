@@ -150,6 +150,9 @@ public class Item {
         equipped = a;
     }
     public bool GetSet () => set;
+    public void SetSet (bool s) {
+        set = s;
+    }
     public bool CheckReq (Character p) {
         for (int i = 0; i < 4; i++) {
             if (p.GetReqI (i) >= requirements[i])

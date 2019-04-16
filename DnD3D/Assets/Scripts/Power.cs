@@ -41,6 +41,9 @@ public class Power {
             Debug.Log ("Power Error " + id);
     }
     public bool GetSet () => set;
+    public void SetSet(bool s){
+        set = s;
+    }
     public string GetName () => name;
     public string GetDescription () => description;
     public int GetId () => id;

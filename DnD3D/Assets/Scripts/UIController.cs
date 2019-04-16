@@ -48,7 +48,7 @@ public class UIController : MonoBehaviour {
     public void Start () {
         powersB = new Button[3];
         itemsB = new Button[6];
-        itemsBC = new Button[2];
+        itemsBC = new Button[3];
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
@@ -70,6 +70,7 @@ public class UIController : MonoBehaviour {
         itemsB[5] = itemsUI.transform.GetChild (7).GetComponent<Button> ();
         itemsBC[0] = itemsUI.transform.GetChild (8).GetComponent<Button> ();
         itemsBC[1] = itemsUI.transform.GetChild (9).GetComponent<Button> ();
+        itemsBC[2] = itemsUI.transform.GetChild (10).GetComponent<Button> ();
         itemInt = false;
 
         popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
@@ -148,10 +149,7 @@ public class UIController : MonoBehaviour {
         }
         SetPowersButtons ();
         SetItemsButtons ();
-        if (!itemInt) {
-            itemsBC[0].transform.gameObject.SetActive (false);
-            itemsBC[1].transform.gameObject.SetActive (false);
-        }
+
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
         level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
@@ -199,12 +197,14 @@ public class UIController : MonoBehaviour {
     }
     public void SetItemsButtons () {
         if (!itemInt) {
+            itemsBC[0].transform.gameObject.SetActive (false);
+            itemsBC[1].transform.gameObject.SetActive (false);
+            itemsBC[2].transform.gameObject.SetActive (false);
             for (int i = 0; i < 6; i++) {
                 item = player.GetItem (i);
                 if (item == null) {
-                    itemsB[i].transform.gameObject.SetActive (false);
+                    itemsB[i].transform.GetChild (0).gameObject.SetActive (false);
                 } else {
-                    itemsB[i].transform.gameObject.SetActive (true);
                     itemsB[i].transform.GetChild (1).gameObject.GetComponent<Text> ().text = (item.GetName ());
                     if (item.GetTypeI () == "Equipment") {
                         if (!item.CheckReq (player)) {
@@ -221,42 +221,41 @@ public class UIController : MonoBehaviour {
     public void ItemInteraction (int i) {
         if (!itemInt) {
             itemInt = true;
-            for (int a = 0; a < itemsB.Length; a++) {
-                if (a != i)
-                    itemsB[a].transform.gameObject.SetActive (false);
+            itemsB[i].transform.GetComponent<Image> ().color = Color.grey;
+            item = player.GetItem (selectedItem);
+            if (item != null) {
+                if (item.GetTypeI () == "Equipment" && !item.CheckReq (player))
+                    itemsBC[0].transform.gameObject.SetActive (false);
+                else
+                    itemsBC[0].transform.gameObject.SetActive (true);
+                itemsBC[1].transform.gameObject.SetActive (true);
+                itemsBC[2].transform.gameObject.SetActive (true);
+                selectedItem = i;
             }
-            itemsBC[0].transform.gameObject.SetActive (true);
-            itemsBC[1].transform.gameObject.SetActive (true);
-            selectedItem = i;
         }
     }
     public void ItemAction (int a) {
-        if (a == 6) {
-            item = player.GetItem (selectedItem);
-            if (item.GetTypeI () == "Equipment" && !item.CheckReq (player)) {
-                Debug.Log ("error item action");
-            } else {
-                if (!item.GetEquipped ()) {
-                    player.SetMouvement (item.GetEffect (0));
-                    player.SetMouvementUI (item.GetEffect (0));
-                    player.SetMaxHealth (item.GetEffect (1));
-                    player.SetHealth (item.GetEffect (2));
-                    player.SetStrength (item.GetEffect (3));
-                    player.SetAgility (item.GetEffect (4));
-                    player.SetIntelligence (item.GetEffect (5));
-                    player.SetWisdom (item.GetEffect (6));
-                    player.SetBonusDamage (item.GetEffect (7));
-                    player.SetRange (item.GetEffect (8));
-                    player.SetRangeUI (item.GetEffect (8));
-                    if (item.GetTypeI () == "Equipment") {
-                        itemsB[selectedItem].GetComponent<Image> ().color = Color.green;
-                        item.SetEquiped (true);
-                    } else {
-                        player.RemoveItem (selectedItem);
-                    }
+        if (a == 0) {
+            if (!item.GetEquipped ()) {
+                player.SetMouvement (item.GetEffect (0));
+                player.SetMouvementUI (item.GetEffect (0));
+                player.SetMaxHealth (item.GetEffect (1));
+                player.SetHealth (item.GetEffect (2));
+                player.SetStrength (item.GetEffect (3));
+                player.SetAgility (item.GetEffect (4));
+                player.SetIntelligence (item.GetEffect (5));
+                player.SetWisdom (item.GetEffect (6));
+                player.SetBonusDamage (item.GetEffect (7));
+                player.SetRange (item.GetEffect (8));
+                player.SetRangeUI (item.GetEffect (8));
+                if (item.GetTypeI () == "Equipment") {
+                    itemsB[selectedItem].GetComponent<Image> ().color = Color.green;
+                    item.SetEquiped (true);
+                } else {
+                    player.RemoveItem (selectedItem);
                 }
             }
-        } else if (a == 7) {
+        } else if (a == 1) {
             if (item.GetTypeI () == "Equipment" && item.GetEquipped ()) {
                 player.SetMouvement (-item.GetEffect (0));
                 player.SetMouvementUI (-item.GetEffect (0));
@@ -269,15 +268,19 @@ public class UIController : MonoBehaviour {
                 player.SetBonusDamage (-item.GetEffect (7));
                 player.SetRange (-item.GetEffect (8));
                 player.SetRangeUI (-item.GetEffect (8));
+                item.SetEquiped (false);
             }
             player.RemoveItem (selectedItem);
+            itemsB[selectedItem].transform.GetChild (1).gameObject.GetComponent<Text> ().text = "";
         }
         itemInt = false;
         for (int b = 0; b < itemsB.Length; b++) {
             itemsB[b].transform.gameObject.SetActive (true);
         }
+        itemsB[selectedItem].GetComponent<Image> ().color = Color.white;
         itemsBC[0].transform.gameObject.SetActive (false);
         itemsBC[1].transform.gameObject.SetActive (false);
+        itemsBC[2].transform.gameObject.SetActive (false);
     }
     public void EndTurn () {
         gameBoard.NextTurn ();
@@ -293,17 +296,17 @@ public class UIController : MonoBehaviour {
         gameBoard.Check ();
     }
     public void AcceptPopup () {
-        if (tileEvent.GetId () == 0)
+        if (tileEvent.GetId () == 0) {
             gameBoard.AddNewPower (tileEvent.GetPower ());
-        else if (tileEvent.GetId () == 1)
+        } else if (tileEvent.GetId () == 1) {
             gameBoard.AddNewItem (tileEvent.GetItem ());
-        else {
+            popupUI.SetActive (false);
+        } else {
             tileEvent.GetHap ().ActivateHap (player);
             popupUI.transform.GetChild (2).GetComponent<Text> ().text = tileEvent.GetHap ().GetDescription ();
+            popupUI.transform.GetChild (3).gameObject.SetActive (false);
         }
         tileEvent.ClearEvent ();
-        // popupUI.transform.GetChild (3).gameObject.SetActive (false);
-        popupUI.SetActive (false);
     }
     public void ClosePopupUI () {
         popupUI.SetActive (false);
@@ -320,5 +323,8 @@ public class UIController : MonoBehaviour {
     }
     public void SetRoundUI (int r) {
         controlsUI.transform.GetChild (8).GetComponent<Text> ().text = "Round:" + r;
+    }
+    public void SetItemInt (bool a) {
+        itemInt = a;
     }
 }

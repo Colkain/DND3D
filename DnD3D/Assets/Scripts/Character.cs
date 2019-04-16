@@ -94,7 +94,7 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        if (preventDamage)
+        if (preventDamage && h < 0)
             preventDamage = false;
         else
             health += h;
@@ -211,7 +211,7 @@ public class Character : MonoBehaviour {
         }
     }
     public void RemovePower (int i) {
-        powers[i] = null;
+        powers[i].SetSet (false);
     }
 
     public Power GetPower (int i) {
@@ -229,10 +229,10 @@ public class Character : MonoBehaviour {
         }
     }
     public void RemoveItem (int i) {
-        items[i] = null;
+        items[i].SetSet (false);
     }
     public Item GetItem (int i) {
-        if (items[i]!= null && items[i].GetSet () == true)
+        if (items[i] != null && items[i].GetSet () == true)
             return items[i];
         else
             return null;
