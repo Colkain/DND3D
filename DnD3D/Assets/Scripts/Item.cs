@@ -10,13 +10,11 @@ public class Item {
     [SerializeField] private int[] effects;
     [SerializeField] private bool equipped;
     [SerializeField] private bool checkReq = false;
-    [SerializeField] private bool set = false;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom
         effects = new int[10]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range
         equipped = false;
         id = i;
-        set = true;
         if (id == 0) {
             typeI = "Equipment";
             name = "Sword";
@@ -148,10 +146,6 @@ public class Item {
     public bool GetEquipped () => equipped;
     public void SetEquiped (bool a) {
         equipped = a;
-    }
-    public bool GetSet () => set;
-    public void SetSet (bool s) {
-        set = s;
     }
     public bool CheckReq (Character p) {
         for (int i = 0; i < 4; i++) {

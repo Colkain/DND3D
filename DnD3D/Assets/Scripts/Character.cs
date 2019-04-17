@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
@@ -27,8 +28,8 @@ public class Character : MonoBehaviour {
     [SerializeField] private int bonusAttack;
     [SerializeField] private bool preventDamage;
     [SerializeField] private Vector3 coor;
-    [SerializeField] private Power[] powers;
-    [SerializeField] private Item[] items;
+    [SerializeField] private List<Power> powers;
+    [SerializeField] private List<Item> items;
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
         nameC = n;
         classC = classId;
@@ -41,8 +42,8 @@ public class Character : MonoBehaviour {
         bonusAttack = 0;
         preventDamage = false;
         coor = coorc;
-        powers = new Power[3];
-        items = new Item[6];
+        powers = new List<Power> ();
+        items = new List<Item> ();
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -195,44 +196,34 @@ public class Character : MonoBehaviour {
         }
     }
     public void AddPower (int i) {
-        for (int a = 0; a < powers.Length; a++) {
-            if (powers[a].GetSet () == false) {
-                powers[a] = new Power (i);
-                return;
-            }
-        }
+        powers.Add (new Power (i));
     }
     public void AddPower (Power i) {
-        for (int a = 0; a < powers.Length; a++) {
-            if (powers[a].GetSet () == false) {
-                powers[a] = i;
-                return;
-            }
-        }
+        if (powers.Count < 3)
+            powers.Add (i);
     }
+
     public void RemovePower (int i) {
-        powers[i].SetSet (false);
+        if (powers.Count >= i + 1)
+            powers.RemoveAt (i);
     }
 
     public Power GetPower (int i) {
-        if (powers[i].GetSet () == true)
+        if (powers.Count >= i + 1)
             return powers[i];
         else
             return null;
     }
     public void AddItem (Item i) {
-        for (int a = 0; a < items.Length; a++) {
-            if (items[a].GetSet () == false) {
-                items[a] = i;
-                return;
-            }
-        }
+        if (items.Count < 6)
+            items.Add (i);
     }
     public void RemoveItem (int i) {
-        items[i].SetSet (false);
+        if (items.Count >= i + 1)
+            items.RemoveAt (i);
     }
     public Item GetItem (int i) {
-        if (items[i] != null && items[i].GetSet () == true)
+        if (items.Count >= i + 1)
             return items[i];
         else
             return null;
