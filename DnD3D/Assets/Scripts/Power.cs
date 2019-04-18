@@ -3,6 +3,7 @@
 [System.Serializable]
 public class Power {
     [SerializeField] private int id;
+    [SerializeField] private int level;
     [SerializeField] private string name;
     [SerializeField] private string description;
     [SerializeField] private int cooldown;
@@ -10,6 +11,7 @@ public class Power {
 
     public Power (int i) {
         id = i;
+        level = 1;
         cooldownUI = 0;
         if (id == 0) {
             name = "Berserk";
@@ -46,5 +48,9 @@ public class Power {
         cooldownUI += i;
     }
     public int GetCooldownUI () => cooldownUI;
+    public int GetLevel () => level;
+    public void SetLevel (int i) {
+        level += i;
+    }
 
 }

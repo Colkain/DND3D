@@ -26,7 +26,6 @@ public class TileEvent : MonoBehaviour {
             description = "Nothing happens, it's a normal tile.";
         }
     }
-
     public void ClearEvent () {
         id = 3;
         power = null;

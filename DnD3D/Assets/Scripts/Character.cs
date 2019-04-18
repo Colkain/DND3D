@@ -175,20 +175,20 @@ public class Character : MonoBehaviour {
         if (p.GetCooldownUI () == 0) {
             p.SetCooldownUI (p.GetCooldown ());
             if (p.GetId () == 0) {
-                action++;
-                actionUI++;
+                action += 1 * p.GetLevel ();
+                actionUI += 1 * p.GetLevel ();
             } else if (p.GetId () == 1) {
-                mouvement += 2;
-                mouvementUI += 2;
+                mouvement += 2 * p.GetLevel ();
+                mouvementUI += 2 * p.GetLevel ();
             } else if (p.GetId () == 2) {
-                range++;
-                rangeUI++;
+                range += 1 * p.GetLevel ();
+                rangeUI += 1 * p.GetLevel ();
             } else if (p.GetId () == 3) {
                 health += Random.Range (1, 5);
                 if (health > maxHealth)
                     health = maxHealth;
             } else if (p.GetId () == 4) {
-                bonusAttack += 1;
+                bonusAttack += 1 * p.GetLevel ();
             } else if (p.GetId () == 5) {
                 preventDamage = true;
             } else
@@ -199,6 +199,7 @@ public class Character : MonoBehaviour {
         powers.Add (new Power (i));
     }
     public void AddPower (Power i) {
+        //add power level;
         if (powers.Count < 3)
             powers.Add (i);
     }
