@@ -141,7 +141,7 @@ public class GameboardControl : MonoBehaviour {
     }
     public int GetRound () => round;
     public void NextTurn () {
-        uiC.SetItemInt (false);
+        // uiC.SetItemInt (false);
         player.SetisTurn (false);
         if (player.GetId () < cMax)
             idc++;
