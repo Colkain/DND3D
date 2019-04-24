@@ -22,14 +22,13 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] private TileEvent tileEvent;
     [SerializeField] Character player;
     CharacterMovement characterMouvement;
-    bool newRound = true;
     // Start is called before the first frame update
     public void Awake () {
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
     }
     public void StartingGame (int c) {
-        round = 0;
+        round = 1;
         idt = 0; //tile id
         tiles = new Tile[maxColumns, maxRows];
         doors = new ArrayList ();
@@ -58,12 +57,6 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
-            if (round > 0 && newRound) {
-                newRound = false;
-                uiC.SetRoundUI (round);
-                uiC.SetLevelUpButtons (true); //level up buttons     
-            }
-
             player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
             uiC.SetCharUI (player);
@@ -138,25 +131,30 @@ public class GameboardControl : MonoBehaviour {
     public int GetRound () => round;
     public void NextTurn () {
         player.SetisTurn (false);
-        if (player.GetId () < cMax)
+        if (player.GetId () < cMax) {
             idc++;
-        else
+
+        } else {
             idc = 1;
+            round++;
+        }
         player = characters[idc - 1];
         player.SetActionUI (player.GetAction () - player.GetActionUI ());
         player.SetRangeUI (player.GetRange () - player.GetRangeUI ());
         player.SetMouvementUI (player.GetMouvement () - player.GetMouvementUI ());
         player.SetisTurn (true);
+        if (round > 1) {
+            uiC.SetLevelUpButtons (true); //level up buttons     
+        }
         for (int p = 0; p < 3; p++) {
             if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
                 player.GetPower (p).SetCooldownUI (-1);
         }
         //SetUI
         uiC.NextTurnUI (player);
-        
+
         SetPreviousTile ();
         cam.SetCamera (idc);
-        newRound = true;
     }
     public void Check () {
         if (player.GetActionUI () > 0) {

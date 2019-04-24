@@ -2,12 +2,13 @@
 using UnityEngine.UI;
 
 public class AbilitiesUI : MonoBehaviour {
-    private Character player = null;
+    public Text roundUI;
     public Transform abilitiesParent;
     public Button attackButton;
     public Button checkButton;
     public Button endTurn;
     AbilitySlot[] slots;
+    private Character player = null;
     void Start () {
         slots = abilitiesParent.GetComponentsInChildren<AbilitySlot> ();
     }
@@ -42,7 +43,8 @@ public class AbilitiesUI : MonoBehaviour {
     public void OnEndTurn () {
         GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
     }
-    public void SetPlayer (Character p) {
+    public void SetPlayer (Character p, int i) {
+        roundUI.text = "Round: " + i.ToString ();
         player = p;
     }
 }

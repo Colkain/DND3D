@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour {
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetisTurn (true);
-            abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player);
+            abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
             itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
             gameBoard.SetPreviousTile ();
             cam.SetCamera (gameBoard.GetIdc ());
@@ -132,7 +132,7 @@ public class UIController : MonoBehaviour {
     }
     public void NextTurnUI (Character c) {
         player = c;
-        abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player);
+        abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
     }
     public void AcceptPopup () {
