@@ -8,7 +8,7 @@ public class Power {
     [SerializeField] private string description;
     [SerializeField] private int cooldown;
     [SerializeField] private int cooldownUI;
-
+    [SerializeField] private Sprite icon;
     public Power (int i) {
         id = i;
         level = 1;
@@ -18,11 +18,11 @@ public class Power {
             description = "+1 Action.";
             cooldown = 3;
         } else if (id == 1) {
-            name = "Backstab";
+            name = "Sprint";
             description = "+2 Mouvement.";
             cooldown = 3;
         } else if (id == 2) {
-            name = "Sniper";
+            name = "Snipe";
             description = "Range +1.";
             cooldown = 3;
         } else if (id == 3) {
@@ -37,8 +37,8 @@ public class Power {
             name = "Block";
             description = "Prevent next damage.";
             cooldown = 3;
-        } else
-            Debug.Log ("Power Error " + id);
+        }
+        icon = Resources.Load<Sprite> (name);
     }
     public string GetName () => name;
     public string GetDescription () => description;
@@ -52,5 +52,5 @@ public class Power {
     public void SetLevel (int i) {
         level += i;
     }
-
+    public Sprite GetIcon () => icon;
 }
