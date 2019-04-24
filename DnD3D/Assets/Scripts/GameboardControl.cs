@@ -107,12 +107,8 @@ public class GameboardControl : MonoBehaviour {
         characters[i - 1].SetClass ();
         SetStartingPower ();
     }
-    public Character[] GetCharacters () {
-        return characters;
-    }
-    public Character GetPlayer () {
-        return player;
-    }
+    public Character[] GetCharacters () => characters;
+    public Character GetPlayer () => player;
     public void AddInDoors (GameObject d) {
         doors.Add (d);
     }
@@ -141,7 +137,6 @@ public class GameboardControl : MonoBehaviour {
     }
     public int GetRound () => round;
     public void NextTurn () {
-        // uiC.SetItemInt (false);
         player.SetisTurn (false);
         if (player.GetId () < cMax)
             idc++;
@@ -156,6 +151,9 @@ public class GameboardControl : MonoBehaviour {
             if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
                 player.GetPower (p).SetCooldownUI (-1);
         }
+        //SetUI
+        uiC.NextTurnUI (player);
+        
         SetPreviousTile ();
         cam.SetCamera (idc);
         newRound = true;

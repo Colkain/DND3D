@@ -137,10 +137,8 @@ public class Item {
             effects[5] = 1;
             effects[6] = 1;
             description = "Effects:\n\t+2 Health\n+2 Max Health\n+2 Mouvement\n+2 Strength\n+2 Agility\n+2 Intelligence\n+2 Wisdom";
-        } else
-            Debug.Log ("Item Error " + id);
-
-        icon = Resources.Load (name) as Sprite;
+        }
+        icon = Resources.Load<Sprite> (name);
     }
     public string GetTypeI () => typeI;
     public string GetName () => name;

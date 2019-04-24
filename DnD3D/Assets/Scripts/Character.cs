@@ -223,6 +223,13 @@ public class Character : MonoBehaviour {
         if (items.Count >= i + 1)
             items.RemoveAt (i);
     }
+    public void RemoveItem (Item item) {
+        for (int i = 0; i < items.Count; i++) {
+            if (items[i] == item)
+                items.RemoveAt (i);
+        }
+    }
+    public List<Item> GetItems () => items;
     public Item GetItem (int i) {
         if (items.Count >= i + 1)
             return items[i];
