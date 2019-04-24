@@ -4,10 +4,13 @@ using UnityEngine.UI;
 public class StatSlot : MonoBehaviour {
     public Button levelUpButton;
     public Text text;
-    public void SetText (Text t, bool i) {
-        text = t;
-        if (!i)
-            levelUpButton.enabled = false;
+    void Start () {
+        levelUpButton.interactable = false;
     }
-    void Update () { }
+    public void SetText (string t) {
+        text.text = t;
+    }
+    public void SetInteractable (bool i) {
+            levelUpButton.interactable = i;
+    }
 }

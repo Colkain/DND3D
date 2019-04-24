@@ -59,7 +59,6 @@ public class GameboardControl : MonoBehaviour {
         } else {
             player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
             characterMouvement = player.GetComponent<CharacterMovement> ();
-            uiC.SetCharUI (player);
             ActivateDoors (false);
             currentTile = WhatTile (player);
             currentTile.SetVisited (true);
@@ -143,9 +142,7 @@ public class GameboardControl : MonoBehaviour {
         player.SetRangeUI (player.GetRange () - player.GetRangeUI ());
         player.SetMouvementUI (player.GetMouvement () - player.GetMouvementUI ());
         player.SetisTurn (true);
-        if (round > 1) {
-            uiC.SetLevelUpButtons (true); //level up buttons     
-        }
+        
         for (int p = 0; p < 3; p++) {
             if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
                 player.GetPower (p).SetCooldownUI (-1);

@@ -16,22 +16,9 @@ public class UIController : MonoBehaviour {
     private GameObject creationUI;
     private GameObject popupUI;
     GameboardControl gameBoard;
-    //inGame Texts
-    GameObject nameC;
-    GameObject classC;
-    GameObject level;
-    GameObject action;
-    GameObject health;
-    GameObject mouvement;
-    GameObject strength;
-    GameObject agility;
-    GameObject intelligence;
-    GameObject wisdom;
-    GameObject range;
     //Popup UI
     Button popupB;
     TileEvent tileEvent;
-    bool startOfTheGame;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
         popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
@@ -43,7 +30,6 @@ public class UIController : MonoBehaviour {
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
-        startOfTheGame = true;
     }
     public void SettingUp () {
         m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
@@ -66,6 +52,7 @@ public class UIController : MonoBehaviour {
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetisTurn (true);
+            statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound());
             abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
             itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
             gameBoard.SetPreviousTile ();
@@ -84,53 +71,16 @@ public class UIController : MonoBehaviour {
         Text text = GameObject.Find ("PlayerNumber").GetComponent<Text> ();
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
-    public void SetCharUI (Character c) {
-        player = c;
-        cm = player.GetComponent<CharacterMovement> ();
-        nameC = GameObject.Find ("Name");
-        classC = GameObject.Find ("Class");
-        level = GameObject.Find ("Level");
-        action = GameObject.Find ("Action");
-        health = GameObject.Find ("Health");
-        mouvement = GameObject.Find ("Mouvement");
-        strength = GameObject.Find ("Strength");
-        agility = GameObject.Find ("Agility");
-        intelligence = GameObject.Find ("Intelligence");
-        wisdom = GameObject.Find ("Wisdom");
-        range = GameObject.Find ("Range");
-
-        if (startOfTheGame) {
-            SetLevelUpButtons (false);
-            startOfTheGame = false;
-        }
-
-        nameC.GetComponent<Text> ().text = c.GetName ();
-        classC.GetComponent<Text> ().text = c.GetClass ();
-        level.GetComponent<Text> ().text = "Lvl:" + c.GetLevel ().ToString ();
-        action.GetComponent<Text> ().text = "Action:" + c.GetActionUI ();
-        health.GetComponent<Text> ().text = "HP:" + c.GetHealth ().ToString () + "/" + c.GetMaxHealth ().ToString ();
-        mouvement.GetComponent<Text> ().text = "Mv:" + c.GetMouvementUI ().ToString ();
-        strength.GetComponent<Text> ().text = "Str:" + c.GetStrength ().ToString ();
-        agility.GetComponent<Text> ().text = "Agi:" + c.GetAgility ().ToString ();
-        intelligence.GetComponent<Text> ().text = "Int:" + c.GetIntelligence ().ToString ();
-        wisdom.GetComponent<Text> ().text = "Wis:" + c.GetWisdom ().ToString ();
-        range.GetComponent<Text> ().text = "Ran:" + c.GetRangeUI ().ToString ();
-    }
-
-    public void SetLevelUpButtons (bool a) {
-        mouvement.transform.GetChild (0).gameObject.SetActive (a);
-        health.transform.GetChild (0).gameObject.SetActive (a);
-        strength.transform.GetChild (0).gameObject.SetActive (a);
-        agility.transform.GetChild (0).gameObject.SetActive (a);
-        intelligence.transform.GetChild (0).gameObject.SetActive (a);
-        wisdom.transform.GetChild (0).gameObject.SetActive (a);
-    }
     public void LevelUp (int stat) {
         gameBoard.GetCharacters () [gameBoard.GetIdc () - 1].LevelUp (stat);
-        SetLevelUpButtons (false);
+        statsUI.GetComponent<StatsUI> ().SetLevelUpButtons (false);
+    }
+    public void SetLevelUpButtons () {
+        statsUI.GetComponent<StatsUI> ().SetLevelUpButtons (true);
     }
     public void NextTurnUI (Character c) {
         player = c;
+        statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
         abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
     }
