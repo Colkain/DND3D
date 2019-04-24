@@ -7,13 +7,13 @@ public class UIController : MonoBehaviour {
     CameraController cam;
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
+    public GameObject statsUI;
     public GameObject itemsUI;
     public GameObject abilitiesUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     private GameObject creationUI;
-    private GameObject statUI;
     private GameObject popupUI;
     GameboardControl gameBoard;
     //inGame Texts
@@ -34,12 +34,11 @@ public class UIController : MonoBehaviour {
     bool startOfTheGame;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
-        statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
         // popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
 
         SetCreationUI ();
-        statUI.SetActive (false);
+        statsUI.SetActive (false);
         abilitiesUI.SetActive (false);
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
@@ -60,7 +59,7 @@ public class UIController : MonoBehaviour {
         s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
         SetCreationUI ();
         if (gameBoard.GetIdc () == cMax) {
-            statUI.SetActive (true);
+            statsUI.SetActive (true);
             abilitiesUI.SetActive (true);
             itemsUI.SetActive (true);
             gameBoard.SetIdc (1);
