@@ -170,7 +170,49 @@ public class Character : MonoBehaviour {
     }
     public int GetAction () => action;
     public int GetActionUI () => actionUI;
-
+    public void EquipItem (Item item) {
+        for (int i = 0; i < items.Count; i++) {
+            if (items[i] == item) {
+                if (GetReqI (items[i])) {
+                    ActivateItemEffect (items[i], 1);
+                    items[i].SetEquiped (true);
+                    return;
+                }
+            }
+        }
+    }
+    public void UnequipItem (Item item) {
+        for (int i = 0; i < items.Count; i++) {
+            if (items[i] == item) {
+                ActivateItemEffect (items[i], -1);
+                items[i].SetEquiped (false);
+                return;
+            }
+        }
+    }
+    public void UseItem (Item item) {
+        for (int i = 0; i < items.Count; i++) {
+            if (items[i] == item) {
+                ActivateItemEffect (items[i], 1);
+                return;
+            }
+        }
+    }
+    public void ActivateItemEffect (Item item, int polarity) {
+        mouvement += polarity * item.GetEffect (0);
+        mouvementUI += polarity * item.GetEffect (0);
+        maxHealth += polarity * item.GetEffect (1);
+        health += polarity * item.GetEffect (1);
+        health += polarity * item.GetEffect (2);
+        if (health > maxHealth)
+            health = maxHealth;
+        strength += polarity * item.GetEffect (3);
+        agility += polarity * item.GetEffect (4);
+        intelligence += polarity * item.GetEffect (5);
+        wisdom += polarity * item.GetEffect (6);
+        bonusAttack += polarity * item.GetEffect (7);
+        range += polarity * item.GetEffect (8);
+    }
     public void ActivatePowerEffect (Power p) {
         if (p.GetCooldownUI () == 0) {
             p.SetCooldownUI (p.GetCooldown ());
@@ -236,15 +278,11 @@ public class Character : MonoBehaviour {
         else
             return null;
     }
-    public int GetReqI (int i) {
-        if (i == 0)
-            return strength;
-        else if (i == 1)
-            return agility;
-        else if (i == 2)
-            return intelligence;
+    public bool GetReqI (Item item) {
+        if ((item.GetRequirement (0) <= strength) && (item.GetRequirement (1) <= agility) && (item.GetRequirement (2) <= intelligence) && (item.GetRequirement (3) <= wisdom))
+            return true;
         else
-            return wisdom;
+            return false;
     }
     public void SetBonusDamage (int i) {
         bonusAttack += i;

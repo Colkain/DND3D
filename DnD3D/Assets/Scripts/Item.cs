@@ -14,7 +14,7 @@ public class Item {
     [SerializeField] private Sprite icon;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom
-        effects = new int[10]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range
+        effects = new int[9]; //effects 0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range
         equipped = false;
         id = i;
         if (id == 0) {
@@ -143,20 +143,11 @@ public class Item {
     public string GetTypeI () => typeI;
     public string GetName () => name;
     public string GetDescription () => description;
-    public int[] GetRequirements () => requirements;
+    public int GetRequirement (int i) => requirements[i];
     public int GetEffect (int i) => effects[i];
     public bool GetEquipped () => equipped;
     public void SetEquiped (bool a) {
         equipped = a;
     }
     public Sprite GetIcon () => icon;
-    public bool CheckReq (Character p) {
-        for (int i = 0; i < 4; i++) {
-            if (p.GetReqI (i) >= requirements[i])
-                checkReq = true;
-            else
-                checkReq = false;
-        }
-        return checkReq;
-    }
 }
