@@ -7,6 +7,9 @@ public class AbilitySlot : MonoBehaviour {
     public Button powerButton;
     public Button removeButton;
     public Text cooldownText;
+    void Start () {
+        cooldownText.enabled = false;
+    }
     void Update () {
         if (power != null) {
             cooldownText.text = power.GetCooldownUI ().ToString ();

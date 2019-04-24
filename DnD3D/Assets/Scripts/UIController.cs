@@ -130,24 +130,10 @@ public class UIController : MonoBehaviour {
         gameBoard.GetCharacters () [gameBoard.GetIdc () - 1].LevelUp (stat);
         SetLevelUpButtons (false);
     }
-    public void EndTurn () {
-        gameBoard.NextTurn ();
-    }
     public void NextTurnUI (Character c) {
         player = c;
         abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player);
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
-    }
-    public void Attack () {
-        cm.SetButtonClicked (true);
-        cm.Attack ();
-    }
-    public void UsePower (int i) {
-        cm.UsePower (i);
-    }
-    public void Check () {
-        Debug.Log("a");
-        gameBoard.Check ();
     }
     public void AcceptPopup () {
         if (tileEvent.GetId () == 0) {

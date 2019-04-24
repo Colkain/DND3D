@@ -19,8 +19,8 @@ public class AbilitiesUI : MonoBehaviour {
                 attackButton.image.color = Color.white;
                 checkButton.image.color = Color.white;
             } else {
-                attackButton.interactable = true;
-                checkButton.interactable = true;
+                attackButton.interactable = false;
+                checkButton.interactable = false;
                 attackButton.image.color = Color.red;
                 checkButton.image.color = Color.red;
             }
@@ -31,6 +31,16 @@ public class AbilitiesUI : MonoBehaviour {
                     slots[i].ClearSlot ();
             }
         }
+    }
+    public void OnAttack () {
+        player.GetComponent<CharacterMovement> ().SetButtonClicked (true);
+        player.GetComponent<CharacterMovement> ().Attack ();
+    }
+    public void OnCheck () {
+        GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().Check ();
+    }
+    public void OnEndTurn () {
+        GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
     }
     public void SetPlayer (Character p) {
         player = p;

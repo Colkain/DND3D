@@ -27,7 +27,6 @@ public class CharacterMovement : MonoBehaviour {
         gameboard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
         isAttacking = false;
         player = gameObject.GetComponent<Character> ();
-        range = player.GetRange ();
         buttonClicked = false;
     }
     // Update is called once per frame
@@ -59,7 +58,8 @@ public class CharacterMovement : MonoBehaviour {
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));
                 Vector3 coor = gameboard.WhatTile (player).GetCoor ();
-                if (range != 0) {
+                range = player.GetRangeUI();
+                if (range >= 0) {
                     for (int i = 0; i <= range; i++) {
                         cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
                         cells.Add (gameboard.GetTile ((int) coor.x - i, (int) coor.z));
