@@ -7,13 +7,13 @@ public class UIController : MonoBehaviour {
     CameraController cam;
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
+    public GameObject itemsUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     private GameObject creationUI;
     private GameObject statUI;
     private GameObject controlsUI;
-    private GameObject itemsUI;
     private GameObject popupUI;
     GameboardControl gameBoard;
     //inGame Texts
@@ -45,7 +45,6 @@ public class UIController : MonoBehaviour {
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
         controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
-        itemsUI = GameObject.Find ("InGameUI").transform.GetChild (2).gameObject;
         popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
 
         attackB = controlsUI.transform.GetChild (2).GetComponent<Button> ();
