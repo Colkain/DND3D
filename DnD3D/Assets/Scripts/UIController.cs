@@ -8,12 +8,12 @@ public class UIController : MonoBehaviour {
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
     public GameObject itemsUI;
+    public GameObject abilitiesUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     private GameObject creationUI;
     private GameObject statUI;
-    private GameObject controlsUI;
     private GameObject popupUI;
     GameboardControl gameBoard;
     //inGame Texts
@@ -28,38 +28,19 @@ public class UIController : MonoBehaviour {
     GameObject intelligence;
     GameObject wisdom;
     GameObject range;
-    //inGame ControlsUI Buttons
-    Button attackB;
-    Button checkB;
-    Button endTurn;
-    //Powers UI
-    Button[] powersB;
-    Power power;
-    //Items UI
     //Popup UI
     Button popupB;
     TileEvent tileEvent;
     bool startOfTheGame;
     public void Start () {
-        powersB = new Button[3];
         creationUI = GameObject.Find ("CreationUI");
         statUI = GameObject.Find ("InGameUI").transform.GetChild (0).gameObject;
-        controlsUI = GameObject.Find ("InGameUI").transform.GetChild (1).gameObject;
         popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
-
-        attackB = controlsUI.transform.GetChild (2).GetComponent<Button> ();
-        checkB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
-
-        powersB[0] = controlsUI.transform.GetChild (4).GetComponent<Button> ();
-        powersB[1] = controlsUI.transform.GetChild (5).GetComponent<Button> ();
-        powersB[2] = controlsUI.transform.GetChild (6).GetComponent<Button> ();
-
-        popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
-        endTurn = controlsUI.transform.GetChild (7).GetComponent<Button> ();
+        // popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
 
         SetCreationUI ();
         statUI.SetActive (false);
-        controlsUI.SetActive (false);
+        abilitiesUI.SetActive (false);
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
@@ -80,12 +61,13 @@ public class UIController : MonoBehaviour {
         SetCreationUI ();
         if (gameBoard.GetIdc () == cMax) {
             statUI.SetActive (true);
-            controlsUI.SetActive (true);
+            abilitiesUI.SetActive (true);
             itemsUI.SetActive (true);
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
             Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetisTurn (true);
+            abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player);
             itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
             gameBoard.SetPreviousTile ();
             cam.SetCamera (gameBoard.GetIdc ());
@@ -122,14 +104,6 @@ public class UIController : MonoBehaviour {
             SetLevelUpButtons (false);
             startOfTheGame = false;
         }
-        if (player.GetActionUI () == 0) {
-            attackB.transform.GetChild (0).gameObject.SetActive (true);
-            checkB.transform.GetChild (0).gameObject.SetActive (true);
-        } else {
-            attackB.transform.GetChild (0).gameObject.SetActive (false);
-            checkB.transform.GetChild (0).gameObject.SetActive (false);
-        }
-        SetPowersButtons ();
 
         nameC.GetComponent<Text> ().text = c.GetName ();
         classC.GetComponent<Text> ().text = c.GetClass ();
@@ -156,31 +130,12 @@ public class UIController : MonoBehaviour {
         gameBoard.GetCharacters () [gameBoard.GetIdc () - 1].LevelUp (stat);
         SetLevelUpButtons (false);
     }
-
-    public void SetPowersButtons () {
-        for (int i = 0; i < 3; i++) {
-            power = player.GetPower (i);
-            if (power == null) {
-                powersB[i].transform.GetChild (0).gameObject.SetActive (true);
-                powersB[i].transform.GetChild (2).gameObject.SetActive (false);
-            } else {
-                powersB[i].transform.GetChild (1).gameObject.GetComponent<Text> ().text = power.GetName ();
-                if (power.GetCooldownUI () > 0) {
-                    powersB[i].transform.GetChild (0).gameObject.SetActive (true);
-                    powersB[i].transform.GetChild (2).gameObject.SetActive (true);
-                    powersB[i].transform.GetChild (2).gameObject.GetComponent<Text> ().text = (power.GetCooldownUI ().ToString ());
-                } else {
-                    powersB[i].transform.GetChild (0).gameObject.SetActive (false);
-                    powersB[i].transform.GetChild (2).gameObject.SetActive (false);
-                }
-            }
-        }
-    }
     public void EndTurn () {
         gameBoard.NextTurn ();
     }
     public void NextTurnUI (Character c) {
         player = c;
+        abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player);
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
     }
     public void Attack () {
@@ -191,6 +146,7 @@ public class UIController : MonoBehaviour {
         cm.UsePower (i);
     }
     public void Check () {
+        Debug.Log("a");
         gameBoard.Check ();
     }
     public void AcceptPopup () {
@@ -220,6 +176,6 @@ public class UIController : MonoBehaviour {
             popupUI.transform.GetChild (3).gameObject.SetActive (true);
     }
     public void SetRoundUI (int r) {
-        controlsUI.transform.GetChild (8).GetComponent<Text> ().text = "Round:" + r;
+        //set round
     }
 }

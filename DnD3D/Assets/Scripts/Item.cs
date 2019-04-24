@@ -10,7 +10,6 @@ public class Item {
     [SerializeField] private int[] requirements;
     [SerializeField] private int[] effects;
     [SerializeField] private bool equipped;
-    [SerializeField] private bool checkReq = false;
     [SerializeField] private Sprite icon;
     public Item (int i) {
         requirements = new int[4]; //reqs 0:strength 1:agility 2:intelligence 3:wisdom

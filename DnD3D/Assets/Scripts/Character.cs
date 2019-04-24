@@ -245,10 +245,11 @@ public class Character : MonoBehaviour {
         if (powers.Count < 3)
             powers.Add (i);
     }
-
-    public void RemovePower (int i) {
-        if (powers.Count >= i + 1)
-            powers.RemoveAt (i);
+    public void RemovePower (Power p) {
+        for (int i = 0; i < powers.Count; i++) {
+            if (powers[i] == p)
+                powers.RemoveAt (i);
+        }
     }
 
     public Power GetPower (int i) {
@@ -271,6 +272,7 @@ public class Character : MonoBehaviour {
                 items.RemoveAt (i);
         }
     }
+    public List<Power> GetPowers () => powers;
     public List<Item> GetItems () => items;
     public Item GetItem (int i) {
         if (items.Count >= i + 1)
