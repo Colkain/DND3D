@@ -90,6 +90,7 @@ public class UIController : MonoBehaviour {
     public void AcceptPopup () {
         if (tileEvent.GetId () == 0) {
             gameBoard.AddNewPower (tileEvent.GetPower ());
+            popupUI.SetActive (false);
         } else if (tileEvent.GetId () == 1) {
             gameBoard.AddNewItem (tileEvent.GetItem ());
             popupUI.SetActive (false);
