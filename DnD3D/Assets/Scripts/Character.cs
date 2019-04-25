@@ -63,28 +63,28 @@ public class Character : MonoBehaviour {
             wisdom = Random.Range (1, 4);
             GetComponent<Renderer> ().material = warriorMat;
         } else if (classC == "Rogue") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
+            mouvement = Random.Range (2, 7);
+            maxHealth = Random.Range (4, 9);
+            strength = Random.Range (1, 5);
+            agility = Random.Range (5, 10);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
-            intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
+            mouvement = Random.Range (2, 6);
+            maxHealth = Random.Range (3, 9);
+            strength = Random.Range (1, 4);
+            agility = Random.Range (1, 4);
+            intelligence = Random.Range (5, 10);
+            wisdom = Random.Range (2, 6);
             GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
-            mouvement = Random.Range (1, 5);
-            maxHealth = Random.Range (5, 11);
-            strength = Random.Range (5, 11);
-            agility = Random.Range (1, 5);
+            mouvement = Random.Range (1, 6);
+            maxHealth = Random.Range (5, 9);
+            strength = Random.Range (1, 6);
+            agility = Random.Range (1, 4);
             intelligence = Random.Range (1, 4);
-            wisdom = Random.Range (1, 4);
+            wisdom = Random.Range (5, 11);
             GetComponent<Renderer> ().material = clericMat;
         }
         actionUI = action;

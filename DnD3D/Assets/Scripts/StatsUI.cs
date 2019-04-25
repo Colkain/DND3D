@@ -45,11 +45,11 @@ public class StatsUI : MonoBehaviour {
             SetLevelUpButtons (true);
  }
     public void SetLevelUpButtons (bool a) {
-        slots[4].SetInteractable (true);
-        slots[5].SetInteractable (true);
-        slots[6].SetInteractable (true);
-        slots[7].SetInteractable (true);
-        slots[8].SetInteractable (true);
-        slots[9].SetInteractable (true);
+        slots[4].SetInteractable (a);
+        slots[5].SetInteractable (a);
+        slots[6].SetInteractable (a);
+        slots[7].SetInteractable (a);
+        slots[8].SetInteractable (a);
+        slots[9].SetInteractable (a);
     }
 }

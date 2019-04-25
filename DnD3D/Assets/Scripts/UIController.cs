@@ -50,9 +50,9 @@ public class UIController : MonoBehaviour {
             itemsUI.SetActive (true);
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
-            Character player = GameObject.FindWithTag (name).GetComponent<Character> ();
+            player = GameObject.FindWithTag (name).GetComponent<Character> ();
             player.SetisTurn (true);
-            statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound());
+            statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
             abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
             itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
             gameBoard.SetPreviousTile ();
@@ -64,6 +64,9 @@ public class UIController : MonoBehaviour {
     }
     public void SetCreationUI () {
         creationUI.SetActive (false);
+    }
+    public void SetPlayer (Character p) {
+        player = p;
     }
     public void SetCreationUI (Vector3 coor) {
         characterCoor = coor;

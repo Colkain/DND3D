@@ -57,7 +57,7 @@ public class GameboardControl : MonoBehaviour {
         if (characters[idc - 1] == null) {
             CreateCharacter ();
         } else {
-            player = GameObject.FindWithTag ("Player" + idc).GetComponent<Character> ();
+            player = characters[idc - 1];
             characterMouvement = player.GetComponent<CharacterMovement> ();
             ActivateDoors (false);
             currentTile = WhatTile (player);
