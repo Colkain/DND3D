@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
-    CharacterMovement cm;
     [SerializeField] private Character player;
     CameraController cam;
     Dropdown m_Dropdown;
@@ -16,13 +15,10 @@ public class UIController : MonoBehaviour {
     private GameObject creationUI;
     private GameObject popupUI;
     GameboardControl gameBoard;
-    //Popup UI
-    Button popupB;
     TileEvent tileEvent;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
         popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
-        // popupB = controlsUI.transform.GetChild (3).GetComponent<Button> ();
 
         SetCreationUI ();
         statsUI.SetActive (false);
@@ -113,8 +109,5 @@ public class UIController : MonoBehaviour {
             popupUI.transform.GetChild (3).gameObject.SetActive (false);
         else
             popupUI.transform.GetChild (3).gameObject.SetActive (true);
-    }
-    public void SetRoundUI (int r) {
-        //set round
     }
 }

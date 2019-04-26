@@ -6,6 +6,7 @@ public class Power {
     [SerializeField] private int level;
     [SerializeField] private string name;
     [SerializeField] private string description;
+    [SerializeField] private int duration;
     [SerializeField] private int cooldown;
     [SerializeField] private int cooldownUI;
     [SerializeField] private Sprite icon;
@@ -15,33 +16,55 @@ public class Power {
         cooldownUI = 0;
         if (id == 0) {
             name = "Berserk";
-            description = "+1 Action.";
+            description = "+" + level + " Action.";
             cooldown = 3;
+            duration = 1;
         } else if (id == 1) {
             name = "Sprint";
-            description = "+2 Mouvement.";
+            description = "+" + level + " Mouvement.";
             cooldown = 3;
+            duration = 1;
         } else if (id == 2) {
             name = "Snipe";
-            description = "Range +1.";
+            description = "+" + level + " Range.";
             cooldown = 3;
+            duration = 1;
         } else if (id == 3) {
+            int ia = 4 + level;
             name = "Heal";
-            description = "Can Heal : 1;5";
+            description = "Can Heal: " + level + ";" + ia;
             cooldown = 3;
+            duration = 1;
         } else if (id == 4) {
             name = "Damage";
-            description = "+1 bonus damage.";
+            description = "+" + level + " bonus damage.";
             cooldown = 3;
+            duration = 1;
         } else if (id == 5) {
             name = "Block";
-            description = "Prevent next damage.";
+            description = "Prevent damage for " + level + " turns.";
             cooldown = 3;
+            duration = 1;
         }
         icon = Resources.Load<Sprite> (name);
     }
     public string GetName () => name;
     public string GetDescription () => description;
+    public void SetDescription () {
+        if (id == 0)
+            description = "+" + level + " Action.";
+        else if (id == 1)
+            description = "+" + level + " Mouvement.";
+        else if (id == 2)
+            description = "+" + level + " Range.";
+        else if (id == 3) {
+            int ia = 4 + level;
+            description = "Can Heal: " + level + ";" + ia;
+        } else if (id == 4)
+            description = "+" + level + " bonus damage.";
+        else if (id == 5)
+            description = "Prevent damage for " + level + " turns.";
+    }
     public int GetId () => id;
     public int GetCooldown () => cooldown;
     public void SetCooldownUI (int i) {
@@ -51,6 +74,8 @@ public class Power {
     public int GetLevel () => level;
     public void SetLevel (int i) {
         level += i;
+        SetDescription();
     }
+    public int GetDuration () => duration;
     public Sprite GetIcon () => icon;
 }

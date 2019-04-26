@@ -349,6 +349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CreationUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2441924329160315762, guid: f5fc1c11e5c5cd74a89e2a04be4e49d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2441924329160315763, guid: f5fc1c11e5c5cd74a89e2a04be4e49d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1636,6 +1641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SettingupUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057056249669336982, guid: f757dd4aeff3bf441b63d4e14fa04790,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5057056249669336983, guid: f757dd4aeff3bf441b63d4e14fa04790,
         type: 3}

@@ -30,6 +30,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private Vector3 coor;
     [SerializeField] private List<Power> powers;
     [SerializeField] private List<Item> items;
+    [SerializeField] private List<Buff> buffs;
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
         nameC = n;
         classC = classId;
@@ -44,6 +45,7 @@ public class Character : MonoBehaviour {
         coor = coorc;
         powers = new List<Power> ();
         items = new List<Item> ();
+        buffs = new List<Buff> ();
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
         gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
@@ -220,13 +222,13 @@ public class Character : MonoBehaviour {
                 action += 1 * p.GetLevel ();
                 actionUI += 1 * p.GetLevel ();
             } else if (p.GetId () == 1) {
-                mouvement += 2 * p.GetLevel ();
-                mouvementUI += 2 * p.GetLevel ();
+                mouvement += 1 * p.GetLevel ();
+                mouvementUI += 1 * p.GetLevel ();
             } else if (p.GetId () == 2) {
                 range += 1 * p.GetLevel ();
                 rangeUI += 1 * p.GetLevel ();
             } else if (p.GetId () == 3) {
-                health += Random.Range (1, 5);
+                health += Random.Range (0 + p.GetLevel (), 4 + p.GetLevel ());
                 if (health > maxHealth)
                     health = maxHealth;
             } else if (p.GetId () == 4) {
@@ -241,9 +243,17 @@ public class Character : MonoBehaviour {
         powers.Add (new Power (i));
     }
     public void AddPower (Power i) {
-        //add power level;
-        if (powers.Count < 3)
-            powers.Add (i);
+        int ex = 4;
+        if (powers.Count < 3) {
+            for (int a = 0; a < powers.Count; a++) {
+                if (powers[a].GetId () == i.GetId ())
+                    ex = a;
+            }
+            if (ex == 4)
+                powers.Add (i);
+            else
+                powers[ex].SetLevel (1);
+        }
     }
     public void RemovePower (Power p) {
         for (int i = 0; i < powers.Count; i++) {
