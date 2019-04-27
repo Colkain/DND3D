@@ -239,6 +239,15 @@ public class Character : MonoBehaviour {
                 Debug.Log ("Power Activate Error");
         }
     }
+    public void AddBuff (int i) {
+        // buffs.Add (p);
+    }
+    public void RemoveBuff () {
+
+    }
+    public void ActivateBuff () {
+
+    }
     public void AddPower (int i) {
         powers.Add (new Power (i));
     }

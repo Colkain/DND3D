@@ -10,6 +10,7 @@ public class Power {
     [SerializeField] private int cooldown;
     [SerializeField] private int cooldownUI;
     [SerializeField] private Sprite icon;
+    [SerializeField] private int[] effects;
     public Power (int i) {
         id = i;
         level = 1;
@@ -74,8 +75,9 @@ public class Power {
     public int GetLevel () => level;
     public void SetLevel (int i) {
         level += i;
-        SetDescription();
+        SetDescription ();
     }
     public int GetDuration () => duration;
     public Sprite GetIcon () => icon;
+    public int GetEffect (int i) => effects[i];
 }

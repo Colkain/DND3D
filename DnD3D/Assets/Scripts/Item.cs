@@ -139,6 +139,7 @@ public class Item {
         }
         icon = Resources.Load<Sprite> (name);
     }
+    public int GetId () => id;
     public string GetTypeI () => typeI;
     public string GetName () => name;
     public string GetDescription () => description;
