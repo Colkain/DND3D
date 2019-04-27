@@ -10,9 +10,8 @@ public class Power {
     [SerializeField] private int cooldown;
     [SerializeField] private int cooldownUI;
     [SerializeField] private Sprite icon;
-    [SerializeField] private int[] effects;
     public Power (int i) {
-        id = i;
+        id = 5;
         level = 1;
         cooldownUI = 0;
         if (id == 0) {
@@ -45,7 +44,7 @@ public class Power {
             name = "Block";
             description = "Prevent damage for " + level + " turns.";
             cooldown = 3;
-            duration = 1;
+            duration = level;
         }
         icon = Resources.Load<Sprite> (name);
     }
@@ -75,9 +74,10 @@ public class Power {
     public int GetLevel () => level;
     public void SetLevel (int i) {
         level += i;
+        if (id == 5)
+            duration += i;
         SetDescription ();
     }
     public int GetDuration () => duration;
     public Sprite GetIcon () => icon;
-    public int GetEffect (int i) => effects[i];
 }

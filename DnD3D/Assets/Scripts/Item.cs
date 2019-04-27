@@ -6,6 +6,7 @@ public class Item {
     [SerializeField] private int id;
     [SerializeField] private string typeI;
     [SerializeField] private string name;
+    int level;
     [SerializeField] private string description;
     [SerializeField] private int[] requirements;
     [SerializeField] private int[] effects;

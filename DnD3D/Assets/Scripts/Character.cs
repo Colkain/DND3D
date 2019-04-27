@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
-
     public Material warriorMat;
     public Material rogueMat;
     public Material mageMat;
@@ -23,10 +22,9 @@ public class Character : MonoBehaviour {
     [SerializeField] private int intelligence;
     [SerializeField] private int wisdom;
     [SerializeField] private int range;
-    [SerializeField] private int rangeUI;
     [SerializeField] private int level;
     [SerializeField] private int bonusAttack;
-    [SerializeField] private bool preventDamage;
+    [SerializeField] private bool immune;
     [SerializeField] private Vector3 coor;
     [SerializeField] private List<Power> powers;
     [SerializeField] private List<Item> items;
@@ -38,10 +36,9 @@ public class Character : MonoBehaviour {
         id = i;
         action = 1;
         range = 0;
-        rangeUI = range;
         level = 1;
         bonusAttack = 0;
-        preventDamage = false;
+        immune = false;
         coor = coorc;
         powers = new List<Power> ();
         items = new List<Item> ();
@@ -97,8 +94,8 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        if (preventDamage && h < 0)
-            preventDamage = false;
+        if (immune && h < 0)
+            return;
         else
             health += h;
     }
@@ -112,12 +109,6 @@ public class Character : MonoBehaviour {
     }
     public void SetMouvementUI (int i) {
         mouvementUI += i;
-    }
-    public void SetRange (int i) {
-        range += i;
-    }
-    public void SetRangeUI (int i) {
-        rangeUI += i;
     }
     public void SetStrength (int i) {
         strength += i;
@@ -155,7 +146,6 @@ public class Character : MonoBehaviour {
         level++;
     }
     public int GetRange () => range;
-    public int GetRangeUI () => rangeUI;
     public int GetId () => id;
     public int GetAttack () {
         return (int) (strength + intelligence + agility + wisdom) / 8 + bonusAttack; //returns damage
@@ -163,9 +153,6 @@ public class Character : MonoBehaviour {
     public bool GetisTurn () => isTurn;
     public void SetisTurn (bool t) {
         isTurn = t;
-    }
-    public void SetAction (int i) {
-        action += i;
     }
     public void SetActionUI (int i) {
         actionUI += i;
@@ -176,7 +163,7 @@ public class Character : MonoBehaviour {
         for (int i = 0; i < items.Count; i++) {
             if (items[i] == item) {
                 if (GetReqI (items[i])) {
-                    ActivateItemEffect (items[i], 1);
+                    ActivateEffect (items[i]);
                     items[i].SetEquiped (true);
                     return;
                 }
@@ -186,7 +173,7 @@ public class Character : MonoBehaviour {
     public void UnequipItem (Item item) {
         for (int i = 0; i < items.Count; i++) {
             if (items[i] == item) {
-                ActivateItemEffect (items[i], -1);
+                RemoveBuff (item);
                 items[i].SetEquiped (false);
                 return;
             }
@@ -195,58 +182,100 @@ public class Character : MonoBehaviour {
     public void UseItem (Item item) {
         for (int i = 0; i < items.Count; i++) {
             if (items[i] == item) {
-                ActivateItemEffect (items[i], 1);
+                ActivatePotion (items[i]);
                 return;
             }
         }
     }
-    public void ActivateItemEffect (Item item, int polarity) {
-        mouvement += polarity * item.GetEffect (0);
-        mouvementUI += polarity * item.GetEffect (0);
-        maxHealth += polarity * item.GetEffect (1);
-        health += polarity * item.GetEffect (1);
-        health += polarity * item.GetEffect (2);
+    public void ActivatePotion (Item item) {
+        mouvement += item.GetEffect (0);
+        mouvementUI += item.GetEffect (0);
+        maxHealth += item.GetEffect (1);
+        health += item.GetEffect (1);
+        health += item.GetEffect (2);
         if (health > maxHealth)
             health = maxHealth;
-        strength += polarity * item.GetEffect (3);
-        agility += polarity * item.GetEffect (4);
-        intelligence += polarity * item.GetEffect (5);
-        wisdom += polarity * item.GetEffect (6);
-        bonusAttack += polarity * item.GetEffect (7);
-        range += polarity * item.GetEffect (8);
+        strength += item.GetEffect (3);
+        agility += item.GetEffect (4);
+        intelligence += item.GetEffect (5);
+        wisdom += item.GetEffect (6);
+        bonusAttack += item.GetEffect (7);
+        range += item.GetEffect (8);
     }
-    public void ActivatePowerEffect (Power p) {
+    public void ActivateBuff (Buff b, int polarity) {
+        mouvement += b.GetEffect (0) * polarity;
+        mouvementUI += b.GetEffect (0) * polarity;
+        mouvement += b.GetEffect (11) * polarity;
+        mouvementUI += b.GetEffect (11) * polarity;
+        maxHealth += b.GetEffect (1) * polarity;
+        health += b.GetEffect (1) * polarity;
+        health += b.GetEffect (2) * polarity;
+        maxHealth += b.GetEffect (11) * polarity;
+        health += b.GetEffect (11) * polarity;
+        if (health > maxHealth)
+            health = maxHealth;
+        strength += b.GetEffect (3) * polarity;
+        agility += b.GetEffect (4) * polarity;
+        intelligence += b.GetEffect (5) * polarity;
+        wisdom += b.GetEffect (11) * polarity;
+        strength += b.GetEffect (3) * polarity;
+        agility += b.GetEffect (11) * polarity;
+        intelligence += b.GetEffect (11) * polarity;
+        wisdom += b.GetEffect (11) * polarity;
+        bonusAttack += b.GetEffect (11) * polarity;
+        range += b.GetEffect (8) * polarity;
+        range += b.GetEffect (11) * polarity;
+        if (b.GetEffect (9) > 0 && polarity > 0)
+            immune = true;
+        else if (b.GetEffect (9) > 0 && polarity < 0)
+            immune = false;
+        action += b.GetEffect (10) * polarity;
+        actionUI += b.GetEffect (10) * polarity;
+
+    }
+    public void ActivateEffect (Item i) {
+        Buff b;
+        if (i.GetId () < 6)
+            b = new Buff (7, i.GetEffect (7), 99, i.GetIcon ());
+        else if (i.GetId () == 6 || i.GetId () == 7)
+            b = new Buff (8, i.GetEffect (8), 99, i.GetIcon ());
+        else if (i.GetId () == 8 || i.GetId () == 9 || i.GetId () == 10)
+            b = new Buff (1, i.GetEffect (1), 99, i.GetIcon ());
+        else {
+            Debug.Log ("error");
+            b = null;
+        }
+        buffs.Add (b);
+        ActivateBuff (b, 1);
+    }
+    public void ActivateEffect (Power p) {
         if (p.GetCooldownUI () == 0) {
-            p.SetCooldownUI (p.GetCooldown ());
-            if (p.GetId () == 0) {
-                action += 1 * p.GetLevel ();
-                actionUI += 1 * p.GetLevel ();
-            } else if (p.GetId () == 1) {
-                mouvement += 1 * p.GetLevel ();
-                mouvementUI += 1 * p.GetLevel ();
-            } else if (p.GetId () == 2) {
-                range += 1 * p.GetLevel ();
-                rangeUI += 1 * p.GetLevel ();
-            } else if (p.GetId () == 3) {
-                health += Random.Range (0 + p.GetLevel (), 4 + p.GetLevel ());
+            if (p.GetId () == 3) {
+                int ia = 4 + level;
+                health += Random.Range (p.GetLevel (), ia);
                 if (health > maxHealth)
                     health = maxHealth;
-            } else if (p.GetId () == 4) {
-                bonusAttack += 1 * p.GetLevel ();
-            } else if (p.GetId () == 5) {
-                preventDamage = true;
-            } else
-                Debug.Log ("Power Activate Error");
+            } else {
+                Buff b;
+                if (p.GetId () == 0)
+                    b = new Buff (10, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                else if (p.GetId () == 1)
+                    b = new Buff (0, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                else if (p.GetId () == 2)
+                    b = new Buff (8, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                else if (p.GetId () == 4)
+                    b = new Buff (7, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                else if (p.GetId () == 5)
+                    b = new Buff (9, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                else {
+                    Debug.Log ("error");
+                    b = null;
+                }
+                buffs.Add (b);
+                ActivateBuff (b, 1);
+            }
+            p.SetCooldownUI (p.GetCooldown ());
         }
-    }
-    public void AddBuff (int i) {
-        // buffs.Add (p);
-    }
-    public void RemoveBuff () {
-
-    }
-    public void ActivateBuff () {
-
     }
     public void AddPower (int i) {
         powers.Add (new Power (i));
@@ -281,14 +310,35 @@ public class Character : MonoBehaviour {
         if (items.Count < 6)
             items.Add (i);
     }
-    public void RemoveItem (int i) {
-        if (items.Count >= i + 1)
-            items.RemoveAt (i);
-    }
     public void RemoveItem (Item item) {
         for (int i = 0; i < items.Count; i++) {
             if (items[i] == item)
                 items.RemoveAt (i);
+        }
+    }
+    public void SetbuffsdurationUI () {
+        for (int i = 0; i < buffs.Count; i++) {
+            buffs[i].SetDuration (-1);
+            if (buffs[i].GetDuration () == 0) {
+                ActivateBuff (buffs[i], -1);
+                buffs.RemoveAt (i);
+            }
+        }
+    }
+    public void RemoveBuff (Item a) {
+        int e;
+        if (a.GetId () < 6)
+            e = 7;
+        else if (a.GetId () == 6 || a.GetId () == 7)
+            e = 8;
+        else
+            e = 1;
+
+        for (int i = 0; i < buffs.Count; i++) {
+            if (buffs[i].GetEffect (buffs[i].GetId ()) == a.GetEffect (e)) {
+                ActivateBuff (buffs[i], -1);
+                buffs.RemoveAt (i);
+            }
         }
     }
     public List<Power> GetPowers () => powers;
@@ -304,8 +354,5 @@ public class Character : MonoBehaviour {
             return true;
         else
             return false;
-    }
-    public void SetBonusDamage (int i) {
-        bonusAttack += i;
     }
 }

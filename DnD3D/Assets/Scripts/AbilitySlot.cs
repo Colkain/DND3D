@@ -42,6 +42,6 @@ public class AbilitySlot : MonoBehaviour {
         GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().RemovePower (power);
     }
     public void OnPowerButton () {
-        GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().ActivatePowerEffect (power);
+        GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().ActivateEffect (power);
     }
 }

@@ -139,10 +139,10 @@ public class GameboardControl : MonoBehaviour {
         }
         player = characters[idc - 1];
         player.SetActionUI (player.GetAction () - player.GetActionUI ());
-        player.SetRangeUI (player.GetRange () - player.GetRangeUI ());
         player.SetMouvementUI (player.GetMouvement () - player.GetMouvementUI ());
+        player.SetbuffsdurationUI ();
         player.SetisTurn (true);
-        
+
         for (int p = 0; p < 3; p++) {
             if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
                 player.GetPower (p).SetCooldownUI (-1);

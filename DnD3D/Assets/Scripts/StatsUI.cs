@@ -17,7 +17,7 @@ public class StatsUI : MonoBehaviour {
         if (player != null) {
             slots[1].SetText ("Lvl:" + player.GetLevel ().ToString ());
             slots[2].SetText ("Action:" + player.GetActionUI ());
-            slots[3].SetText ("Range:" + player.GetRangeUI ().ToString ());
+            slots[3].SetText ("Range:" + player.GetRange ().ToString ());
             slots[4].SetText ("Health:" + player.GetHealth ().ToString () + "/" + player.GetMaxHealth ().ToString ());
             slots[5].SetText ("Movement:" + player.GetMouvementUI ().ToString ());
             slots[6].SetText ("Strength:" + player.GetStrength ().ToString ());
@@ -32,7 +32,7 @@ public class StatsUI : MonoBehaviour {
         slots[0].SetText ("Class:" + player.GetClass ());
         slots[1].SetText ("Lvl:" + player.GetLevel ().ToString ());
         slots[2].SetText ("Action:" + player.GetActionUI ());
-        slots[3].SetText ("Range:" + player.GetRangeUI ().ToString ());
+        slots[3].SetText ("Range:" + player.GetRange ().ToString ());
         slots[4].SetText ("Health:" + player.GetHealth ().ToString () + "/" + player.GetMaxHealth ().ToString ());
         slots[5].SetText ("Movement:" + player.GetMouvementUI ().ToString ());
         slots[6].SetText ("Strength:" + player.GetStrength ().ToString ());

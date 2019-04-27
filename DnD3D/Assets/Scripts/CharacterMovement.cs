@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour {
             UsePower (2);
     }
     public void UsePower (int i) {
-         player.ActivatePowerEffect (player.GetPower (i));
+         player.ActivateEffect (player.GetPower (i));
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour {
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));
                 Vector3 coor = gameboard.WhatTile (player).GetCoor ();
-                range = player.GetRangeUI();
+                range = player.GetRange();
                 if (range >= 0) {
                     for (int i = 0; i <= range; i++) {
                         cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
