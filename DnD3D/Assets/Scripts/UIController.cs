@@ -96,8 +96,8 @@ public class UIController : MonoBehaviour {
             popupUI.SetActive (false);
         } else {
             tileEvent.GetHap ().ActivateHap (player);
-            popupUI.transform.GetChild (2).GetComponent<Text> ().text = tileEvent.GetHap ().GetDescription ();
-            popupUI.transform.GetChild (3).gameObject.SetActive (false);
+            popupUI.transform.GetChild (1).transform.GetChild (0).GetComponent<Text> ().text = tileEvent.GetHap ().GetDescription ();
+            popupUI.transform.GetChild (2).gameObject.SetActive (false);
         }
         tileEvent.ClearEvent ();
     }
@@ -107,11 +107,11 @@ public class UIController : MonoBehaviour {
     public void CheckUI (TileEvent te) {
         tileEvent = te;
         popupUI.SetActive (true);
-        popupUI.transform.GetChild (1).GetComponent<Text> ().text = te.GetNameE ();
-        popupUI.transform.GetChild (2).GetComponent<Text> ().text = te.GetDescription ();
+        popupUI.transform.GetChild (0).transform.GetChild (0).GetComponent<Text> ().text = te.GetNameE ();
+        popupUI.transform.GetChild (1).transform.GetChild (0).GetComponent<Text> ().text = te.GetDescription ();
         if (tileEvent.GetId () > 2)
-            popupUI.transform.GetChild (3).gameObject.SetActive (false);
+            popupUI.transform.GetChild (2).gameObject.SetActive (false);
         else
-            popupUI.transform.GetChild (3).gameObject.SetActive (true);
+            popupUI.transform.GetChild (2).gameObject.SetActive (true);
     }
 }
