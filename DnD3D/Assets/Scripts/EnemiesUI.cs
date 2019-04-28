@@ -11,10 +11,8 @@ public class EnemiesUI : MonoBehaviour {
     void Update () {
         if (player != null) {
             for (int i = 0; i < slots.Length; i++) {
-                if (i < gameboard.GetCMax ()) {
+                if (i < gameboard.GetCMax () && gameboard.GetCharacter (i) != player) {
                     slots[i].AddEnemy (gameboard.GetCharacter (i));
-                    if (gameboard.GetCharacter (i) == player)
-                        slots[i].ClearSlot ();
                 } else
                     slots[i].ClearSlot ();
             }
