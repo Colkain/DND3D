@@ -11,7 +11,7 @@ public class Power {
     [SerializeField] private int cooldownUI;
     [SerializeField] private Sprite icon;
     public Power (int i) {
-        id = 5;
+        id = i;
         level = 1;
         cooldownUI = 0;
         if (id == 0) {

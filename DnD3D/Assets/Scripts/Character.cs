@@ -343,9 +343,16 @@ public class Character : MonoBehaviour {
     }
     public List<Power> GetPowers () => powers;
     public List<Item> GetItems () => items;
+    public List<Buff> GetBuffs () => buffs;
     public Item GetItem (int i) {
         if (items.Count >= i + 1)
             return items[i];
+        else
+            return null;
+    }
+    public Buff GetBuff (int i) {
+        if (buffs.Count >= i + 1)
+            return buffs[i];
         else
             return null;
     }

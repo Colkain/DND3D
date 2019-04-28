@@ -8,19 +8,20 @@ public class UIController : MonoBehaviour {
     public GameObject gameBoardPrefab;
     public GameObject statsUI;
     public GameObject itemsUI;
+    public GameObject popupUI;
     public GameObject abilitiesUI;
+    public GameObject buffsUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     private GameObject creationUI;
-    private GameObject popupUI;
     GameboardControl gameBoard;
     TileEvent tileEvent;
     public void Start () {
         creationUI = GameObject.Find ("CreationUI");
-        popupUI = GameObject.Find ("InGameUI").transform.GetChild (3).gameObject;
 
         SetCreationUI ();
+        buffsUI.SetActive (false);
         statsUI.SetActive (false);
         abilitiesUI.SetActive (false);
         itemsUI.SetActive (false);
@@ -43,6 +44,7 @@ public class UIController : MonoBehaviour {
         if (gameBoard.GetIdc () == cMax) {
             statsUI.SetActive (true);
             abilitiesUI.SetActive (true);
+            buffsUI.SetActive (true);
             itemsUI.SetActive (true);
             gameBoard.SetIdc (1);
             string name = "Player" + gameBoard.GetIdc ();
@@ -51,6 +53,7 @@ public class UIController : MonoBehaviour {
             statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
             abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
             itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
+            buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
             gameBoard.SetPreviousTile ();
             cam.SetCamera (gameBoard.GetIdc ());
         } else {
@@ -82,6 +85,7 @@ public class UIController : MonoBehaviour {
         statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
         abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
+        buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
     }
     public void AcceptPopup () {
         if (tileEvent.GetId () == 0) {

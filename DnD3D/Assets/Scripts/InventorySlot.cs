@@ -24,7 +24,6 @@ public class InventorySlot : MonoBehaviour {
     }
     public void ClearSlot () {
         item = null;
-
         itemButton.image.color = Color.white;
         icon.sprite = null;
         icon.enabled = false;
