@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour {
     public GameObject popupUI;
     public GameObject abilitiesUI;
     public GameObject buffsUI;
-    public GameObject enemiesUI;
+    public GameObject playersUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour {
 
         SetCreationUI ();
         buffsUI.SetActive (false);
-        enemiesUI.SetActive (false);
+        playersUI.SetActive (false);
         statsUI.SetActive (false);
         abilitiesUI.SetActive (false);
         itemsUI.SetActive (false);
@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour {
             SetCreationUI ();
             if (gameBoard.GetIdc () == cMax) {
                 statsUI.SetActive (true);
-                enemiesUI.SetActive (true);
+                playersUI.SetActive (true);
                 abilitiesUI.SetActive (true);
                 buffsUI.SetActive (true);
                 itemsUI.SetActive (true);
@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour {
                 player = GameObject.FindWithTag (name).GetComponent<Character> ();
                 player.SetisTurn (true);
                 statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
-                enemiesUI.GetComponent<EnemiesUI> ().SetPlayer (player);
+                playersUI.GetComponent<PlayersUI> ().SetUI (gameBoard.GetComponent<GameboardControl> ());
                 abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
                 itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
                 buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
@@ -90,7 +90,6 @@ public class UIController : MonoBehaviour {
         player = c;
         statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
         abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
-        enemiesUI.GetComponent<EnemiesUI> ().SetPlayer (player);
         itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
         buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
     }
