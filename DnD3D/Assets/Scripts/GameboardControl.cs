@@ -99,7 +99,9 @@ public class GameboardControl : MonoBehaviour {
         characters[i - 1].SetClass ();
         SetStartingPower ();
     }
+    public int GetCMax () => cMax;
     public Character[] GetCharacters () => characters;
+    public Character GetCharacter (int i) => characters[i];
     public Character GetPlayer () => player;
     public void AddInDoors (GameObject d) {
         doors.Add (d);
