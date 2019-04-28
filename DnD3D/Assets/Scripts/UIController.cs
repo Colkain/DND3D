@@ -38,27 +38,29 @@ public class UIController : MonoBehaviour {
     }
     public void CreateCharacter (string c) {
         nameField = GameObject.FindGameObjectWithTag ("NameField").GetComponent<InputField> ();
-        Spawner s = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<Spawner> ();
-        s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
-        SetCreationUI ();
-        if (gameBoard.GetIdc () == cMax) {
-            statsUI.SetActive (true);
-            abilitiesUI.SetActive (true);
-            buffsUI.SetActive (true);
-            itemsUI.SetActive (true);
-            gameBoard.SetIdc (1);
-            string name = "Player" + gameBoard.GetIdc ();
-            player = GameObject.FindWithTag (name).GetComponent<Character> ();
-            player.SetisTurn (true);
-            statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
-            abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
-            itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
-            buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
-            gameBoard.SetPreviousTile ();
-            cam.SetCamera (gameBoard.GetIdc ());
-        } else {
-            gameBoard.SetIdc (gameBoard.GetIdc () + 1);
-            nameField.text = null;
+        if (nameField.text != "") {
+            Spawner s = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<Spawner> ();
+            s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
+            SetCreationUI ();
+            if (gameBoard.GetIdc () == cMax) {
+                statsUI.SetActive (true);
+                abilitiesUI.SetActive (true);
+                buffsUI.SetActive (true);
+                itemsUI.SetActive (true);
+                gameBoard.SetIdc (1);
+                string name = "Player" + gameBoard.GetIdc ();
+                player = GameObject.FindWithTag (name).GetComponent<Character> ();
+                player.SetisTurn (true);
+                statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
+                abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());
+                itemsUI.GetComponent<InventoryUI> ().SetPlayer (player);
+                buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
+                gameBoard.SetPreviousTile ();
+                cam.SetCamera (gameBoard.GetIdc ());
+            } else {
+                gameBoard.SetIdc (gameBoard.GetIdc () + 1);
+                nameField.text = null;
+            }
         }
     }
     public void SetCreationUI () {
