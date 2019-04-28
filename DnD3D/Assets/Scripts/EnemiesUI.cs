@@ -6,7 +6,6 @@ public class EnemiesUI : MonoBehaviour {
     EnemiesSlot[] slots;
     void Start () {
         slots = transform.GetComponentsInChildren<EnemiesSlot> ();
-
     }
     void Update () {
         if (player != null) {

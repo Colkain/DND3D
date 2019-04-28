@@ -2370,6 +2370,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_CellSize.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_CellSize.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_Spacing.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_Spacing.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646553461180803520, guid: 55f1b7bb303d5584fb48138c740bfafb,
+        type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3737481213352155643, guid: 55f1b7bb303d5584fb48138c740bfafb,
         type: 3}
       propertyPath: m_Color.r
@@ -2597,7 +2627,7 @@ PrefabInstance:
     - target: {fileID: 7495781493135449299, guid: 29102a759c0d4ec4eab2a5d010857c86,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -320
+      value: -327
       objectReference: {fileID: 0}
     - target: {fileID: 7495781493135449299, guid: 29102a759c0d4ec4eab2a5d010857c86,
         type: 3}
@@ -2632,7 +2662,7 @@ PrefabInstance:
     - target: {fileID: 7495781493135449299, guid: 29102a759c0d4ec4eab2a5d010857c86,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: -163.5
       objectReference: {fileID: 0}
     - target: {fileID: 9091285752034156075, guid: 29102a759c0d4ec4eab2a5d010857c86,
         type: 3}

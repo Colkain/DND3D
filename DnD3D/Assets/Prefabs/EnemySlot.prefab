@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9939a0fc92ec3c544b75315a0b7be4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffsUI: {fileID: 53254804070663671}
   nameE: {fileID: 1063404126638446886}
   healthText: {fileID: 1063404126465780029}
   healthBar: {fileID: 1063404126627508845}
@@ -984,32 +985,32 @@ PrefabInstance:
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_Padding.m_Left
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_Spacing.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_Spacing.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_CellSize.x
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_CellSize.y
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
       propertyPath: m_Padding.m_Right
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3884020174516394189, guid: 9206bdba161d60a4fa8c759d99443f0f,
         type: 3}
@@ -1023,6 +1024,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9206bdba161d60a4fa8c759d99443f0f, type: 3}
+--- !u!1 &53254804070663671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1043931990952759653, guid: 9206bdba161d60a4fa8c759d99443f0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1063404126241608850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5173737755487993935 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5263924530580247773, guid: 9206bdba161d60a4fa8c759d99443f0f,

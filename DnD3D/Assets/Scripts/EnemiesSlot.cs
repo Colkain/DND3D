@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class EnemiesSlot : MonoBehaviour {
     private Character enemy;
+    public GameObject buffsUI;
     public Text nameE;
     public Text healthText;
     public Transform healthBar;
@@ -15,8 +16,9 @@ public class EnemiesSlot : MonoBehaviour {
         enemy = newEnemy;
         nameE.text = enemy.GetName ();
         healthText.text = enemy.GetHealth () + "/" + enemy.GetMaxHealth ();
-        health = (float)enemy.GetHealth () / enemy.GetMaxHealth ();
+        health = (float) enemy.GetHealth () / enemy.GetMaxHealth ();
         healthBar.localScale = new Vector3 (health, 1, 1);
+        buffsUI.GetComponent<BuffsUI> ().SetPlayer (enemy);
     }
     public void ClearSlot () {
         gameObject.SetActive (false);
