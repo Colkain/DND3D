@@ -6,6 +6,7 @@ public class UIController : MonoBehaviour {
     CameraController cam;
     Dropdown m_Dropdown;
     public GameObject gameBoardPrefab;
+    public GameObject hoverPanel;
     public GameObject statsUI;
     public GameObject itemsUI;
     public GameObject popupUI;
@@ -22,6 +23,7 @@ public class UIController : MonoBehaviour {
         creationUI = GameObject.Find ("CreationUI");
 
         SetCreationUI ();
+        hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
         playersUI.SetActive (false);
         statsUI.SetActive (false);

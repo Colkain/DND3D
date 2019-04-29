@@ -7,6 +7,7 @@ public class AbilitySlot : MonoBehaviour {
     public Button powerButton;
     public Button removeButton;
     public Text cooldownText;
+    public GameObject hoverPanel;
     void Start () {
         cooldownText.enabled = false;
     }
@@ -43,5 +44,15 @@ public class AbilitySlot : MonoBehaviour {
     }
     public void OnPowerButton () {
         GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().ActivateEffect (power);
+    }
+    public void OnMouseOver () {
+        if (power != null) {
+            hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, 8, 0), power.GetName (), power.GetDescription ());
+            hoverPanel.SetActive (true);
+        }
+    }
+    public void OnMouseExit () {
+        hoverPanel.GetComponent<HoverUI> ().SetPositioned (false);
+        hoverPanel.SetActive (false);
     }
 }

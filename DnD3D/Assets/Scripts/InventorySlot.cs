@@ -5,6 +5,7 @@ public class InventorySlot : MonoBehaviour {
     public Image icon;
     public Button itemButton;
     public Button removeButton;
+    public GameObject hoverPanel;
     void Update () {
         if (item != null) {
             if (!GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().GetReqI (item))
@@ -46,5 +47,15 @@ public class InventorySlot : MonoBehaviour {
             GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().UseItem (item);
             OnRemoveButton ();
         }
+    }
+    public void OnMouseOver () {
+        if (item != null) {
+            hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, 6.7f, 0), item.GetName (), item.GetDescription ());
+            hoverPanel.SetActive (true);
+        }
+    }
+    public void OnMouseExit () {
+        hoverPanel.GetComponent<HoverUI> ().SetPositioned (false);
+        hoverPanel.SetActive (false);
     }
 }
