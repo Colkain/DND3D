@@ -50,12 +50,11 @@ public class InventorySlot : MonoBehaviour {
     }
     public void OnMouseOver () {
         if (item != null) {
-            hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, 6.7f, 0), item.GetName (), item.GetDescription ());
+            hoverPanel.GetComponent<HoverUI> ().SetPosition (item.GetName (), item.GetDescription ());
             hoverPanel.SetActive (true);
         }
     }
     public void OnMouseExit () {
-        hoverPanel.GetComponent<HoverUI> ().SetPositioned (false);
         hoverPanel.SetActive (false);
     }
 }

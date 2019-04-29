@@ -47,12 +47,11 @@ public class AbilitySlot : MonoBehaviour {
     }
     public void OnMouseOver () {
         if (power != null) {
-            hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, 8, 0), power.GetName (), power.GetDescription ());
+            hoverPanel.GetComponent<HoverUI> ().SetPosition (power.GetName (), power.GetDescription ());
             hoverPanel.SetActive (true);
         }
     }
     public void OnMouseExit () {
-        hoverPanel.GetComponent<HoverUI> ().SetPositioned (false);
         hoverPanel.SetActive (false);
     }
 }

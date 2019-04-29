@@ -109,7 +109,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 326825200086829677}
-          m_MethodName: OnMouseOverP
+          m_MethodName: OnMouseOver
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

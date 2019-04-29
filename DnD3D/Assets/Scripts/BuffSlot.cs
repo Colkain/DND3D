@@ -19,15 +19,14 @@ public class BuffSlot : MonoBehaviour {
         icon.enabled = false;
     }
     public void OnMouseOver () {
-        hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, 6.7f, 0), buff.GetName (), buff.GetDescription ());
+        hoverPanel.GetComponent<HoverUI> ().SetPosition (buff.GetName (), buff.GetDescription ());
         hoverPanel.SetActive (true);
     }
     public void OnMouseOverP () {
-        hoverPanel.GetComponent<HoverUI> ().SetPosition (gameObject.transform.position, new Vector3 (10, -6.7f, 0), buff.GetName (), buff.GetDescription ());
+        hoverPanel.GetComponent<HoverUI> ().SetPosition (buff.GetName (), buff.GetDescription ());
         hoverPanel.SetActive (true);
     }
     public void OnMouseExit () {
-        hoverPanel.GetComponent<HoverUI> ().SetPositioned (false);
         hoverPanel.SetActive (false);
     }
 }
