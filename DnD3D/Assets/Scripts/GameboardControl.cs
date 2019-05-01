@@ -17,6 +17,7 @@ public class GameboardControl : MonoBehaviour {
     CameraController cam;
     //Misc
     [SerializeField] private int round;
+    [SerializeField] private int dead;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
     [SerializeField] private TileEvent tileEvent;
@@ -37,6 +38,7 @@ public class GameboardControl : MonoBehaviour {
         cMax = c; // max characters
         characters = new Character[cMax]; // set character list
         Spawner s = GetComponent<Spawner> ();
+        dead = 0;
 
         //Creating tiles
         for (int x = 0; x < maxColumns; x++) {
@@ -80,10 +82,15 @@ public class GameboardControl : MonoBehaviour {
                 if (Input.GetKeyUp (KeyCode.Z))
                     Check ();
             }
+          //  if(dead==cMax-1) endgame
+                
         }
     }
     public void SetIdc (int i) {
         idc = i;
+    }
+    public void SetDead (int i) {
+        dead += i;
     }
     public void SetPreviousTile () {
         previousTile = null;

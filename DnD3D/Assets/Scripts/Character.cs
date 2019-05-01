@@ -10,6 +10,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private bool isTurn;
+    [SerializeField] private bool isAlive;
     [SerializeField] private int id;
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
@@ -40,6 +41,7 @@ public class Character : MonoBehaviour {
         bonusAttack = 0;
         immune = false;
         coor = coorc;
+        isAlive = true;
         powers = new List<Power> ();
         items = new List<Item> ();
         buffs = new List<Buff> ();
@@ -50,6 +52,11 @@ public class Character : MonoBehaviour {
 
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
+    }
+    void Update () {
+        if (!isAlive && isTurn) {
+            GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
+        }
     }
     public void SetClass () {
 
@@ -94,10 +101,16 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        if (immune && h < 0)
-            return;
-        else
-            health += h;
+        if (isAlive) {
+            if (immune && h < 0)
+                return;
+            else
+                health += h;
+            if (health <= 0) {
+                health = 0;
+                isAlive = false;
+            }
+        }
     }
     public void SetMaxHealth (int h) {
         maxHealth += h;
@@ -362,4 +375,5 @@ public class Character : MonoBehaviour {
         else
             return false;
     }
+    public bool GetIsAlive () => isAlive;
 }
