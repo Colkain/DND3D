@@ -13,16 +13,14 @@ public class UIController : MonoBehaviour {
     public GameObject abilitiesUI;
     public GameObject buffsUI;
     public GameObject playersUI;
+    public GameObject characterCreationUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
-    private GameObject creationUI;
     GameboardControl gameBoard;
     TileEvent tileEvent;
     public void Start () {
-        creationUI = GameObject.Find ("CreationUI");
-
-        SetCreationUI ();
+        characterCreationUI.SetActive (false);
         hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
         playersUI.SetActive (false);
@@ -45,7 +43,7 @@ public class UIController : MonoBehaviour {
         if (nameField.text != "") {
             Spawner s = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<Spawner> ();
             s.SetNewCharacter (gameBoard.GetIdc (), nameField.text, c, characterCoor);
-            SetCreationUI ();
+            characterCreationUI.SetActive (false);
             if (gameBoard.GetIdc () == cMax) {
                 statsUI.SetActive (true);
                 playersUI.SetActive (true);
@@ -69,16 +67,13 @@ public class UIController : MonoBehaviour {
             }
         }
     }
-    public void SetCreationUI () {
-        creationUI.SetActive (false);
-    }
     public void SetPlayer (Character p) {
         player = p;
     }
     public void SetCreationUI (Vector3 coor) {
         characterCoor = coor;
-        creationUI.SetActive (true);
-        Text text = GameObject.Find ("PlayerNumber").GetComponent<Text> ();
+        characterCreationUI.SetActive (true);
+        Text text = GameObject.Find ("PlayerNumber").GetComponentInChildren<Text>();
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
     public void LevelUp (int stat) {

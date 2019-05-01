@@ -4,7 +4,6 @@ public class Spawner : MonoBehaviour {
     public GameObject tilePrefab;
     public GameObject wallPrefab;
     public GameObject characterPrefab;
-
     public Tile AddTile (int id, int c, int r, float size, int mazeRows) {
         //Tile Spawning
         GameboardControl gb = GetComponent<GameboardControl> ();
@@ -40,13 +39,10 @@ public class Spawner : MonoBehaviour {
         tile.SetTile (new Vector3 (c, 0, r));
         return tile;
     }
-
     public void SetNewCharacter (int idc, string name, string c, Vector3 charCoor) {
         Character chara = characterPrefab.GetComponent<Character> ();
         GameboardControl gb = gameObject.GetComponent<GameboardControl> ();
         chara.SetCharacter (c, idc, charCoor, name);
         gb.AddInCharacters (idc);
-        UIController uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
-        uiC.SetCreationUI ();
     }
 }
