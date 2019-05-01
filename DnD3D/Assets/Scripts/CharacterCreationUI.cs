@@ -56,5 +56,4 @@ public class CharacterCreationUI : MonoBehaviour {
     public void OnHoverUIExit () {
         hoverUI.SetActive (false);
     }
-
 }
