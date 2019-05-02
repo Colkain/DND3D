@@ -106,8 +106,9 @@ public class UIController : MonoBehaviour {
         }
         tileEvent.ClearEvent ();
     }
-    public void SetDeadCharacters () {
-
+    public void SetEndGameUI () {
+        endGameUI.SetActive (true);
+        endGameUI.GetComponent<EndGameUI> ().SetUI (gameBoard);
     }
     public void ClosePopupUI () {
         popupUI.SetActive (false);

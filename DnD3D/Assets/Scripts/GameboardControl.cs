@@ -180,6 +180,14 @@ public class GameboardControl : MonoBehaviour {
     public void AddNewItem (Item i) {
         player.AddItem (i);
     }
+    public Character GetDedCharacter (int i) => dedCharacters[dedCharacters.Count - i];
+    public Character GetAliveCharacter () {
+        foreach (Character c in characters) {
+            if (c.GetIsAlive ())
+                return c;
+        }
+        return null;
+    }
     public void SetDedCharacters () {
         bool a;
         foreach (Character c in characters) {
@@ -194,7 +202,7 @@ public class GameboardControl : MonoBehaviour {
                 if (!a) {
                     dedCharacters.Add (c);
                     if (dedCharacters.Count == cMax - 1) {
-                        Debug.Log ("Endgame");
+                        uiC.SetEndGameUI ();
                     }
                 }
             }

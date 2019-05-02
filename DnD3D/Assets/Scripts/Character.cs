@@ -375,4 +375,5 @@ public class Character : MonoBehaviour {
         else
             return false;
     }
+    public bool GetIsAlive () => isAlive;
 }
