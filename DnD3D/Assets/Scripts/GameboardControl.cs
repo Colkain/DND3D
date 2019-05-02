@@ -181,17 +181,21 @@ public class GameboardControl : MonoBehaviour {
         player.AddItem (i);
     }
     public void SetDedCharacters () {
+        bool a;
         foreach (Character c in characters) {
+            a = false;
             if (c.GetHealth () == 0) {
                 if (dedCharacters.Count > 0) {
-                    for (int i = 0; i <= dedCharacters.Count; i++) {
-                        if (c == dedCharacters[i])
-                            return;
+                    for (int i = 0; i < dedCharacters.Count; i++) {
+                        if (c.GetId () == dedCharacters[i].GetId ())
+                            a = true;
                     }
                 }
-                dedCharacters.Add (c);
-                if (dedCharacters.Count == cMax - 1) {
-                    Debug.Log ("endgame");
+                if (!a) {
+                    dedCharacters.Add (c);
+                    if (dedCharacters.Count == cMax - 1) {
+                        Debug.Log ("Endgame");
+                    }
                 }
             }
         }

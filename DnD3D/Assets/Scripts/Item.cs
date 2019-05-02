@@ -61,14 +61,14 @@ public class Item {
             requirements[0] = 3;
             requirements[3] = 3;
             effects[8] = 1;
-            description = "Requirements:\n\tStrength:3\n\tWisdom:3\nEffect:\n\t+2 Damage";
+            description = "Requirements:\n\tStrength:3\n\tWisdom:3\nEffect:\n\t+1 Range";
         } else if (id == 7) {
             typeI = "Equipment";
             name = "Crossbow";
             requirements[2] = 3;
             requirements[1] = 3;
             effects[8] = 1;
-            description = "Requirements:\n\tIntelligence:3\n\tAgility:3\nEffect:\n\t+2 Damage";
+            description = "Requirements:\n\tIntelligence:3\n\tAgility:3\nEffect:\n\t+1 Range";
         } else if (id == 8) {
             typeI = "Equipment";
             name = "Light Armor";
