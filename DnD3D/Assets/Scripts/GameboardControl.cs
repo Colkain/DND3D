@@ -1,9 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameboardControl : MonoBehaviour {
     //Grid
-    public Character[] characters;
+    public List<Character> characters;
     public Tile[, ] tiles;
     public static ArrayList doors;
     //Creation of Tiles and Characters
@@ -13,11 +14,11 @@ public class GameboardControl : MonoBehaviour {
     [SerializeField] private int idt;
     [SerializeField] private int idc;
     [SerializeField] private int cMax;
+    [SerializeField] private List<Character> dedCharacters;
     UIController uiC;
     CameraController cam;
     //Misc
     [SerializeField] private int round;
-    [SerializeField] private int dead;
     [SerializeField] private Tile currentTile;
     [SerializeField] private Tile previousTile = null;
     [SerializeField] private TileEvent tileEvent;
@@ -36,9 +37,9 @@ public class GameboardControl : MonoBehaviour {
         size = 4f;
         idc = 1; //character id
         cMax = c; // max characters
-        characters = new Character[cMax]; // set character list
+        characters = new List<Character> (); // set character list
         Spawner s = GetComponent<Spawner> ();
-        dead = 0;
+        dedCharacters = new List<Character> ();
 
         //Creating tiles
         for (int x = 0; x < maxColumns; x++) {
@@ -56,7 +57,7 @@ public class GameboardControl : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        if (characters[idc - 1] == null) {
+        if (characters.Count < cMax) {
             CreateCharacter ();
         } else {
             player = characters[idc - 1];
@@ -82,15 +83,10 @@ public class GameboardControl : MonoBehaviour {
                 if (Input.GetKeyUp (KeyCode.Z))
                     Check ();
             }
-          //  if(dead==cMax-1) endgame
-                
         }
     }
     public void SetIdc (int i) {
         idc = i;
-    }
-    public void SetDead (int i) {
-        dead += i;
     }
     public void SetPreviousTile () {
         previousTile = null;
@@ -102,12 +98,13 @@ public class GameboardControl : MonoBehaviour {
         uiC.SetCreationUI (coor);
     }
     public void AddInCharacters (int i) {
-        characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
+        characters.Add (GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ());
+        // characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
         characters[i - 1].SetClass ();
         SetStartingPower ();
     }
     public int GetCMax () => cMax;
-    public Character[] GetCharacters () => characters;
+    public List<Character> GetCharacters () => characters;
     public Character GetCharacter (int i) => characters[i];
     public Character GetPlayer () => player;
     public void AddInDoors (GameObject d) {
@@ -156,9 +153,7 @@ public class GameboardControl : MonoBehaviour {
             if (player.GetPower (p) != null && player.GetPower (p).GetCooldownUI () > 0)
                 player.GetPower (p).SetCooldownUI (-1);
         }
-        //SetUI
         uiC.NextTurnUI (player);
-
         SetPreviousTile ();
         cam.SetCamera (idc);
     }
@@ -184,5 +179,21 @@ public class GameboardControl : MonoBehaviour {
     }
     public void AddNewItem (Item i) {
         player.AddItem (i);
+    }
+    public void SetDedCharacters () {
+        foreach (Character c in characters) {
+            if (c.GetHealth () == 0) {
+                if (dedCharacters.Count > 0) {
+                    for (int i = 0; i <= dedCharacters.Count; i++) {
+                        if (c == dedCharacters[i])
+                            return;
+                    }
+                }
+                dedCharacters.Add (c);
+                if (dedCharacters.Count == cMax - 1) {
+                    Debug.Log ("endgame");
+                }
+            }
+        }
     }
 }

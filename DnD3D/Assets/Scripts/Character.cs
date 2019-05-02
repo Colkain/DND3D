@@ -10,7 +10,6 @@ public class Character : MonoBehaviour {
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private bool isTurn;
-    [SerializeField] private bool isAlive;
     [SerializeField] private int id;
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
@@ -26,10 +25,15 @@ public class Character : MonoBehaviour {
     [SerializeField] private int level;
     [SerializeField] private int bonusAttack;
     [SerializeField] private bool immune;
+    [SerializeField] private bool isAlive;
     [SerializeField] private Vector3 coor;
     [SerializeField] private List<Power> powers;
     [SerializeField] private List<Item> items;
     [SerializeField] private List<Buff> buffs;
+    void Update () {
+        if (isTurn && !isAlive)
+            GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
+    }
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
         nameC = n;
         classC = classId;
@@ -40,8 +44,8 @@ public class Character : MonoBehaviour {
         level = 1;
         bonusAttack = 0;
         immune = false;
-        coor = coorc;
         isAlive = true;
+        coor = coorc;
         powers = new List<Power> ();
         items = new List<Item> ();
         buffs = new List<Buff> ();
@@ -52,11 +56,6 @@ public class Character : MonoBehaviour {
 
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);
-    }
-    void Update () {
-        if (!isAlive && isTurn) {
-            GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
-        }
     }
     public void SetClass () {
 
@@ -101,7 +100,7 @@ public class Character : MonoBehaviour {
     public string GetClass () => classC;
     public int GetHealth () => health;
     public void SetHealth (int h) {
-        if (isAlive) {
+        if (health > 0) {
             if (immune && h < 0)
                 return;
             else
@@ -109,6 +108,7 @@ public class Character : MonoBehaviour {
             if (health <= 0) {
                 health = 0;
                 isAlive = false;
+                GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().SetDedCharacters ();
             }
         }
     }
@@ -375,5 +375,4 @@ public class Character : MonoBehaviour {
         else
             return false;
     }
-    public bool GetIsAlive () => isAlive;
 }

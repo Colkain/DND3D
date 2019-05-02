@@ -73,7 +73,7 @@ public class UIController : MonoBehaviour {
     public void SetCreationUI (Vector3 coor) {
         characterCoor = coor;
         characterCreationUI.SetActive (true);
-        Text text = GameObject.Find ("PlayerNumber").GetComponentInChildren<Text>();
+        Text text = GameObject.Find ("PlayerNumber").GetComponentInChildren<Text> ();
         text.text = "Player number:" + gameBoard.GetIdc ();
     }
     public void LevelUp (int stat) {
@@ -103,6 +103,9 @@ public class UIController : MonoBehaviour {
             popupUI.transform.GetChild (2).gameObject.SetActive (false);
         }
         tileEvent.ClearEvent ();
+    }
+    public void SetDeadCharacters () {
+        
     }
     public void ClosePopupUI () {
         popupUI.SetActive (false);
