@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour {
     public GameObject buffsUI;
     public GameObject playersUI;
     public GameObject characterCreationUI;
+    public GameObject endGameUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour {
     TileEvent tileEvent;
     public void Start () {
         characterCreationUI.SetActive (false);
+        endGameUI.SetActive (false);
         hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
         playersUI.SetActive (false);
@@ -105,7 +107,7 @@ public class UIController : MonoBehaviour {
         tileEvent.ClearEvent ();
     }
     public void SetDeadCharacters () {
-        
+
     }
     public void ClosePopupUI () {
         popupUI.SetActive (false);
