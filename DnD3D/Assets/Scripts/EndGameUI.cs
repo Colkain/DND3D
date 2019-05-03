@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndGameUI : MonoBehaviour {
@@ -11,10 +12,13 @@ public class EndGameUI : MonoBehaviour {
         winner.text = "Player " + gameboard.GetAliveCharacter ().GetId () + " is the winner";
         slots[0].AddPlayer (gameboard.GetAliveCharacter ());
         for (int i = 1; i < slots.Length; i++) {
-            if (i < gameboard.GetCMax ()) {
+            if (i < gameboard.GetCMax ())
                 slots[i].AddPlayer (gameboard.GetDedCharacter (i));
-            } else
+            else
                 slots[i].ClearSlot ();
         }
+    }
+    public void OnMainMenu () {
+        SceneManager.LoadScene (1, LoadSceneMode.Single);
     }
 }
