@@ -53,13 +53,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.75
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!114 &238269458944083552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,21 +72,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39bc69ee085ea84449e147edb415e86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warriorModel: {fileID: -927199367670048503, guid: a93bb14ccec5acf4db805b2deffe6274,
+  warriorModel: {fileID: -927199367670048503, guid: bac63eab640b8d444a611d3a0aff7c5f,
     type: 3}
-  rogueModel: {fileID: -927199367670048503, guid: a93bb14ccec5acf4db805b2deffe6274,
+  rogueModel: {fileID: -927199367670048503, guid: c232ddfafdde0e546a26b3e49103c4cd,
     type: 3}
-  mageModel: {fileID: -927199367670048503, guid: a93bb14ccec5acf4db805b2deffe6274,
+  mageModel: {fileID: -927199367670048503, guid: 9ae1d78de2627424caba883dacbcadea,
     type: 3}
-  clericModel: {fileID: -927199367670048503, guid: a93bb14ccec5acf4db805b2deffe6274,
+  clericModel: {fileID: -927199367670048503, guid: 6f09d1c887528884f97b78aea3595a01,
     type: 3}
-  nameC: 
-  classC: 
+  nameC: A
+  classC: Warrior
   isTurn: 0
-  id: 0
+  id: 1
   maxHealth: 0
   health: 0
-  action: 0
+  action: 1
   actionUI: 0
   mouvement: 0
   mouvementUI: 0
@@ -95,11 +95,11 @@ MonoBehaviour:
   intelligence: 0
   wisdom: 0
   range: 0
-  level: 0
+  level: 1
   bonusAttack: 0
   immune: 0
-  isAlive: 0
-  coor: {x: 0, y: 0, z: 0}
+  isAlive: 1
+  coor: {x: 0, y: 3, z: 0}
   powers: []
   items: []
   buffs: []

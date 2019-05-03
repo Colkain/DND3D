@@ -67,7 +67,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = warriorMat;
         } else if (classC == "Rogue") {
             mouvement = Random.Range (2, 7);
@@ -76,7 +76,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (5, 10);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
             mouvement = Random.Range (2, 6);
@@ -85,7 +85,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (5, 10);
             wisdom = Random.Range (2, 6);
-            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 6);
@@ -94,11 +94,12 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (5, 11);
-            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = clericMat;
         }
 
         characterModel.transform.SetParent (transform);
+        characterModel.transform.localScale = new Vector3 (1, 1, 1);
         actionUI = action;
         mouvementUI = mouvement;
         health = maxHealth;
