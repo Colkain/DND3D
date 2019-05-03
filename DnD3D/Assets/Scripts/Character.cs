@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
-    public Material warriorMat;
-    public Material rogueMat;
-    public Material mageMat;
-    public Material clericMat;
+    public GameObject warriorModel;
+    public GameObject rogueModel;
+    public GameObject mageModel;
+    public GameObject clericModel;
+    GameObject characterModel;
     private GameObject gameBoardPrefab;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
@@ -66,7 +67,8 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 5);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            GetComponent<Renderer> ().material = warriorMat;
+            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            // GetComponent<Renderer> ().material = warriorMat;
         } else if (classC == "Rogue") {
             mouvement = Random.Range (2, 7);
             maxHealth = Random.Range (4, 9);
@@ -74,7 +76,8 @@ public class Character : MonoBehaviour {
             agility = Random.Range (5, 10);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            GetComponent<Renderer> ().material = rogueMat;
+            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            // GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
             mouvement = Random.Range (2, 6);
             maxHealth = Random.Range (3, 9);
@@ -82,7 +85,8 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (5, 10);
             wisdom = Random.Range (2, 6);
-            GetComponent<Renderer> ().material = mageMat;
+            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            // GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 6);
             maxHealth = Random.Range (5, 9);
@@ -90,8 +94,11 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (5, 11);
-            GetComponent<Renderer> ().material = clericMat;
+            characterModel = Instantiate (warriorModel, new Vector3 (transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            // GetComponent<Renderer> ().material = clericMat;
         }
+
+        characterModel.transform.SetParent (transform);
         actionUI = action;
         mouvementUI = mouvement;
         health = maxHealth;
