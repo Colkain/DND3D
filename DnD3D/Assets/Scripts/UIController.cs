@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour {
     GameboardControl gameBoard;
     TileEvent tileEvent;
     public void Start () {
-        characterCreationUI.SetActive (false);
+        cMax = Parameters.cMax;
         endGameUI.SetActive (false);
         hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
@@ -31,14 +31,9 @@ public class UIController : MonoBehaviour {
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
-    }
-    public void SettingUp () {
-        m_Dropdown = GameObject.FindGameObjectWithTag ("DropDown").GetComponent<Dropdown> ();
-        cMax = m_Dropdown.value + 2;
         GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
         gameBoard = gameBoardObject.GetComponent<GameboardControl> ();
-        GameObject.Find ("SettingupUI").SetActive (false);
-        gameBoard.StartingGame (cMax);
+        gameBoard.StartingGame (cMax, Parameters.columns, Parameters.rows);
     }
     public void CreateCharacter (string c) {
         nameField = GameObject.FindGameObjectWithTag ("NameField").GetComponent<InputField> ();

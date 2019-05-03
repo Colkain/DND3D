@@ -8,8 +8,8 @@ public class GameboardControl : MonoBehaviour {
     public Tile[, ] tiles;
     public static ArrayList doors;
     //Creation of Tiles and Characters
-    [SerializeField] int maxColumns = 10;
-    [SerializeField] int maxRows = 10;
+    [SerializeField] int maxColumns;
+    [SerializeField] int maxRows;
     [SerializeField] float size;
     [SerializeField] private int idt;
     [SerializeField] private int idc;
@@ -29,9 +29,11 @@ public class GameboardControl : MonoBehaviour {
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         uiC = GameObject.Find ("Canvas").GetComponent<UIController> ();
     }
-    public void StartingGame (int c) {
+    public void StartingGame (int c, int col, int row) {
         round = 1;
         idt = 0; //tile id
+        maxColumns = col;
+        maxRows = row;
         tiles = new Tile[maxColumns, maxRows];
         doors = new ArrayList ();
         size = 4f;
