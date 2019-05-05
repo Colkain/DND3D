@@ -598,11 +598,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: 
+        m_MethodName: OnSubmit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 1805421799456947662}
   - component: {fileID: 1805421799456947663}
   m_Layer: 5
-  m_Name: NumberOfLines
+  m_Name: NumberOfRows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,7 +762,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Number of Lines
+  m_Text: Number of Rows
 --- !u!1 &1805421799457008595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,13 +1643,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1805421799934244425}
   m_TextComponent: {fileID: 1805421799125368683}
   m_Placeholder: {fileID: 1805421799094282459}
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Number of Lines
+  m_Text: Number of Rows
 --- !u!1 &1805421800168421342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,11 +2604,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: 
+        m_MethodName: OnReturn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2823,13 +2823,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1805421800746824396}
   m_TextComponent: {fileID: 1805421800896899370}
   m_Placeholder: {fileID: 1805421800164316216}
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:

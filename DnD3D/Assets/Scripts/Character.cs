@@ -8,6 +8,7 @@ public class Character : MonoBehaviour {
     public GameObject clericModel;
     GameObject characterModel;
     private GameObject gameBoardPrefab;
+    [SerializeField] private Animator animator;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private bool isTurn;
@@ -68,7 +69,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
-            // GetComponent<Renderer> ().material = warriorMat;
         } else if (classC == "Rogue") {
             mouvement = Random.Range (2, 7);
             maxHealth = Random.Range (4, 9);
@@ -100,6 +100,7 @@ public class Character : MonoBehaviour {
 
         characterModel.transform.SetParent (transform);
         characterModel.transform.localScale = new Vector3 (1, 1, 1);
+        animator = characterModel.GetComponent<Animator> ();
         actionUI = action;
         mouvementUI = mouvement;
         health = maxHealth;
@@ -111,12 +112,17 @@ public class Character : MonoBehaviour {
         if (health > 0) {
             if (immune && h < 0)
                 return;
-            else
+            else {
+                if (h < 0)
+                    GetAnimator ().SetBool ("IsHit", true);
+
                 health += h;
+            }
             if (health <= 0) {
                 health = 0;
                 isAlive = false;
                 GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().SetDedCharacters ();
+                GetAnimator ().SetBool ("IsAlive", false);
             }
         }
     }
@@ -295,6 +301,7 @@ public class Character : MonoBehaviour {
                 buffs.Add (b);
                 ActivateBuff (b, 1);
             }
+            GetAnimator ().SetTrigger ("BuffEffect");
             p.SetCooldownUI (p.GetCooldown ());
         }
     }
@@ -384,4 +391,5 @@ public class Character : MonoBehaviour {
             return false;
     }
     public bool GetIsAlive () => isAlive;
+    public Animator GetAnimator () => animator;
 }

@@ -295,7 +295,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -340,7 +340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &725939256
 Transform:
   m_ObjectHideFlags: 0
@@ -625,11 +625,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SettingUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800482468382, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1805421800482468381, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
         type: 3}
@@ -921,86 +916,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 198535418}
-    - target: {fileID: 1805421799148001359, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSubmit
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799148001359, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799934244426, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799934244426, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799934244426, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799934244426, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800012435607, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_Value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1805421800609694101, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 198535418}
-    - target: {fileID: 1805421800609694101, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnReturn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800609694101, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800746824397, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800746824397, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800746824397, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421800164316216, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_Text
-      value: Number of Rows
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799456947649, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_Name
-      value: NumberOfRows
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805421799456947663, guid: 5d63ea32c0020a04cac6d66811b3d7f3,
-        type: 3}
-      propertyPath: m_Text
-      value: Number of Rows
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d63ea32c0020a04cac6d66811b3d7f3, type: 3}
 --- !u!1 &1805421800490398680 stripped
@@ -1020,11 +940,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8709254883959209609, guid: 29b63cca045220745922d6b205279402,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8709254883959209608, guid: 29b63cca045220745922d6b205279402,
         type: 3}

@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour {
             UsePower (2);
     }
     public void UsePower (int i) {
-         player.ActivateEffect (player.GetPower (i));
+        player.ActivateEffect (player.GetPower (i));
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour {
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));
                 Vector3 coor = gameboard.WhatTile (player).GetCoor ();
-                range = player.GetRange();
+                range = player.GetRange ();
                 if (range >= 0) {
                     for (int i = 0; i <= range; i++) {
                         cells.Add (gameboard.GetTile ((int) coor.x + i, (int) coor.z));
@@ -100,6 +100,10 @@ public class CharacterMovement : MonoBehaviour {
                 foreach (Character chara in gameboard.GetCharacters ()) {
                     if (player != chara) {
                         if (IsCharacterHit (chara, attackedTile)) {
+                            if (range == 0)
+                                player.GetAnimator ().SetTrigger ("Attack");
+                            else
+                                player.GetAnimator ().SetTrigger ("RangedAttack");
                             chara.SetHealth (-player.GetAttack ());
                             player.SetActionUI (-1);
                         }
@@ -121,8 +125,12 @@ public class CharacterMovement : MonoBehaviour {
 
             Vector3 move = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
             _controller.Move (move * Time.deltaTime * Speed);
-            if (move != Vector3.zero)
+            if (move != Vector3.zero) {
                 transform.forward = move;
+                player.GetAnimator ().SetBool ("IsWalking", true);
+            } else {
+                player.GetAnimator ().SetBool ("IsWalking", false);
+            }
         }
     }
     public void SetButtonClicked (bool a) {
