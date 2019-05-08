@@ -76,7 +76,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (5, 10);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
-            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
+            characterModel = Instantiate (rogueModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
             mouvement = Random.Range (2, 6);
@@ -85,7 +85,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (5, 10);
             wisdom = Random.Range (2, 6);
-            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
+            characterModel = Instantiate (mageModel, transform.position, Quaternion.identity);
             // GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 6);

@@ -14,23 +14,23 @@ public class Spawner : MonoBehaviour {
         Tile tile = tileObject.GetComponent<Tile> ();
         //Walls Spawning
         if (c == 0) {
-            GameObject westWall = Instantiate (wallPrefab, new Vector3 (-size / 8, 2, 0), Quaternion.identity) as GameObject;
+            GameObject westWall = Instantiate (wallPrefab, new Vector3 (-4 / size, 2, 0), Quaternion.identity) as GameObject;
             westWall.name = "West Wall " + c + "," + r;
             westWall.transform.SetParent (tileObject.transform, false);
             tile.SetWestWall (westWall);
         }
-        GameObject eastWall = Instantiate (wallPrefab, new Vector3 (size / 8, 2, 0), Quaternion.identity) as GameObject;
+        GameObject eastWall = Instantiate (wallPrefab, new Vector3 (4 / size, 2, 0), Quaternion.identity) as GameObject;
         eastWall.name = "East Wall " + c + "," + r;
         eastWall.transform.SetParent (tileObject.transform, false);
         tile.SetEastWall (eastWall);
         if (r == mazeRows - 1) {
-            GameObject northWall = Instantiate (wallPrefab, new Vector3 (0, 2, size / 8), Quaternion.identity) as GameObject;
+            GameObject northWall = Instantiate (wallPrefab, new Vector3 (0, 2, 4 / size), Quaternion.identity) as GameObject;
             northWall.name = "North Wall " + c + "," + r;
             northWall.transform.Rotate (new Vector3 (0, 90, 0));
             northWall.transform.SetParent (tileObject.transform, false);
             tile.SetNorthWall (northWall);
         }
-        GameObject southWall = Instantiate (wallPrefab, new Vector3 (0, 2, -size / 8), Quaternion.identity) as GameObject;
+        GameObject southWall = Instantiate (wallPrefab, new Vector3 (0, 2, -4 / size), Quaternion.identity) as GameObject;
         southWall.name = "South Wall " + c + "," + r;
         southWall.transform.Rotate (new Vector3 (0, 90, 0));
         southWall.transform.SetParent (tileObject.transform, false);

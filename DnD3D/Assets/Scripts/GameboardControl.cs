@@ -36,7 +36,7 @@ public class GameboardControl : MonoBehaviour {
         maxRows = row;
         tiles = new Tile[maxColumns, maxRows];
         doors = new ArrayList ();
-        size = 4f;
+        size = 8f;
         idc = 1; //character id
         cMax = c; // max characters
         characters = new List<Character> (); // set character list

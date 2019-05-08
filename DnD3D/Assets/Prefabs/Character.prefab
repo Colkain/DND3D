@@ -74,9 +74,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warriorModel: {fileID: 4937418564545210257, guid: cb2a7738b12b2214db66ae64f1faacab,
     type: 3}
-  rogueModel: {fileID: -927199367670048503, guid: c232ddfafdde0e546a26b3e49103c4cd,
+  rogueModel: {fileID: 7416292845891669283, guid: 631063e989b69d6448f1f25fc1d4235a,
     type: 3}
-  mageModel: {fileID: -927199367670048503, guid: 9ae1d78de2627424caba883dacbcadea,
+  mageModel: {fileID: 1086044328811903311, guid: 6dbb0a7aee0802849a6047b7598d450e,
     type: 3}
   clericModel: {fileID: -927199367670048503, guid: 6f09d1c887528884f97b78aea3595a01,
     type: 3}
