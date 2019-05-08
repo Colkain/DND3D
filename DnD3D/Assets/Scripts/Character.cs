@@ -8,7 +8,7 @@ public class Character : MonoBehaviour {
     public GameObject clericModel;
     GameObject characterModel;
     private GameObject gameBoardPrefab;
-    [SerializeField] private Animator animator;
+    private Animator animator;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
     [SerializeField] private bool isTurn;
@@ -77,7 +77,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (1, 4);
             characterModel = Instantiate (rogueModel, transform.position, Quaternion.identity);
-            // GetComponent<Renderer> ().material = rogueMat;
         } else if (classC == "Mage") {
             mouvement = Random.Range (2, 6);
             maxHealth = Random.Range (3, 9);
@@ -86,7 +85,6 @@ public class Character : MonoBehaviour {
             intelligence = Random.Range (5, 10);
             wisdom = Random.Range (2, 6);
             characterModel = Instantiate (mageModel, transform.position, Quaternion.identity);
-            // GetComponent<Renderer> ().material = mageMat;
         } else if (classC == "Cleric") {
             mouvement = Random.Range (1, 6);
             maxHealth = Random.Range (5, 9);
@@ -94,8 +92,7 @@ public class Character : MonoBehaviour {
             agility = Random.Range (1, 4);
             intelligence = Random.Range (1, 4);
             wisdom = Random.Range (5, 11);
-            characterModel = Instantiate (warriorModel, transform.position, Quaternion.identity);
-            // GetComponent<Renderer> ().material = clericMat;
+            characterModel = Instantiate (clericModel, transform.position, Quaternion.identity);
         }
 
         characterModel.transform.SetParent (transform);

@@ -78,10 +78,10 @@ MonoBehaviour:
     type: 3}
   mageModel: {fileID: 1086044328811903311, guid: 6dbb0a7aee0802849a6047b7598d450e,
     type: 3}
-  clericModel: {fileID: -927199367670048503, guid: 6f09d1c887528884f97b78aea3595a01,
+  clericModel: {fileID: 4928609061613461633, guid: f79288a05a359764ba09a31ed911b03b,
     type: 3}
   animator: {fileID: 0}
-  nameC: A
+  nameC: K
   classC: Warrior
   isTurn: 0
   id: 2
@@ -100,7 +100,7 @@ MonoBehaviour:
   bonusAttack: 0
   immune: 0
   isAlive: 1
-  coor: {x: 0, y: 3, z: 0}
+  coor: {x: 72, y: 3, z: 0}
   powers: []
   items: []
   buffs: []
