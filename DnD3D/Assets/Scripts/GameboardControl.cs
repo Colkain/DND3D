@@ -114,9 +114,18 @@ public class GameboardControl : MonoBehaviour {
     }
     public int GetIdc () => idc;
     public void ActivateDoors (bool t) {
-        foreach (GameObject d in doors) {
-            d.transform.GetChild (0).gameObject.SetActive (t);
+        if (!t) {
+            //open
+            foreach (GameObject d in doors) {
+                d.transform.GetChild (0).gameObject.transform.localPosition = Vector3.Lerp (new Vector3 (0, 0, 0), new Vector3 (0, -1, 0), Time.time * 1);
+            }
+        } else {
+            //close
+            foreach (GameObject d in doors) {
+                d.transform.GetChild (0).gameObject.transform.localPosition = Vector3.Lerp (new Vector3 (0, -1, 0), new Vector3 (0, 0, 0), Time.time * 1);
+            }
         }
+
     }
     public Tile WhatTile (Character c) {
         Vector3 minTile;
