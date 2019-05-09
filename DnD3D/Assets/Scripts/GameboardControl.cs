@@ -117,15 +117,16 @@ public class GameboardControl : MonoBehaviour {
         if (!t) {
             //open
             foreach (GameObject d in doors) {
-                d.transform.GetChild (0).gameObject.transform.localPosition = Vector3.Lerp (new Vector3 (0, 0, 0), new Vector3 (0, -1, 0), Time.time * 1);
+                while (d.transform.GetChild (0).gameObject.transform.localPosition.y >= -1)
+                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.down * Time.deltaTime);
             }
         } else {
             //close
             foreach (GameObject d in doors) {
-                d.transform.GetChild (0).gameObject.transform.localPosition = Vector3.Lerp (new Vector3 (0, -1, 0), new Vector3 (0, 0, 0), Time.time * 1);
+                while (d.transform.GetChild (0).gameObject.transform.localPosition.y <= 0)
+                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.up * Time.deltaTime);
             }
         }
-
     }
     public Tile WhatTile (Character c) {
         Vector3 minTile;

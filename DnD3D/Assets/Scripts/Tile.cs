@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
@@ -10,15 +12,8 @@ public class Tile : MonoBehaviour {
     public GameObject light2;
     public GameObject light3;
     public GameObject light4;
-    public void AddDoor (GameObject w) {
-        GameObject doorObject = Instantiate (doorPrefab, w.transform.localPosition, Quaternion.identity);
-        doorObject.transform.Rotate (w.transform.rotation.eulerAngles);
-        doorObject.transform.SetParent (gameObject.transform, false);
-        GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        gb.AddInDoors (doorObject);
-    }
 
-    public void Update () {
+    void Update () {
         if (visited) {
             light1.GetComponent<Light> ().enabled = true;
             light2.GetComponent<Light> ().enabled = true;
@@ -30,6 +25,13 @@ public class Tile : MonoBehaviour {
             light3.GetComponent<Light> ().enabled = false;
             light4.GetComponent<Light> ().enabled = false;
         }
+    }
+    public void AddDoor (GameObject w) {
+        GameObject doorObject = Instantiate (doorPrefab, w.transform.localPosition, Quaternion.identity);
+        doorObject.transform.Rotate (w.transform.rotation.eulerAngles);
+        doorObject.transform.SetParent (gameObject.transform, false);
+        GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
+        gb.AddInDoors (doorObject);
     }
     public bool GetVisited () {
         return visited;
