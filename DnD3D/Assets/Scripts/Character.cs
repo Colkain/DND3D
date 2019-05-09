@@ -176,6 +176,7 @@ public class Character : MonoBehaviour {
     }
     public bool GetisTurn () => isTurn;
     public void SetisTurn (bool t) {
+        GetAnimator ().SetBool ("IsWalking", false);
         isTurn = t;
     }
     public void SetActionUI (int i) {
