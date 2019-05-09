@@ -22,7 +22,6 @@ public class UIController : MonoBehaviour {
     TileEvent tileEvent;
     public void Start () {
         cMax = Parameters.cMax;
-        endGameUI.SetActive (false);
         hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
         playersUI.SetActive (false);
@@ -30,6 +29,7 @@ public class UIController : MonoBehaviour {
         abilitiesUI.SetActive (false);
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
+        endGameUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
         gameBoard = gameBoardObject.GetComponent<GameboardControl> ();

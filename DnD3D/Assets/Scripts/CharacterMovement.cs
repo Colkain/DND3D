@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour {
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
-            if (Input.GetKeyUp (KeyCode.A) || buttonClicked == true) {
+            if (Input.GetButtonUp("Attack") || buttonClicked == true) {
                 isAttacking = true;
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));
