@@ -16,7 +16,6 @@ public class Tile : MonoBehaviour {
 
     void Awake () {
         doors = new List<GameObject> ();
-        Debug.Log (doors);
     }
     void Update () {
         if (visited) {
