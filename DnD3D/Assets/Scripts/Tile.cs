@@ -8,11 +8,16 @@ public class Tile : MonoBehaviour {
     private GameObject northWall, westWall, eastWall, southWall;
     [SerializeField] private Vector3 coor;
     public GameObject[] walls;
+    [SerializeField] private List<GameObject> doors;
     public GameObject light1;
     public GameObject light2;
     public GameObject light3;
     public GameObject light4;
 
+    void Awake () {
+        doors = new List<GameObject> ();
+        Debug.Log (doors);
+    }
     void Update () {
         if (visited) {
             light1.GetComponent<Light> ().enabled = true;
@@ -31,7 +36,22 @@ public class Tile : MonoBehaviour {
         doorObject.transform.Rotate (w.transform.rotation.eulerAngles);
         doorObject.transform.SetParent (gameObject.transform, false);
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
-        gb.AddInDoors (doorObject);
+        doors.Add (doorObject);
+    }
+    public void SetDoors (bool t) {
+        if (!t) {
+            //open
+            foreach (GameObject d in doors) {
+                while (d.transform.GetChild (0).gameObject.transform.localPosition.y >= -1)
+                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.down * Time.deltaTime);
+            }
+        } else {
+            //close
+            foreach (GameObject d in doors) {
+                while (d.transform.GetChild (0).gameObject.transform.localPosition.y <= 0)
+                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.up * Time.deltaTime);
+            }
+        }
     }
     public bool GetVisited () {
         return visited;

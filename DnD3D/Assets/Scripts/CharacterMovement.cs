@@ -41,11 +41,11 @@ public class CharacterMovement : MonoBehaviour {
         }
     }
     public void PreUsePower () {
-        if (Input.GetKeyUp (KeyCode.E))
+        if (Input.GetButtonUp ("Power1"))
             UsePower (0);
-        else if (Input.GetKeyUp (KeyCode.R))
+        else if (Input.GetButtonUp ("Power2"))
             UsePower (1);
-        else if (Input.GetKeyUp (KeyCode.D))
+        else if (Input.GetButtonUp ("Power3"))
             UsePower (2);
     }
     public void UsePower (int i) {
@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour {
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {
-            if (Input.GetButtonUp("Attack") || buttonClicked == true) {
+            if (Input.GetButtonUp ("Attack") || buttonClicked == true) {
                 isAttacking = true;
                 cells = new List<Tile> ();
                 cells.Add (gameboard.WhatTile (player));

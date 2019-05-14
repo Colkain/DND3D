@@ -6,7 +6,6 @@ public class GameboardControl : MonoBehaviour {
     //Grid
     public List<Character> characters;
     public Tile[, ] tiles;
-    public static ArrayList doors;
     //Creation of Tiles and Characters
     [SerializeField] int maxColumns;
     [SerializeField] int maxRows;
@@ -35,7 +34,6 @@ public class GameboardControl : MonoBehaviour {
         maxColumns = col;
         maxRows = row;
         tiles = new Tile[maxColumns, maxRows];
-        doors = new ArrayList ();
         size = 8f;
         idc = 1; //character id
         cMax = c; // max characters
@@ -76,13 +74,13 @@ public class GameboardControl : MonoBehaviour {
             if (player.GetMouvementUI () == 0)
                 ActivateDoors (true);
             if (player.GetisTurn () && !characterMouvement.IsAttacking ()) {
-                if (Input.GetKeyUp (KeyCode.F)) {
+                if (Input.GetButtonUp ("EndTurn")) {
                     NextTurn ();
                     if (idc == 1) {
                         round++;
                     }
                 }
-                if (Input.GetKeyUp (KeyCode.Z))
+                if (Input.GetButtonUp ("Check"))
                     Check ();
             }
         }
@@ -109,24 +107,10 @@ public class GameboardControl : MonoBehaviour {
     public List<Character> GetCharacters () => characters;
     public Character GetCharacter (int i) => characters[i];
     public Character GetPlayer () => player;
-    public void AddInDoors (GameObject d) {
-        doors.Add (d);
-    }
     public int GetIdc () => idc;
     public void ActivateDoors (bool t) {
-        if (!t) {
-            //open
-            foreach (GameObject d in doors) {
-                while (d.transform.GetChild (0).gameObject.transform.localPosition.y >= -1)
-                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.down * Time.deltaTime);
-            }
-        } else {
-            //close
-            foreach (GameObject d in doors) {
-                while (d.transform.GetChild (0).gameObject.transform.localPosition.y <= 0)
-                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.up * Time.deltaTime);
-            }
-        }
+        foreach (Tile tile in tiles)
+            tile.SetDoors (t);
     }
     public Tile WhatTile (Character c) {
         Vector3 minTile;

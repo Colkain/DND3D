@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour {
         }
     }
     public void SetisLock () {
-        if (Input.GetKeyUp (KeyCode.LeftControl)) {
+        if (Input.GetButtonUp ("Lock")) {
             if (isLocked)
                 isLocked = false;
             else
