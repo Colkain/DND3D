@@ -8,7 +8,7 @@ public class StatsUI : MonoBehaviour {
     Character player = null;
     string text;
     // Start is called before the first frame update
-    void Start () {
+    void Awake () {
         slots = statsParent.GetComponentsInChildren<StatSlot> ();
     }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class EndGameUI : MonoBehaviour {
     public Text winner;
     PlayerEndGame[] slots;
-    void Start () {
+    void Awake () {
         slots = transform.GetComponentsInChildren<PlayerEndGame> ();
     }
     public void SetUI (GameboardControl gameboard) {

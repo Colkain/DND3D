@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
     [SerializeField] private bool visited = false;
+    [SerializeField] private float doorSpeed;
     public GameObject doorPrefab;
     private GameObject northWall, westWall, eastWall, southWall;
     [SerializeField] private Vector3 coor;
@@ -16,6 +17,7 @@ public class Tile : MonoBehaviour {
 
     void Awake () {
         doors = new List<GameObject> ();
+        doorSpeed = (1f / 1.5f) * Time.time;
     }
     void Update () {
         if (visited) {
@@ -41,14 +43,12 @@ public class Tile : MonoBehaviour {
         if (!t) {
             //open
             foreach (GameObject d in doors) {
-                while (d.transform.GetChild (0).gameObject.transform.localPosition.y >= -1)
-                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.down * Time.deltaTime);
+                d.transform.localPosition = Vector3.Lerp (d.transform.localPosition, new Vector3 (d.transform.localPosition.x, d.transform.localPosition.y, -1), doorSpeed);
             }
         } else {
             //close
             foreach (GameObject d in doors) {
-                while (d.transform.GetChild (0).gameObject.transform.localPosition.y <= 0)
-                    d.transform.GetChild (0).gameObject.transform.Translate (Vector3.up * Time.deltaTime);
+                d.transform.localPosition = Vector3.Lerp (d.transform.localPosition, new Vector3 (d.transform.localPosition.x, d.transform.localPosition.y, 0), doorSpeed);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 public class PlayersUI : MonoBehaviour {
     PlayerSlot[] slots;
-    void Start () {
+    void Awake () {
         slots = transform.GetComponentsInChildren<PlayerSlot> ();
     }
     public void SetUI (GameboardControl gameboard) {

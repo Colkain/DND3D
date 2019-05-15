@@ -4,7 +4,7 @@ public class BuffsUI : MonoBehaviour {
     private Character player = null;
     public Transform buffsParent;
     BuffSlot[] slots;
-    void Start () {
+    void Awake () {
         slots = buffsParent.GetComponentsInChildren<BuffSlot> ();
     }
     void Update () {
