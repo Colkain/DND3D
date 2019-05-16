@@ -51,6 +51,7 @@ public class UIController : MonoBehaviour {
                 string name = "Player" + gameBoard.GetIdc ();
                 player = GameObject.FindWithTag (name).GetComponent<Character> ();
                 player.SetisTurn (true);
+                gameBoard.ActivateDoors (-1);
                 statsUI.GetComponent<StatsUI> ().SetPlayer (player, gameBoard.GetRound ());
                 playersUI.GetComponent<PlayersUI> ().SetUI (gameBoard.GetComponent<GameboardControl> ());
                 abilitiesUI.GetComponent<AbilitiesUI> ().SetPlayer (player, gameBoard.GetRound ());

@@ -1,10 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
     [SerializeField] private bool visited = false;
-    [SerializeField] private float doorSpeed;
+    [SerializeField] private bool doorClosed = false;
+    [SerializeField] private float doorSpeed = 1f;
+    [SerializeField] private float doorStartTime = 0;
+    [SerializeField] private float doorFracJourney;
+    [SerializeField] private Vector3 doorDefaultPosition;
+    [SerializeField] private float doorNewPosition;
     public GameObject doorPrefab;
     private GameObject northWall, westWall, eastWall, southWall;
     [SerializeField] private Vector3 coor;
@@ -17,7 +21,6 @@ public class Tile : MonoBehaviour {
 
     void Awake () {
         doors = new List<GameObject> ();
-        doorSpeed = (1f / 1.5f) * Time.time;
     }
     void Update () {
         if (visited) {
@@ -31,6 +34,11 @@ public class Tile : MonoBehaviour {
             light3.GetComponent<Light> ().enabled = false;
             light4.GetComponent<Light> ().enabled = false;
         }
+        foreach (GameObject d in doors) {
+            doorFracJourney = (Time.time - doorStartTime) * doorSpeed;
+            doorDefaultPosition = d.transform.GetChild (0).transform.localPosition;
+            d.transform.GetChild (0).transform.localPosition = Vector3.Lerp (doorDefaultPosition, new Vector3 (doorDefaultPosition.x, doorNewPosition, doorDefaultPosition.z), doorFracJourney);
+        }
     }
     public void AddDoor (GameObject w) {
         GameObject doorObject = Instantiate (doorPrefab, w.transform.localPosition, Quaternion.identity);
@@ -39,18 +47,9 @@ public class Tile : MonoBehaviour {
         GameboardControl gb = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<GameboardControl> ();
         doors.Add (doorObject);
     }
-    public void SetDoors (bool t) {
-        if (!t) {
-            //open
-            foreach (GameObject d in doors) {
-                d.transform.localPosition = Vector3.Lerp (d.transform.localPosition, new Vector3 (d.transform.localPosition.x, d.transform.localPosition.y, -1), doorSpeed);
-            }
-        } else {
-            //close
-            foreach (GameObject d in doors) {
-                d.transform.localPosition = Vector3.Lerp (d.transform.localPosition, new Vector3 (d.transform.localPosition.x, d.transform.localPosition.y, 0), doorSpeed);
-            }
-        }
+    public void SetDoorClosed (float t) {
+        doorNewPosition = t;
+        doorStartTime = Time.time;
     }
     public bool GetVisited () {
         return visited;

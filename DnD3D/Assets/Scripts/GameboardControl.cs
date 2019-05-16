@@ -62,7 +62,6 @@ public class GameboardControl : MonoBehaviour {
         } else {
             player = characters[idc - 1];
             characterMouvement = player.GetComponent<CharacterMovement> ();
-            ActivateDoors (false);
             currentTile = WhatTile (player);
             currentTile.SetVisited (true);
             if (previousTile != currentTile) {
@@ -72,7 +71,7 @@ public class GameboardControl : MonoBehaviour {
                 previousTile = currentTile;
             }
             if (player.GetMouvementUI () == 0)
-                ActivateDoors (true);
+                ActivateDoors (0);
             if (player.GetisTurn () && !characterMouvement.IsAttacking ()) {
                 if (Input.GetButtonUp ("EndTurn")) {
                     NextTurn ();
@@ -108,9 +107,9 @@ public class GameboardControl : MonoBehaviour {
     public Character GetCharacter (int i) => characters[i];
     public Character GetPlayer () => player;
     public int GetIdc () => idc;
-    public void ActivateDoors (bool t) {
+    public void ActivateDoors (float t) {
         foreach (Tile tile in tiles)
-            tile.SetDoors (t);
+            tile.SetDoorClosed (t);
     }
     public Tile WhatTile (Character c) {
         Vector3 minTile;
@@ -152,6 +151,7 @@ public class GameboardControl : MonoBehaviour {
         uiC.NextTurnUI (player);
         SetPreviousTile ();
         cam.SetCamera (idc);
+        ActivateDoors (-1);
     }
     public void Check () {
         if (player.GetActionUI () > 0) {
