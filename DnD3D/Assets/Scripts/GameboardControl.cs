@@ -70,8 +70,6 @@ public class GameboardControl : MonoBehaviour {
 
                 previousTile = currentTile;
             }
-            if (player.GetMouvementUI () == 0)
-                ActivateDoors (0);
             if (player.GetisTurn () && !characterMouvement.IsAttacking ()) {
                 if (Input.GetButtonUp ("EndTurn")) {
                     NextTurn ();
@@ -151,7 +149,6 @@ public class GameboardControl : MonoBehaviour {
         uiC.NextTurnUI (player);
         SetPreviousTile ();
         cam.SetCamera (idc);
-        ActivateDoors (-1);
     }
     public void Check () {
         if (player.GetActionUI () > 0) {

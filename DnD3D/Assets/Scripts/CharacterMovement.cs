@@ -49,7 +49,8 @@ public class CharacterMovement : MonoBehaviour {
             UsePower (2);
     }
     public void UsePower (int i) {
-        player.ActivateEffect (player.GetPower (i));
+        if (player.GetPower (i) != null)
+            player.ActivateEffect (player.GetPower (i));
     }
     public void Attack () {
         if (player.GetActionUI () > 0) {

@@ -7,7 +7,7 @@ public class Character : MonoBehaviour {
     public GameObject mageModel;
     public GameObject clericModel;
     GameObject characterModel;
-    private GameObject gameBoardPrefab;
+    private GameObject gameBoard;
     private Animator animator;
     [SerializeField] private string nameC;
     [SerializeField] private string classC;
@@ -32,9 +32,18 @@ public class Character : MonoBehaviour {
     [SerializeField] private List<Power> powers;
     [SerializeField] private List<Item> items;
     [SerializeField] private List<Buff> buffs;
+    void Awake () {
+        gameBoard = GameObject.FindWithTag ("GameBoard");
+    }
     void Update () {
-        if (isTurn && !isAlive)
-            GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
+        if (isTurn) {
+            if (mouvementUI <= 0)
+                gameBoard.GetComponent<GameboardControl> ().ActivateDoors (-0.1f);
+            else
+                gameBoard.GetComponent<GameboardControl> ().ActivateDoors (-1);
+            if (!isAlive)
+                GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().NextTurn ();
+        }
     }
     public void SetCharacter (string classId, int i, Vector3 coorc, string n) {
         nameC = n;
@@ -53,8 +62,8 @@ public class Character : MonoBehaviour {
         buffs = new List<Buff> ();
 
         Character charObject = Instantiate (this, coorc, Quaternion.identity);
-        gameBoardPrefab = GameObject.FindWithTag ("GameBoard");
-        charObject.transform.SetParent (gameBoardPrefab.transform, false);
+        gameBoard = GameObject.FindWithTag ("GameBoard");
+        charObject.transform.SetParent (gameBoard.transform, false);
 
         charObject.name = ("Player" + id);
         charObject.tag = ("Player" + id);

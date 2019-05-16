@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
     [SerializeField] private bool visited = false;
-    [SerializeField] private bool doorClosed = false;
     [SerializeField] private float doorSpeed = 1f;
     [SerializeField] private float doorStartTime = 0;
     [SerializeField] private float doorFracJourney;
