@@ -30,7 +30,7 @@ public class Power {
             cooldown = 3;
             duration = 1;
         } else if (id == 3) {
-            int ia = 4 + level;
+            int ia = 2 + level;
             name = "Heal";
             description = "Can Heal: " + level + ";" + ia;
             cooldown = 3;
