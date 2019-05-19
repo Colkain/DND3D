@@ -34,7 +34,7 @@ public class GameboardControl : MonoBehaviour {
         maxColumns = col;
         maxRows = row;
         tiles = new Tile[maxColumns, maxRows];
-        size = 8f;
+        size = 8f; // if changed you need to change *8f in cameracontroller panmax
         idc = 1; //character id
         cMax = c; // max characters
         characters = new List<Character> (); // set character list

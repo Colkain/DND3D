@@ -13,8 +13,8 @@ public class CameraController : MonoBehaviour {
     Vector2 panMaxLimit;
     Vector2 panMinLimit;
     void Start () {
-        panMaxLimit = new Vector2 (36, 32);
-        panMinLimit = new Vector2 (0, -4);
+        panMaxLimit = new Vector2 ((Parameters.columns - 1), (Parameters.rows - 1)) * 8;
+        panMinLimit = new Vector2 (-1, -1) * 8;
         offsets = new Vector3[3];
         angles = new Quaternion[3];
         offsets[0] = new Vector3 (0, 8, -3);
