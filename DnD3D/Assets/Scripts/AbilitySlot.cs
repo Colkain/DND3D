@@ -8,9 +8,7 @@ public class AbilitySlot : MonoBehaviour {
     public Button removeButton;
     public Text cooldownText;
     public GameObject hoverPanel;
-    void Start () {
-        cooldownText.enabled = false;
-    }
+    void Start () { }
     void Update () {
         if (power != null) {
             cooldownText.text = power.GetCooldownUI ().ToString ();
@@ -38,6 +36,7 @@ public class AbilitySlot : MonoBehaviour {
         icon.enabled = false;
         powerButton.interactable = false;
         removeButton.interactable = false;
+        cooldownText.enabled = false;
     }
     public void OnRemoveButton () {
         GameObject.FindWithTag ("GameBoard").GetComponent<GameboardControl> ().GetPlayer ().RemovePower (power);
