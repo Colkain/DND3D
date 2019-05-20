@@ -285,23 +285,37 @@ public class Character : MonoBehaviour {
     public void ActivateEffect (Power p) {
         if (p.GetCooldownUI () == 0) {
             if (p.GetId () == 3) {
-                int ia = 4 + level;
-                health += Random.Range (p.GetLevel (), ia);
+                health += Random.Range (p.GetLevel (), (int) p.GetIntensity ());
                 if (health > maxHealth)
                     health = maxHealth;
+            } else if (p.GetId () == 6) {
+                foreach (Power po in powers) {
+                    if (po.GetId () != p.GetId ()) {
+                        po.SetCooldownUI (-po.GetCooldownUI ());
+                    }
+                }
             } else {
                 Buff b;
                 if (p.GetId () == 0)
-                    b = new Buff (10, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                    b = new Buff (10, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 1)
-                    b = new Buff (0, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                    b = new Buff (0, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 2)
-                    b = new Buff (8, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                    b = new Buff (8, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 4)
-                    b = new Buff (7, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                    b = new Buff (7, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 5)
                     b = new Buff (9, p.GetLevel (), p.GetDuration (), p.GetIcon ());
-                else {
+                else if (p.GetId () == 7) {
+                    SetHealth (-p.GetIntensity ());
+                    b = new Buff (7, 1, p.GetDuration (), p.GetIcon ());
+                } else if (p.GetId () == 8) {
+                    SetHealth (-p.GetIntensity ());
+                    b = new Buff (0, 1, p.GetDuration (), p.GetIcon ());
+                } else if (p.GetId () == 9) {
+                    SetHealth (-p.GetIntensity ());
+                    b = new Buff (10, 1, p.GetDuration (), p.GetIcon ());
+                } else {
                     Debug.Log ("error");
                     b = null;
                 }

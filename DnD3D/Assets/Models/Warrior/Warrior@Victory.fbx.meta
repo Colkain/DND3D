@@ -1,172 +1,12 @@
 fileFormatVersion: 2
-guid: bac63eab640b8d444a611d3a0aff7c5f
+guid: 85752faaa24ff274885ff96176adddc9
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Beard_diffuse
-    second: {fileID: 2800000, guid: f644030f87a926648aed123e5da51e71, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Beard_gloss
-    second: {fileID: 2800000, guid: f9d26bc2204325d48ade983af9e20aa7, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Beard_normal
-    second: {fileID: 2800000, guid: 7b2520ae64ca5444b80f68345e29ac36, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Beard_specular
-    second: {fileID: 2800000, guid: 87eb476c4e5becd4c9335c66f4ab1501, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Body_diffuse
-    second: {fileID: 2800000, guid: 14c5595d714123c40ab0caff4e578732, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Body_gloss
-    second: {fileID: 2800000, guid: b15d06fda2b552a43993f87ef090d6d4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Body_normal
-    second: {fileID: 2800000, guid: a894c9886d190a448a8e66807ef75c2d, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Body_specular
-    second: {fileID: 2800000, guid: 29b8efe9a44446546ae937832ff9885e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Bottom_diffuse
-    second: {fileID: 2800000, guid: 6ae86be42810d824d9f732a3bb8990f5, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Bottom_gloss
-    second: {fileID: 2800000, guid: 8b956e9a0f97abf4f8e2150f946b35a8, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Bottom_normal
-    second: {fileID: 2800000, guid: a482d969524b6cd41b18b2a155b6eee9, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Bottom_specular
-    second: {fileID: 2800000, guid: ad3a0275a83d96d4bbc0b196953e1bdc, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Glove_diffuse
-    second: {fileID: 2800000, guid: fa55b8f0caf50244a8ce1ef536a2a0f9, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Glove_gloss
-    second: {fileID: 2800000, guid: 8583fa9a8cfa1074d952115c6674174e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Glove_normal
-    second: {fileID: 2800000, guid: 9447ba1fe87fe4542af46a60051cbd4f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Glove_specular
-    second: {fileID: 2800000, guid: 152d3f4e892e8be40af9f0b8524013f6, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Hair_diffuse
-    second: {fileID: 2800000, guid: 22ad6ba8d855ed04aa2e0113aab6af0e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Hair_gloss
-    second: {fileID: 2800000, guid: 9116d89f735778e40a048ec0ef84eb30, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Hair_normal
-    second: {fileID: 2800000, guid: d1a4b601fd4edb345be23ceb2882d0ed, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Hair_specular
-    second: {fileID: 2800000, guid: 8e219095cdd795746a4a6e9ad028aba8, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Moustache_diffuse
-    second: {fileID: 2800000, guid: b64beaa485d88ab41bb3fbe9800d7e29, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Moustache_gloss
-    second: {fileID: 2800000, guid: 7c34aa198776eb141bb624e9ba1e3cda, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Moustache_normal
-    second: {fileID: 2800000, guid: 11caf66d6226ee248a8bd4262e18eeb9, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Moustache_specular
-    second: {fileID: 2800000, guid: 8376a3de57129924bbe88974ad3603c4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Shoes_diffuse
-    second: {fileID: 2800000, guid: af5889a1f446fed46a40ae4f82798dac, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Shoes_gloss
-    second: {fileID: 2800000, guid: e17c17e1b7aa927459bcf41fd46fb798, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Shoes_normal
-    second: {fileID: 2800000, guid: 0bd39a379eb68c341b47282ae417d11b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Shoes_specular
-    second: {fileID: 2800000, guid: c52f24eaecef23b4aa1e4ae61a54524e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Top_diffuse
-    second: {fileID: 2800000, guid: c0fcc073b19be8c4d807b756147a141b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Top_gloss
-    second: {fileID: 2800000, guid: 426fb3a5bafb14047bb6ef465eba9a54, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Top_normal
-    second: {fileID: 2800000, guid: 530373ffb5dfce14b93656d800f04923, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Warrior_Top_specular
-    second: {fileID: 2800000, guid: 96bf8150fe8e34e4fb7bc0fc58bc0263, type: 3}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -195,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Victory
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 256
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -258,20 +98,9 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - b92b0cfa9aaec8e48923f1eb7f4b5cd1
-  - 9b4a98f13814f744abe44df3766050f7
-  - cca6d8539dd4b444b89c10be42bfd945
-  - 8cd7ea7a51bf7934f8ff90144fe15575
-  - 36b2d8d471589414da2ca76a9f9de51f
-  - 59887fd9e4751784181460665ea9ae7d
-  - db7910e33537d9a438a38414acf47068
-  - 23f65a4e170abfb4e89591d98b3aec42
-  - 54f46a3fd9fd959479c435865482df56
-  - 85752faaa24ff274885ff96176adddc9
-  - 495f6c8c995a18f4e9fec6233b8969a7
-  importAnimation: 0
-  copyAvatar: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 3
     human:
@@ -732,7 +561,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: bac63eab640b8d444a611d3a0aff7c5f,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
