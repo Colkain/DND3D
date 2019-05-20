@@ -7,6 +7,7 @@ public class PlayerEndGame : MonoBehaviour {
     public void AddPlayer (Character player) {
         gameObject.SetActive (true);
         nameE.text = player.GetName ();
+        icon.sprite = Resources.Load<Sprite> (player.GetClass ());
     }
     public void ClearSlot () {
         gameObject.SetActive (false);
