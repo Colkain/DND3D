@@ -94,78 +94,80 @@ public class Power {
     public string GetName () => name;
     public string GetDescription () => description;
     public void SetPower () {
+        string d="";
         if (id == 0) {
             intensity = level;
-            description = "+" + intensity + " Action.";
+            d = "+" + intensity + " Action.";
         } else if (id == 1) {
             intensity = level;
-            description = "+" + intensity + " Movement.";
+            d = "+" + intensity + " Movement.";
         } else if (id == 2) {
             intensity = level;
-            description = "+" + intensity + " Range.";
+            d = "+" + intensity + " Range.";
         } else if (id == 3) {
             intensity = 2 + level;
-            description = "Can Heal: " + level + ";" + intensity;
+            d = "Can Heal: " + level + ";" + intensity;
         } else if (id == 4) {
             intensity = 1 + level;
-            description = "+" + intensity + " bonus damage.";
+            d = "+" + intensity + " bonus damage.";
         } else if (id == 5) {
             duration = level;
-            description = "Prevent damage for " + duration + " turns.";
+            d = "Prevent damage for " + duration + " turns.";
         } else if (id == 6) {
-            description = "Reset power cooldowns.";
+            d = "Reset power cooldowns.";
             cooldown = 6 - level;
         } else if (id == 7) {
             intensity = 5 - level;
             if (intensity == 0)
                 intensity++;
-            description = "Decrease your health by " + intensity + " yourself and increase your damage by 1.";
+            d = "Decrease your health by " + intensity + " yourself and increase your damage by 1.";
         } else if (id == 8) {
             intensity = 5 - level;
             if (intensity == 0)
                 intensity++;
-            description = "Decrease your health by " + intensity + " yourself and increase your movement by 1.";
+            d = "Decrease your health by " + intensity + " yourself and increase your movement by 1.";
         } else if (id == 9) {
             intensity = 6 - level;
             if (intensity == 1)
                 intensity++;
-            description = "Decrease your health by " + intensity + " yourself and gain 1 action.";
+            d = "Decrease your health by " + intensity + " yourself and gain 1 action.";
         } else if (id == 10) {
             intensity = level;
-            description = "Deal " + intensity + " damage to everyone in the tile you are entering.";
+            d = "Deal " + intensity + " damage to everyone in the tile you are entering.";
         } else if (id == 11) {
             intensity = level;
-            description = "Gain " + intensity + " health when entering a tile.";
+            d = "Gain " + intensity + " health when entering a tile.";
         } else if (id == 12) {
             intensity = level;
-            description = "Gain " + intensity + " health when exploring a new tile.";
+            d = "Gain " + intensity + " health when exploring a new tile.";
         } else if (id == 13) {
             intensity = level;
-            description = "Gain " + intensity + " movement when exploring a new tile.";
+            d = "Gain " + intensity + " movement when exploring a new tile.";
         } else if (id == 14) {
             intensity = level;
-            description = "Gain " + intensity + " health when attacking.";
+            d = "Gain " + intensity + " health when attacking.";
         } else if (id == 15) {
             intensity = 10 * level;
             if (intensity > 100)
                 intensity = 100;
-            description = "Gain health equal to " + intensity + "% of your damage when attacking.";
+            d = "Gain health equal to " + intensity + "% of your damage when attacking.";
         } else if (id == 16) {
             intensity = level;
-            description = "Gain " + intensity + " action when checking a new tile";
+            d = "Gain " + intensity + " action when checking a new tile";
         } else if (id == 17) {
             intensity = level;
-            description = "Gain " + intensity + " movement when checking a new tile";
+            d = "Gain " + intensity + " movement when checking a new tile";
         } else if (id == 18) {
             intensity = level;
-            description = "Gain " + intensity + " health when checking a new tile";
+            d = "Gain " + intensity + " health when checking a new tile";
         } else if (id == 19) {
             intensity = level;
-            description = "Gain " + intensity + " damage when checking a new tile";
+            d = "Gain " + intensity + " damage when checking a new tile";
         } else if (id == 20) {
             intensity = level;
-            description = "Gain " + intensity + " max health when checking a new tile";
+            d = "Gain " + intensity + " max health when checking a new tile";
         }
+        description = "lv." + level + "\t CD:" + cooldown + "\n" + d;
     }
     public int GetIntensity () => intensity;
     public void SetIntensity (int i) {
@@ -181,7 +183,6 @@ public class Power {
     public void SetLevel (int i) {
         level += i;
         SetPower ();
-        Debug.Log (name + " " + level + " " + intensity);
     }
     public int GetDuration () => duration;
     public Sprite GetIcon () => icon;

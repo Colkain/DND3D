@@ -49,6 +49,7 @@ public class Buff {
             name = "Bonus Action";
             description = "+" + effects[id] + " Bonus Action.";
         }
+        description += "\nDuration:" + duration;
     }
     public int GetEffect (int i) => effects[i];
     public int GetId () => id;
