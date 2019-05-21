@@ -330,16 +330,14 @@ public class Character : MonoBehaviour {
         powers.Add (new Power (i));
     }
     public void AddPower (Power i) {
-        int ex = 4;
-        if (powers.Count < 3) {
-            for (int a = 0; a < powers.Count; a++) {
-                if (powers[a].GetId () == i.GetId ())
-                    ex = a;
+        foreach (Power p in powers) {
+            if (p.GetId () == i.GetId ()) {
+                p.SetLevel (1);
+                return;
             }
-            if (ex == 4)
-                powers.Add (i);
-            else
-                powers[ex].SetLevel (1);
+        }
+        if (powers.Count < 3) {
+            powers.Add (i);
         }
     }
     public void RemovePower (Power p) {
