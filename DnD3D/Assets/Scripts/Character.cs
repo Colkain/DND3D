@@ -318,9 +318,10 @@ public class Character : MonoBehaviour {
     }
     public void AddBuff (int id, int intensity, int duration, Sprite icon) {
         foreach (Buff b in buffs) {
-            if (b.GetId () == id && b.GetDuration () == duration) {
+            if (b.GetId () == id) {
                 ActivateBuff (b, 1);
                 b.SetLevel (intensity);
+                b.SetDuration (duration);
                 return;
             }
         }
