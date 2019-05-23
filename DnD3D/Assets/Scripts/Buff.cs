@@ -10,7 +10,7 @@ public class Buff {
     [SerializeField] private Sprite icon;
     [SerializeField] private int[] effects;
     public Buff (int i, int l, int d, Sprite ic) {
-        effects = new int[12]; //0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range 9:immune 10:action 11:allUpgradableStats
+        effects = new int[12]; //0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range 9:immune 10:action
         id = i;
         effects[id] = l;
         duration = d;
@@ -55,12 +55,39 @@ public class Buff {
     public int GetId () => id;
     public string GetName () => name;
     public string GetDescription () => description;
+    public void SetDescription () {
+        if (id == 0) {
+            description = "+" + effects[id] + " Movement.";
+        } else if (id == 1) {
+            description = "+" + effects[id] + " Max Health.";
+        } else if (id == 2) {
+            description = "+" + effects[id] + " Health.";
+        } else if (id == 3) {
+            description = "+" + effects[id] + " Strength.";
+        } else if (id == 4) {
+            description = "+" + effects[id] + " Agility.";
+        } else if (id == 5) {
+            description = "+" + effects[id] + " Intelligence.";
+        } else if (id == 6) {
+            description = "+" + effects[id] + " Wisdom.";
+        } else if (id == 7) {
+            description = "+" + effects[id] + " Bonus Damage.";
+        } else if (id == 8) {
+            description = "+" + effects[id] + " Range.";
+        } else if (id == 9) {
+            description = "Prevent damage for " + effects[id] + " turns.";
+        } else if (id == 10) {
+            description = "+" + effects[id] + " Bonus Action.";
+        }
+        description += "\nDuration:" + duration;
+    }
     public int GetDuration () => duration;
     public void SetDuration (int i) {
         duration += i;
     }
     public void SetLevel (int i) {
         effects[id] += i;
+        SetDescription ();
     }
     public Sprite GetIcon () => icon;
 }

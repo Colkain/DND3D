@@ -239,33 +239,23 @@ public class Character : MonoBehaviour {
     public void ActivateBuff (Buff b, int polarity) {
         mouvement += b.GetEffect (0) * polarity;
         mouvementUI += b.GetEffect (0) * polarity;
-        mouvement += b.GetEffect (11) * polarity;
-        mouvementUI += b.GetEffect (11) * polarity;
         maxHealth += b.GetEffect (1) * polarity;
         health += b.GetEffect (1) * polarity;
         health += b.GetEffect (2) * polarity;
-        maxHealth += b.GetEffect (11) * polarity;
-        health += b.GetEffect (11) * polarity;
         if (health > maxHealth)
             health = maxHealth;
         strength += b.GetEffect (3) * polarity;
         agility += b.GetEffect (4) * polarity;
         intelligence += b.GetEffect (5) * polarity;
-        wisdom += b.GetEffect (11) * polarity;
-        strength += b.GetEffect (3) * polarity;
-        agility += b.GetEffect (11) * polarity;
-        intelligence += b.GetEffect (11) * polarity;
-        wisdom += b.GetEffect (11) * polarity;
-        bonusAttack += b.GetEffect (11) * polarity;
+        wisdom += b.GetEffect (6) * polarity;
+        bonusAttack += b.GetEffect (7) * polarity;
         range += b.GetEffect (8) * polarity;
-        range += b.GetEffect (11) * polarity;
         if (b.GetEffect (9) > 0 && polarity > 0)
             immune = true;
         else if (b.GetEffect (9) > 0 && polarity < 0)
             immune = false;
         action += b.GetEffect (10) * polarity;
         actionUI += b.GetEffect (10) * polarity;
-
     }
     public void ActivateEffect (Item i) {
         Buff b;
@@ -314,7 +304,7 @@ public class Character : MonoBehaviour {
                 } else if (p.GetId () == 9) {
                     SetHealth (-p.GetIntensity ());
                     AddBuff (10, 1, p.GetDuration (), p.GetIcon ());
-                } 
+                }
             }
             GetAnimator ().SetTrigger ("BuffEffect");
             p.SetCooldownUI (p.GetCooldown ());
@@ -323,9 +313,8 @@ public class Character : MonoBehaviour {
     public void AddBuff (int id, int intensity, int duration, Sprite icon) {
         foreach (Buff b in buffs) {
             if (b.GetId () == id && b.GetDuration () == duration) {
-                b.SetLevel (intensity);
-                buffs.Add (b);
                 ActivateBuff (b, 1);
+                b.SetLevel (intensity);
                 return;
             }
         }
