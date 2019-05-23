@@ -295,36 +295,43 @@ public class Character : MonoBehaviour {
                     }
                 }
             } else {
-                Buff b;
                 if (p.GetId () == 0)
-                    b = new Buff (10, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
+                    AddBuff (10, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 1)
-                    b = new Buff (0, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
+                    AddBuff (0, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 2)
-                    b = new Buff (8, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
+                    AddBuff (8, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 4)
-                    b = new Buff (7, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
+                    AddBuff (7, p.GetIntensity (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 5)
-                    b = new Buff (9, p.GetLevel (), p.GetDuration (), p.GetIcon ());
+                    AddBuff (9, p.GetLevel (), p.GetDuration (), p.GetIcon ());
                 else if (p.GetId () == 7) {
                     SetHealth (-p.GetIntensity ());
-                    b = new Buff (7, 1, p.GetDuration (), p.GetIcon ());
+                    AddBuff (7, 1, p.GetDuration (), p.GetIcon ());
                 } else if (p.GetId () == 8) {
                     SetHealth (-p.GetIntensity ());
-                    b = new Buff (0, 1, p.GetDuration (), p.GetIcon ());
+                    AddBuff (0, 1, p.GetDuration (), p.GetIcon ());
                 } else if (p.GetId () == 9) {
                     SetHealth (-p.GetIntensity ());
-                    b = new Buff (10, 1, p.GetDuration (), p.GetIcon ());
-                } else {
-                    Debug.Log ("error");
-                    b = null;
-                }
-                buffs.Add (b);
-                ActivateBuff (b, 1);
+                    AddBuff (10, 1, p.GetDuration (), p.GetIcon ());
+                } 
             }
             GetAnimator ().SetTrigger ("BuffEffect");
             p.SetCooldownUI (p.GetCooldown ());
         }
+    }
+    public void AddBuff (int id, int intensity, int duration, Sprite icon) {
+        foreach (Buff b in buffs) {
+            if (b.GetId () == id && b.GetDuration () == duration) {
+                b.SetLevel (intensity);
+                buffs.Add (b);
+                ActivateBuff (b, 1);
+                return;
+            }
+        }
+        Buff buff = new Buff (id, intensity, duration, icon);
+        buffs.Add (buff);
+        ActivateBuff (buff, 1);
     }
     public void AddPower (int i) {
         powers.Add (new Power (i));

@@ -59,5 +59,8 @@ public class Buff {
     public void SetDuration (int i) {
         duration += i;
     }
+    public void SetLevel (int i) {
+        effects[id] += i;
+    }
     public Sprite GetIcon () => icon;
 }
