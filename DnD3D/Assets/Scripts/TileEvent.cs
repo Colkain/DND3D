@@ -8,7 +8,7 @@ public class TileEvent : MonoBehaviour {
     [SerializeField] private Item item;
     [SerializeField] private Hap hap;
     public void SetTileEvent (int i) {
-        id = 0;
+        id = i;
         if (id == 0) {
             power = new Power (Random.Range (0, 10));
             nameE = "New power:" + power.GetName ();
