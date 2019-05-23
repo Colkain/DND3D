@@ -37,6 +37,12 @@ public class Character : MonoBehaviour {
     }
     void Update () {
         if (isTurn) {
+            for (int i = 0; i < buffs.Count; i++) {
+                if (buffs[i].GetDuration () == 0) {
+                    ActivateBuff (buffs[i], -1);
+                    buffs.RemoveAt (i);
+                }
+            }
             if (mouvementUI <= 0)
                 gameBoard.GetComponent<GameboardControl> ().ActivateDoors (-0.1f);
             else
@@ -362,10 +368,6 @@ public class Character : MonoBehaviour {
     public void SetbuffsdurationUI () {
         for (int i = 0; i < buffs.Count; i++) {
             buffs[i].SetDuration (-1);
-            if (buffs[i].GetDuration () == 0) {
-                ActivateBuff (buffs[i], -1);
-                buffs.RemoveAt (i);
-            }
         }
     }
     public void RemoveBuff (Item a) {
