@@ -45,7 +45,7 @@ public class GameboardControl : MonoBehaviour {
         for (int x = 0; x < maxColumns; x++) {
             for (int z = 0; z < maxRows; z++) {
                 tiles[x, z] = s.AddTile (idt, x, z, size, maxRows);
-                tiles[x, z].GetComponent<TileEvent> ().SetTileEvent (Random.Range (0, 9));
+                tiles[x, z].GetComponent<TileEvent> ().SetTileEvent (Random.Range (1, 10));
                 idt++;
             }
         }

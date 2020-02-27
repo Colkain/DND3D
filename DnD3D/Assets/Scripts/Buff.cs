@@ -10,7 +10,7 @@ public class Buff {
     [SerializeField] private Sprite icon;
     [SerializeField] private int[] effects;
     public Buff (int i, int l, int d, Sprite ic) {
-        effects = new int[12]; //0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range 9:immune 10:action
+        effects = new int[12]; //0:mouvement 1:maxHealth 2:health 3:strength 4:agility 5:intelligence 6:wisdom 7:damage 8:range 9:immune 10:action 11:whenEntering 12:exploring 13:vampire 14:leech 15:investigator
         id = i;
         effects[id] = l;
         duration = d;

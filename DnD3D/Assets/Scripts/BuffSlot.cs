@@ -19,8 +19,10 @@ public class BuffSlot : MonoBehaviour {
         icon.enabled = false;
     }
     public void OnMouseOver () {
-        hoverPanel.GetComponent<HoverUI> ().SetPosition (buff.GetName (), buff.GetDescription ());
-        hoverPanel.SetActive (true);
+        if (buff != null) {
+            hoverPanel.GetComponent<HoverUI> ().SetPosition (buff.GetName (), buff.GetDescription ());
+            hoverPanel.SetActive (true);
+        }
     }
     public void OnMouseOverP () {
         hoverPanel.GetComponent<HoverUI> ().SetPosition (buff.GetName (), buff.GetDescription ());

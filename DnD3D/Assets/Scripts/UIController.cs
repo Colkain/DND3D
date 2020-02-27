@@ -89,10 +89,10 @@ public class UIController : MonoBehaviour {
         buffsUI.GetComponent<BuffsUI> ().SetPlayer (player);
     }
     public void AcceptPopup () {
-        if (tileEvent.GetId () == 0) {
+        if (tileEvent.GetTType ().Equals ("Power")) {
             gameBoard.AddNewPower (tileEvent.GetPower ());
             popupUI.SetActive (false);
-        } else if (tileEvent.GetId () == 1) {
+        } else if (tileEvent.GetTType ().Equals ("Item")) {
             gameBoard.AddNewItem (tileEvent.GetItem ());
             popupUI.SetActive (false);
         } else {
@@ -114,7 +114,7 @@ public class UIController : MonoBehaviour {
         popupUI.SetActive (true);
         popupUI.transform.GetChild (0).transform.GetChild (0).GetComponent<Text> ().text = te.GetNameE ();
         popupUI.transform.GetChild (1).transform.GetChild (0).GetComponent<Text> ().text = te.GetDescription ();
-        if (tileEvent.GetId () > 2)
+        if (tileEvent.GetTType ().Equals ("Void") || tileEvent.GetTType ().Equals ("Checked"))
             popupUI.transform.GetChild (2).gameObject.SetActive (false);
         else
             popupUI.transform.GetChild (2).gameObject.SetActive (true);
