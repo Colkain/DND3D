@@ -96,7 +96,6 @@ public class GameboardControl : MonoBehaviour {
     }
     public void AddInCharacters (int i) {
         characters.Add (GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ());
-        // characters[i - 1] = GameObject.FindGameObjectWithTag ("Player" + i).GetComponent<Character> ();
         characters[i - 1].SetClass ();
         SetStartingPower ();
     }

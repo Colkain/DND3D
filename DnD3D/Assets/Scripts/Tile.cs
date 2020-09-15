@@ -17,7 +17,6 @@ public class Tile : MonoBehaviour {
     public GameObject light2;
     public GameObject light3;
     public GameObject light4;
-
     void Awake () {
         doors = new List<GameObject> ();
     }

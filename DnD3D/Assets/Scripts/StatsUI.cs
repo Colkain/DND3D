@@ -7,12 +7,9 @@ public class StatsUI : MonoBehaviour {
     StatSlot[] slots;
     Character player = null;
     string text;
-    // Start is called before the first frame update
     void Awake () {
         slots = statsParent.GetComponentsInChildren<StatSlot> ();
     }
-
-    // Update is called once per frame
     void Update () {
         if (player != null) {
             slots[1].SetText ("Lvl:" + player.GetLevel ().ToString ());

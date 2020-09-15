@@ -8,7 +8,6 @@ public class AbilitySlot : MonoBehaviour {
     public Button removeButton;
     public Text cooldownText;
     public GameObject hoverPanel;
-    void Start () { }
     void Update () {
         if (power != null) {
             cooldownText.text = power.GetCooldownUI ().ToString ();
