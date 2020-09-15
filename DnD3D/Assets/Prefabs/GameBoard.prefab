@@ -48,7 +48,7 @@ MonoBehaviour:
     type: 3}
   wallPrefab: {fileID: 806159467575743796, guid: 24c129dcb62e77849b9bfdb950ef903a,
     type: 3}
-  characterPrefab: {fileID: 6077675585819108852, guid: 4ac1ae41a44241f4d980aa7dbb21e843,
+  characterPrefab: {fileID: 6077675585819108852, guid: 7f3cc659a78c1e24f8610a1f8349b76b,
     type: 3}
 --- !u!114 &426079064
 MonoBehaviour:
@@ -69,7 +69,9 @@ MonoBehaviour:
   idt: 0
   idc: 0
   cMax: 0
+  dedCharacters: []
   round: 0
   currentTile: {fileID: 0}
   previousTile: {fileID: 0}
+  tileEvent: {fileID: 0}
   player: {fileID: 0}
