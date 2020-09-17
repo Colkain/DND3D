@@ -12,3 +12,5 @@ This game include:
 -20+ powers, events and items.
                    
 Keep in mind that a developed this game for fun and there are few functionalities not implemented yet. You can of course download and alter the project however you see fit. 
+
+https://colkain.itch.io/dungeonbr
