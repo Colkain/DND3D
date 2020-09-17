@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
     [SerializeField] private Character player;
@@ -14,13 +15,17 @@ public class UIController : MonoBehaviour {
     public GameObject buffsUI;
     public GameObject playersUI;
     public GameObject characterCreationUI;
+    public GameObject pauseUI;
     public GameObject endGameUI;
     [SerializeField] private static int cMax;
     [SerializeField] private Vector3 characterCoor;
     InputField nameField;
     GameboardControl gameBoard;
     TileEvent tileEvent;
+    private bool paused;
+
     public void Start () {
+        paused = false;
         cMax = Parameters.cMax;
         hoverPanel.SetActive (false);
         buffsUI.SetActive (false);
@@ -30,10 +35,20 @@ public class UIController : MonoBehaviour {
         itemsUI.SetActive (false);
         popupUI.SetActive (false);
         endGameUI.SetActive (false);
+        pauseUI.SetActive (false);
         cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraController> ();
         GameObject gameBoardObject = Instantiate (gameBoardPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
         gameBoard = gameBoardObject.GetComponent<GameboardControl> ();
         gameBoard.StartingGame (cMax, Parameters.columns, Parameters.rows);
+    }
+    public void Update () {
+        if (Input.GetButtonUp ("Pause")) {
+            if (paused) {
+                OnResume ();
+            } else {
+                OnPause ();
+            }
+        }
     }
     public void CreateCharacter (string c) {
         nameField = GameObject.FindGameObjectWithTag ("NameField").GetComponent<InputField> ();
@@ -118,5 +133,21 @@ public class UIController : MonoBehaviour {
             popupUI.transform.GetChild (2).gameObject.SetActive (false);
         else
             popupUI.transform.GetChild (2).gameObject.SetActive (true);
+    }
+    public void OnPause () {
+        pauseUI.SetActive (true);
+        Time.timeScale = 0f;
+        paused = true;
+    }
+    public void OnResume () {
+        pauseUI.SetActive (false);
+        Time.timeScale = 1f;
+        paused = false;
+    }
+    public void OnMain () {
+        SceneManager.LoadScene (0, LoadSceneMode.Single);
+    }
+    public void OnQuit () {
+        Application.Quit ();
     }
 }
